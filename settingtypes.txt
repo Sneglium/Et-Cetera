@@ -1,0 +1,192 @@
+[Basic Resources]
+
+# Enable or disable the module entirely.
+# Boolean (true/false); default: true
+etc.load_module_basic_resources (Load Module: Basic Resources) bool true
+
+[Craft Grid Tools]
+
+# Enable or disable the module entirely.
+# Boolean (true/false); default: true
+etc.load_module_craft_tools (Load Module: Craft Grid Tools) bool true
+
+# How many times a craft grid tool other than the Sheeting Hammer can be crafted with before it breaks.
+# Integer (0-1000); default: 150
+etc.craft_tools_num_uses (Tool Durability) int 150 0 1000
+
+# How many times the Sheeting Hammer can be crafted with before it breaks.
+# Integer (0-1000); default: 300
+etc.craft_tools_hammer_num_uses (Hammer Durability) int 300 0 1000
+
+[Wrought Iron]
+
+# Enable or disable the module entirely.
+# Boolean (true/false); default: true
+etc.load_module_wrought_iron (Load Module: Wrought Iron) bool true
+
+# Replace the furnace recipe with a sillier grid recipe using coal.
+# May be useful to resolve conflicts.
+# Boolean (true/false); default: false
+etc.wrought_iron_dumb_crafting (Dumber Crafting) bool false
+
+[Slime]
+
+# Enable or disable the module entirely.
+# Boolean (true/false); default: true
+etc.load_module_slime (Load Module: Slime) bool true
+
+[Item Cosmetic Stations]
+
+# Enable or disable the module entirely.
+# Boolean (true/false); default: true
+etc.load_module_labelling_bench (Load Module: Labelling Bench) bool true
+
+# Use the workbenches from ChunkyDeco (if present) in the Labelling Bench recipe.
+# Boolean (true/false); default: true
+etc.labelling_bench_use_chunkydeco (Labelling Bench: Use ChunkyDeco Workbench) bool true
+
+# Enable or disable the module entirely.
+# Boolean (true/false); default: true
+etc.load_module_coloring_bench (Load Module: Dyeing Table) bool true
+
+# Use the workbenches from ChunkyDeco (if present) in the Dyeing Table recipe.
+# Boolean (true/false); default: true
+etc.coloring_bench_use_chunkydeco (Dyeing Table: Use ChunkyDeco Workbench) bool true
+
+[Mortar and Pestle]
+
+# Enable or disable the module entirely.
+# Boolean (true/false); default: true
+etc.load_module_mortar_and_pestle (Load Module: Mortar and Pestle) bool true
+
+# Allow the mortar and pestle to accept technic grinder recipes.
+# Registered recipes will take precedence in case of a conflict.
+# Boolean (true/false); default: true
+etc.mortar_and_pestle_technic_support (Use Technic Recipes) bool true
+
+# This value will be multiplied by the recipe "hardness" and the item
+# count *0.75 to determine roughly how many hits the recipe should take.
+# Floating-point (0.0-10.0); default: 1.0
+etc.mortar_and_pestle_hardness_mult (Hardness Multiplier) float 1.0 0 10
+
+# Add a 'dust' node, which is made by crushing sand and can be used to create clay.
+# Boolean (true/false); default: true
+etc.load_module_dust (Enable Dust) bool true
+
+[Anvil]
+
+# Enable or disable the module entirely.
+# Boolean (true/false); default: true
+etc.load_module_anvil (Load Module: Anvil) bool true
+
+# How many times the Blacksmith's Hammer can be used before it breaks.
+# Integer (0-1000); default: 200
+etc.anvil_hammer_num_uses (Hammer Durability) int 200 0 1000
+
+# Allow repairing hammers on the anvil.
+# This makes hammers effectively unlimited once the player has two or more.
+# Boolean (true/false); default: false
+etc.anvil_circular_repair (Self-repairing Hammers) bool false
+
+# How many "uses" of a tool will be repaired with each hammer blow.
+# Floating-point (0.0-10.0); default: 4.0
+etc.anvil_repair_factor (Repair Factor) float 4.0 0 10
+
+# Use a wrought iron block in the anvil recipe instead of a steel block if the Wrought Iron module is enabled.
+# Boolean (true/false); default: true
+etc.anvil_use_wrought_iron (Wrought Iron Recipe) bool true
+
+# When enabled, tools will not be destroyed when they reach 0 durability, and will instead become useless until repaired.
+# Will only affect tools used to dig nodes.
+# Warning: special tools (e.g. upgradeable tools, tools made from multi-part systems) might behave weirdly upon breaking!
+# Boolean (true/false); default: true
+etc.anvil_prevent_tool_break (Forgiving Tool Breakage) bool true
+
+[Chalk]
+
+# Enable or disable the module entirely.
+# Boolean (true/false); default: true
+etc.load_module_chalk (Load Module: Chalk) bool true
+
+# Disable to allow drawing on non-full cube nodes. Will look bad.
+# Boolean (true/false); default: true
+etc.chalk_cubes_only (Full Blocks Only) bool true
+
+# Disable to allow drawing on softer nodes like grass and leaves.
+# Boolean (true/false); default: true
+etc.chalk_hard_only (Hard Nodes Only) bool true
+
+# Can the player change an existing chalk symbol of the same color without losing durability.
+# Boolean (true/false); default: true
+etc.chalk_free_switching (Free Re-Drawing) bool true
+
+# How many symbols a stick of chalk can draw before it breaks.
+# Integer (0-1000); default: 100
+etc.chalk_num_uses (Durability) int 100 0 1000
+
+[Fluid Bottles]
+
+# Enable or disable the module entirely.
+# Boolean (true/false); default: true
+etc.load_module_fluid_bottles (Load Module: Fluid Bottles) bool true
+
+# Enable bottling lava in glass bottles.
+# Boolean (true/false); default: true
+etc.fluid_bottles_lava_bottle (Lava Bottle) bool true
+
+# Allow throwing the lava bottle with left-click, which can set fires.
+# Boolean (true/false); default: true
+etc.fluid_bottles_lava_bottle_throwable (Throwable Lava Bottle) bool true
+
+# The amount of light a lava bottle should emit when placed in the world.
+# Integer (0-14); default: 8
+etc.fluid_bottles_lava_bottle_light_source (Lava Bottle Light Level) int 8 0 14
+
+# Replace the bottle textures with a prettier version.
+# Boolean (true/false); default: true
+etc.fluid_bottles_retexture (Retexture Bottles) bool true
+
+[All-In-One Tools]
+
+# Enable or disable the module entirely.
+# Boolean (true/false); default: true
+etc.load_module_paxels (Load Module: All-In-One Tools) bool true
+
+# The percentage of the material's sword damage that the All-In-One Tool of the material should deal (rounds up).
+# Floating-point (0.0-10.0); default: 0.85
+etc.paxels_damage_mult (AIOT Damage Multiplier) float 0.85 0 10
+
+# The All-In-One Tool's durability will be the sum of the durabilities of all the tools of the material type multiplied by this value (rounded up).
+# For example: diamond = ceil((30 + 30 + 30 + 40) * 0.75) = 98
+# Floating-point (0.0-10.0); default: 0.75
+etc.paxels_durability_mult (AIOT Durability Multiplier) float 0.75 0 10
+
+# Add AIOTs for moreores materials, if present.
+# Boolean (true/false); default: true
+etc.paxels_moreores (All-In-One Tools for Moreores) bool true
+
+[Falling Tweaks]
+
+# Enable or disable the module entirely.
+# Boolean (true/false); default: true
+etc.load_module_fall_tweaks (Load Module: Falling Tweaks) bool true
+
+# Makes the straw block from farming reduce fall damage by 20%
+# Boolean (true/false); default: true
+etc.fall_tweaks_straw (Modify Straw) bool true
+
+# Makes beds reduce fall damage by 50% and bounce the player slightly
+# Boolean (true/false); default: true
+etc.fall_tweaks_beds (Modify Beds) bool true
+
+# Makes leaves reduce fall damage by 40%
+# Boolean (true/false); default: true
+etc.fall_tweaks_leaves (Modify Leaves) bool true
+
+# Makes wool reduce fall damage by 55%
+# Boolean (true/false); default: true
+etc.fall_tweaks_wool (Modify Wool) bool true
+
+# Makes fences and fence rails increase fall damage by 15%
+# Boolean (true/false); default: true
+etc.fall_tweaks_fence (Modify Fences) bool true

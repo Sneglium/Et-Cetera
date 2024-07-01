@@ -1,0 +1,95 @@
+# textdomain: etcetera
+
+## EXAMPLE LOCALIZATION FILE FOR ET CETERA
+
+# Content meta
+Et Cetera=
+A library mod that provides general improvements and tweaks for MTG and others as well as a common utility for modding. Usual dependency for Sneglium/Faustawk mods.=
+
+## The keys in this file are formatted correctly to correspond to the displaynames, descriptions and/or statlines of items in Et Cetera as they appear in-game.
+## The Lua code is not a valid at-a-glance reference, as Etc transforms its' text heavily during registry.
+## The items are organized by module in the order they appear in README.md and settingtypes.txt.
+
+## Basic Resources
+
+Pine Tar=
+Rough Twine=
+Heavy Canvas=
+Oilcloth=
+Powdered Flint=
+### Note: the text in parentheses is not the description, but rather part of a two-line displayname.
+Sandpaper@n(Poor, Ungraded)=
+Sandpaper@n(Poor, Low Grit)=
+
+## Craft Grid Tools
+
+Metal File=
+Metal Snips=
+Hand Drill=
+Sheeting Hammer=
+Carving Knife=
+
+Will not be consumed in recipes until durability@nruns out.=
+
+## Wrought Iron
+
+Wrought Iron Ingot=
+Wrought Iron Block=
+
+## Labelling Bench
+
+Labelling Bench=
+Used to change the name and add or change@nthe description of items.=
+
+## Dyeing Table
+
+Dyeing Table=
+Used to change the colors of items.=
+
+## Mortar And Pestle
+
+Pestle=
+Use on a mortar with <LMB>=
+
+Mortar=
+Add and remove items with <RMB>=
+
+Dust=
+
+## Anvil
+
+Blacksmith's Hammer=
+Use on an anvil with <LMB>=
+
+Anvil=
+Add and remove items with <RMB>=
+
+## Chalk
+
+Red Chalk=
+Orange Chalk=
+Yellow Chalk=
+Green Chalk=
+Blue Chalk=
+Violet Chalk=
+White Chalk=
+
+Used to draw symbols on hard nodes. Redrawing@na symbol of the same color will not use@ndurability.=
+<LMB> to draw a symbol=
+
+## Fluid Bottles
+
+Glass Bottle (Water)=
+Glass Bottle (Lava)=
+
+## All-In-One Tools
+
+Wooden Shpavel=
+Stone Shpavel=
+Bronze Shpavel=
+Steel Shpavel=
+Mese Shpavel=
+Diamond Shpavel=
+
+Silver Shpavel=
+Mithril Shpavel=

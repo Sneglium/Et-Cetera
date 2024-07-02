@@ -13,13 +13,21 @@ A library mod that provides general improvements and tweaks for MTG and others a
 ## Basic Resources
 
 Pine Tar=
+Pine Pitch=
+Charcoal=
 Rough Twine=
 Heavy Canvas=
 Oilcloth=
 Powdered Flint=
+Powdered Mese=
+Powdered Diamond=
+Acidic Extract=
+Algin=
 ### Note: the text in parentheses is not the description, but rather part of a two-line displayname.
 Sandpaper@n(Poor, Ungraded)=
-Sandpaper@n(Poor, Low Grit)=
+Sandpaper@n(Decent, Low Grit)=
+Sandpaper@n(Great, Medium Grit)=
+Sandpaper@n(Great, High Grit)=
 
 ## Craft Grid Tools
 
@@ -35,6 +43,28 @@ Will not be consumed in recipes until durability@nruns out.=
 
 Wrought Iron Ingot=
 Wrought Iron Block=
+
+## Slime
+
+Slime Ball=
+Slime Block=
+
+## Treated Wood
+
+Treated Wood Planks=
+Pitched Wood Planks=
+
+## Corrosion
+
+Bronze Block=
+Copper Block=
+Steel Block=
+Tin Block=
+
+(Slightly Corroded)=
+(Partially Corroded)=
+(Mostly Corroded)=
+(Completely Corroded)=
 
 ## Labelling Bench
 

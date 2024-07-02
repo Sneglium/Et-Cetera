@@ -103,6 +103,34 @@ The *Slime* module (technical: `slime`) adds slime balls and slime blocks. Slime
  - *Load Module: Slime* (`etc.load_module_slime`, boolean): Enable or disable the module entirely.
 
 ---
+### Treated Wood
+
+**Depends on:**
+
+ - `basic_resources` (Etc module; required)
+ - `default` (`minetest_game` Mod; optional)
+
+The *Treated Wood* module (technical: `treated_wood`) adds two new decorative wood plank nodes, which can be created by crafting any wood with pine tar or pitch.
+
+**List of Settings:**
+
+ - *Load Module: Treated Wood* (`etc.load_module_treated_wood`, boolean): Enable or disable the module entirely.
+
+---
+### Corrosion
+
+**Depends on:**
+
+ - `default` (`minetest_game` Mod; required)
+
+The *Corrosion* module (technical: `corrosion`) adds decorative versions of the default metal blocks which can be made by placing them in or near water, causing the metal to slowly corrode over time.
+
+**List of Settings:**
+
+ - *Load Module: Corrosion* (`etc.load_module_corrosion`, boolean): Enable or disable the module entirely.
+ - *Corrosion Speed Multiplier* (`etc.corrosion_speed_mult`, floating-point): A multiplier for the average rate at which corrosion occurs.
+
+---
 ### Item Cosmetic Stations
 
 #### Labelling Bench
@@ -154,7 +182,7 @@ Additionally, if enabled, a Dust node will be added which can be obtained by cru
 
  - *Load Module: Mortar and Pestle* (`etc.load_module_mortar_and_pestle`, boolean): Enable or disable the module entirely.
  - *Use Technic Recipes* (`etc.mortar_and_pestle_technic_support`, boolean): Allow the mortar and pestle to accept technic grinder recipes.
- - *Hardness Multiplier* (`etc.mortar_and_pestle_hardness_mult`, Floating-point): A multiplier for the average number of hits it will take to complete a recipe.
+ - *Hardness Multiplier* (`etc.mortar_and_pestle_hardness_mult`, floating-point): A multiplier for the average number of hits it will take to complete a recipe.
  - *Enable Dust* (`etc.load_module_dust`, boolean): Add a 'dust' node, which is made by crushing sand and can be used to create clay.
 
 ---
@@ -177,30 +205,9 @@ WARNING: This option may play weirdly with tools made via a compound parts syste
  - *Load Module: Anvil* (`etc.load_module_anvil`, boolean): Enable or disable the module entirely.
  - *Hammer Durability* (`etc.anvil_hammer_num_uses`, Integer): How many times the Blacksmith's Hammer can hit an item before it breaks.
  - *Self-repairing Hammers* (`etc.anvil_circular_repair`, boolean): Allow hammers to repair other hammers, effectively making them unlimited once you have two or more.
- - *Repair Factor* (`etc.anvil_repair_factor`, Floating-point): A multiplier for the number of "uses" of a given tool that will be repaired with a single hammer blow.
+ - *Repair Factor* (`etc.anvil_repair_factor`, floating-point): A multiplier for the number of "uses" of a given tool that will be repaired with a single hammer blow.
  - *Wrought Iron Recipe* (`etc.anvil_use_wrought_iron`, boolean): Use a wrought iron block in the anvil recipe instead of a steel block if the Wrought Iron module is enabled.
  - *Forgiving Tool Breakage* (`etc.anvil_prevent_tool_break`, boolean): Digging tools will not be destroyed when they reach 0 durability, and will instead become useless until repaired.
-
----
-### Chalk
-
-**Depends on:**
-
- - `craft_tools` (Etc module; required)
- - `basic_resources` (Etc module; required)
- - `dust` (Etc module; optional)
- - `default` (`minetest_game` Mod; optional)
- - `dye` (`minetest_game` Mod; optional)
-
-The *Chalk* module (technical: `chalk`) adds a few colored chalk sticks that can draw on any face of an eligible node. By default, a node is eligible if it is a full block and has a 'hard' digging group (for example, stone and wood planks are eligible but stone stairs are not). Chalk will normally not use durability when replacing a symbol of the same color, though this can be disabled.
-
-**List of Settings:**
-
- - *Load Module: Chalk* (`etc.load_module_chalk`, boolean): Enable or disable the module entirely.
- - *Full Blocks Only* (`etc.chalk_cubes_only`, boolean): When enabled, chalk will only be able to draw on full cube nodes.
- - *Hard Nodes Only* (`etc.chalk_hard_only`, boolean): When enabled, chalk will only be able to draw on nodes with a `cracky` or `choppy` digging group.
- - *Free Re-Drawing* (`etc.chalk_free_switching`, boolean): Enable chalk to replace symbols of the same color without losing durability.
- - *Durability* (`etc.chalk_num_uses`, Integer): How many symbols a single stick of chalk can draw.
 
 ---
 ### Fluid Bottles
@@ -237,8 +244,8 @@ The *All-In-One-Tools* module (technical: `paxels`) adds a "Shpavel" for each ba
 **List of Settings:**
 
  - *Load Module: All-In-One-Tools* (`etc.load_module_paxels`, boolean): Enable or disable the module entirely.
- - *AIOT Damage Multiplier* (`etc.paxels_damage_mult`, Floating-point): The percentage of the material's sword damage that the All-In-One Tool of the material should deal (rounds up).
- - *AIOT Durability Multiplier* (`etc.paxels_durability_mult`, Floating-point): The All-In-One Tool's durability will be the sum of the durabilities of all the tools of the material type multiplied by this value (rounded up).
+ - *AIOT Damage Multiplier* (`etc.paxels_damage_mult`, floating-point): The percentage of the material's sword damage that the All-In-One Tool of the material should deal (rounds up).
+ - *AIOT Durability Multiplier* (`etc.paxels_durability_mult`, floating-point): The All-In-One Tool's durability will be the sum of the durabilities of all the tools of the material type multiplied by this value (rounded up).
  - *All-In-One Tools for Moreores* (`etc.paxels_moreores`, boolean): Add AIOTs for moreores materials, if present.
 
 ---
@@ -261,6 +268,27 @@ The *Falling Tweaks* module (technical: `fall_tweaks`) changes some group values
  - *Modify Leaves* (`etc.fall_tweaks_leaves`, boolean): Makes leaves reduce fall damage by 40%
  - *Modify Wool* (`etc.fall_tweaks_wool`, boolean): Makes wool reduce fall damage by 55%
  - *Modify Fences* (`etc.fall_tweaks_fence`, boolean): Makes fences and fence rails increase fall damage by 15%
+
+---
+### Chalk
+
+**Depends on:**
+
+ - `craft_tools` (Etc module; required)
+ - `basic_resources` (Etc module; required)
+ - `dust` (Etc module; optional)
+ - `default` (`minetest_game` Mod; optional)
+ - `dye` (`minetest_game` Mod; optional)
+
+The *Chalk* module (technical: `chalk`) adds a few colored chalk sticks that can draw on any face of an eligible node. By default, a node is eligible if it is a full block and has a 'hard' digging group (for example, stone and wood planks are eligible but stone stairs are not). Chalk will normally not use durability when replacing a symbol of the same color, though this can be disabled.
+
+**List of Settings:**
+
+ - *Load Module: Chalk* (`etc.load_module_chalk`, boolean): Enable or disable the module entirely.
+ - *Full Blocks Only* (`etc.chalk_cubes_only`, boolean): When enabled, chalk will only be able to draw on full cube nodes.
+ - *Hard Nodes Only* (`etc.chalk_hard_only`, boolean): When enabled, chalk will only be able to draw on nodes with a `cracky` or `choppy` digging group.
+ - *Free Re-Drawing* (`etc.chalk_free_switching`, boolean): Enable chalk to replace symbols of the same color without losing durability.
+ - *Durability* (`etc.chalk_num_uses`, Integer): How many symbols a single stick of chalk can draw.
 
 ## Support
 

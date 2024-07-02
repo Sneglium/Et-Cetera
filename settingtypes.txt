@@ -35,6 +35,22 @@ etc.wrought_iron_dumb_crafting (Dumber Crafting) bool false
 # Boolean (true/false); default: true
 etc.load_module_slime (Load Module: Slime) bool true
 
+[Treated Wood]
+
+# Enable or disable the module entirely.
+# Boolean (true/false); default: true
+etc.load_module_treated_wood (Load Module: Treated Wood) bool true
+
+[Corrosion]
+
+# Enable or disable the module entirely.
+# Boolean (true/false); default: true
+etc.load_module_corrosion (Load Module: Corrosion) bool true
+
+# A multiplier for the average rate at which corrosion occurs.
+# Floating-point (0.0-10.0); default: 1.0
+etc.corrosion_speed_mult (Corrosion Speed Multiplier) float 1.0 0 10
+
 [Item Cosmetic Stations]
 
 # Enable or disable the module entirely.
@@ -102,28 +118,6 @@ etc.anvil_use_wrought_iron (Wrought Iron Recipe) bool true
 # Boolean (true/false); default: true
 etc.anvil_prevent_tool_break (Forgiving Tool Breakage) bool true
 
-[Chalk]
-
-# Enable or disable the module entirely.
-# Boolean (true/false); default: true
-etc.load_module_chalk (Load Module: Chalk) bool true
-
-# Disable to allow drawing on non-full cube nodes. Will look bad.
-# Boolean (true/false); default: true
-etc.chalk_cubes_only (Full Blocks Only) bool true
-
-# Disable to allow drawing on softer nodes like grass and leaves.
-# Boolean (true/false); default: true
-etc.chalk_hard_only (Hard Nodes Only) bool true
-
-# Can the player change an existing chalk symbol of the same color without losing durability.
-# Boolean (true/false); default: true
-etc.chalk_free_switching (Free Re-Drawing) bool true
-
-# How many symbols a stick of chalk can draw before it breaks.
-# Integer (0-1000); default: 100
-etc.chalk_num_uses (Durability) int 100 0 1000
-
 [Fluid Bottles]
 
 # Enable or disable the module entirely.
@@ -190,3 +184,25 @@ etc.fall_tweaks_wool (Modify Wool) bool true
 # Makes fences and fence rails increase fall damage by 15%
 # Boolean (true/false); default: true
 etc.fall_tweaks_fence (Modify Fences) bool true
+
+[Chalk]
+
+# Enable or disable the module entirely.
+# Boolean (true/false); default: true
+etc.load_module_chalk (Load Module: Chalk) bool true
+
+# Disable to allow drawing on non-full cube nodes. Will look bad.
+# Boolean (true/false); default: true
+etc.chalk_cubes_only (Full Blocks Only) bool true
+
+# Disable to allow drawing on softer nodes like grass and leaves.
+# Boolean (true/false); default: true
+etc.chalk_hard_only (Hard Nodes Only) bool true
+
+# Can the player change an existing chalk symbol of the same color without losing durability.
+# Boolean (true/false); default: true
+etc.chalk_free_switching (Free Re-Drawing) bool true
+
+# How many symbols a stick of chalk can draw before it breaks.
+# Integer (0-1000); default: 100
+etc.chalk_num_uses (Durability) int 100 0 1000

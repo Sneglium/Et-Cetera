@@ -1,4 +1,4 @@
- 
+
 etc = {modpath = minetest.get_modpath 'etcetera', modules = {}}
 
 local function load_script (fn)
@@ -19,23 +19,25 @@ load_script 'utils/entity_utils'
 
 etc.register_node, etc.register_item, etc.register_tool = etc.create_wrappers('etcetera', 'etc')
 
+-- Resources
 load_script_optional('basic_resources')
 load_script_optional('craft_tools')
 load_script_optional('wrought_iron', 'default')
 load_script_optional('slime', '&basic_resources')
+load_script_optional('treated_wood', '&basic_resources')
+load_script_optional('corrosion', 'default')
 
+-- Crafting stations and such
 load_script_optional('labelling_bench')
 load_script_optional('coloring_bench')
-
 load_script_optional('mortar_and_pestle', '&basic_resources')
 load_script_optional('dust', '&mortar_and_pestle', 'bucket')
-
 load_script_optional('anvil', '&craft_tools')
 
-load_script_optional('chalk', '&craft_tools')
-
+-- Tweaks and additions for MTG/the engine
 load_script_optional('fluid_bottles', 'default', 'vessels')
-
 load_script_optional('paxels', 'default')
-
 load_script_optional('fall_tweaks', 'default')
+
+-- Misc. additions
+load_script_optional('chalk', '&craft_tools')

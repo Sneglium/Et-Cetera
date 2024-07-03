@@ -124,15 +124,46 @@ The *Treated Wood* module (technical: `treated_wood`) adds two new decorative wo
  - `basic_resources` (Etc module; optional)
  - `default` (`minetest_game` Mod; required)
  - `technic` (Standalone mod; optional)
+ - `unified_inventory` **OR** `i3` (Standalone mods; one or neither but not both - optional)
 
 The *Corrosion* module (technical: `corrosion`) adds decorative versions of the default metal blocks which can be made by placing them in or near water, causing the metal to slowly corrode over time. It will also add variants for some of the technic metal blocks if present.
 
 Corroded metal of any kind can be crafted with Acidic Extract from the basic resources module (if enabled) to remove the corrosion.
 
+If Unified Inventory or I3 are present, corrosion will be visible as a recipe type in their respective crafting guides.
+
 **List of Settings:**
 
  - *Load Module: Corrosion* (`etc.load_module_corrosion`, boolean): Enable or disable the module entirely.
  - *Corrosion Speed Multiplier* (`etc.corrosion_speed_mult`, floating-point): A multiplier for the average rate at which corrosion occurs.
+
+---
+### Bees
+
+**Depends on:**
+
+ - `craft_tools` (Etc module; optional)
+ - `corrosion` (Etc module; optional)
+ - `default` (`minetest_game` Mod; required)
+ - `vessels` (`minetest_game` Mod; optional)
+ - `fireflies` (`minetest_game` Mod; optional)
+
+The *Bees* module (technical: `bees`) adds naturally spawning bees faithful to the MTG style (think butterflies and fireflies) that can be caught and farmed in an apiary for wax and honey.
+
+In order to catch bees you will need to use the bug net from the `fireflies` mod (or a similar item with the ability to catch `catchable` nodes), however this module can load without it present.
+
+To collect honey, the `vessels` mod is needed. Leftclick an empty glass bottle on an apiary with honey in it to collect it. Wax can be collected using the Carving Knife from the `craft_tools` module.
+
+Bees will constantly produce wax, but will only produce honey during the day. They need flowers near their apiary and will remember which flowers they recently collected nectar from (the last two by default) and avoid those.
+
+If the `corrosion` module is enabled, wax can be used to seal metal blocks and prevent them from corroding in the presence of water.
+
+**List of Settings:**
+
+ - *Load Module: Bees* (`etc.load_module_bees`, boolean): Enable or disable the module entirely.
+ - *Honey Generation Rate* (`etc.bees_honey_rate`, floating-point): A multiplier for the average amount of honey generated every 10 seconds.
+ - *Wax Generation Rate* (`etc.bees_wax_rate`, floating-point): A multiplier for the average amount of beeswax generated every 10 seconds.
+ - *Apiary Memory Length* (`etc.bees_memory_length`, integer): How many visited flowers can the apiary remember.
 
 ---
 ### Item Cosmetic Stations
@@ -207,7 +238,7 @@ WARNING: This option may play weirdly with tools made via a compound parts syste
 **List of Settings:**
 
  - *Load Module: Anvil* (`etc.load_module_anvil`, boolean): Enable or disable the module entirely.
- - *Hammer Durability* (`etc.anvil_hammer_num_uses`, Integer): How many times the Blacksmith's Hammer can hit an item before it breaks.
+ - *Hammer Durability* (`etc.anvil_hammer_num_uses`, integer): How many times the Blacksmith's Hammer can hit an item before it breaks.
  - *Self-repairing Hammers* (`etc.anvil_circular_repair`, boolean): Allow hammers to repair other hammers, effectively making them unlimited once you have two or more.
  - *Repair Factor* (`etc.anvil_repair_factor`, floating-point): A multiplier for the number of "uses" of a given tool that will be repaired with a single hammer blow.
  - *Wrought Iron Recipe* (`etc.anvil_use_wrought_iron`, boolean): Use a wrought iron block in the anvil recipe instead of a steel block if the Wrought Iron module is enabled.
@@ -232,7 +263,7 @@ If the setting is enabled, this module will also replace the textures of the gla
  - *Load Module: Fluid Bottles* (`etc.load_module_fluid_bottles`, boolean): Enable or disable the module entirely.
  - *Lava Bottle* (`etc.fluid_bottles_lava_bottle`, boolean): Add a bottle of lava.
  - *Throwable Lava Bottle* (`etc.fluid_bottles_lava_bottle_throwable`, boolean): If enabled, allow players to throw the lava bottle and set fires from afar.
- - *Lava Bottle Light Level* (`etc.fluid_bottles_lava_bottle_light_source`, Integer): How much light should the lava bottle produce when placed.
+ - *Lava Bottle Light Level* (`etc.fluid_bottles_lava_bottle_light_source`, integer): How much light should the lava bottle produce when placed.
  - *Retexture Bottles* (`etc.fluid_bottles_retexture`, boolean): Replace the bottle textures from vessels & fireflies with a prettier version.
 
 ---
@@ -310,7 +341,7 @@ The *Chalk* module (technical: `chalk`) adds a few colored chalk sticks that can
  - *Full Blocks Only* (`etc.chalk_cubes_only`, boolean): When enabled, chalk will only be able to draw on full cube nodes.
  - *Hard Nodes Only* (`etc.chalk_hard_only`, boolean): When enabled, chalk will only be able to draw on nodes with a `cracky` or `choppy` digging group.
  - *Free Re-Drawing* (`etc.chalk_free_switching`, boolean): Enable chalk to replace symbols of the same color without losing durability.
- - *Durability* (`etc.chalk_num_uses`, Integer): How many symbols a single stick of chalk can draw.
+ - *Durability* (`etc.chalk_num_uses`, integer): How many symbols a single stick of chalk can draw.
 
 ## Support
 

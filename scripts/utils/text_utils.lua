@@ -6,6 +6,8 @@ etc.textcolors = {
 	statblock   = '#f4315b'
 }
 
+ETC_DESC_WRAP_LIMIT = 40
+
 etc.gettext = {
 	etcetera = function(text, colormode, ...)
 		if (not colormode) or colormode == 'normal' then
@@ -26,8 +28,6 @@ etc.breaking_characters = {
  [','] = 'after',
  ['('] = 'before'
 }
-
-ETC_DESC_WRAP_LIMIT = 40
 
 -- Inserts newlines into a text to control how far it can extend past <limit> characters per line.
 -- If <hard> is true, it will break words, otherwise it will only break after it reaches a character

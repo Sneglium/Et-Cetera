@@ -14,7 +14,7 @@ end
 load_script 'utils/misc_utils'
 load_script 'utils/text_utils'
 load_script 'utils/reg_utils'
-load_script 'utils/nodebox_utils'
+load_script 'utils/node_utils'
 load_script 'utils/entity_utils'
 
 etc.register_node, etc.register_item, etc.register_tool = etc.create_wrappers('etcetera', 'etc')
@@ -26,6 +26,7 @@ load_script_optional('wrought_iron', 'default')
 load_script_optional('slime', '&basic_resources')
 load_script_optional('treated_wood', '&basic_resources')
 load_script_optional('corrosion', 'default')
+load_script_optional('bees', 'default')
 
 -- Crafting stations and such
 load_script_optional('labelling_bench')

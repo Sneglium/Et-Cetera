@@ -72,6 +72,14 @@ function etc.merge (table_a, table_b)
 	return new_table
 end
 
+function etc.array_find (array, data)
+	for index, v in pairs(array) do
+		if v == data then return index, v end
+	end
+	
+	return nil
+end
+
 -- TYPE & ERROR HELPERS
 
 -- Table that holds the various log functions

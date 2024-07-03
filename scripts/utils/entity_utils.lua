@@ -21,9 +21,9 @@ minetest.register_entity('etcetera:item_display', {
 
 -- If rotation = 'random_flat', lies flat and has a random Y axis rotation
 function etc.add_item_display (pos, item, scale, rotation)
-	etc.log.assert(etc.is_vector(pos), 'Display entity position must be a vector')
-	etc.log.assert(etc.is_itemstack(item), 'Display entity item must be an ItemStack')
-	etc.log.assert(etc.is_number(scale), 'Display entity scale must be a number')
+	etc.log.assert(etc.is_vector(pos), 'Item display entity position must be a vector')
+	etc.log.assert(etc.is_itemstack(item), 'Item display entity item must be an ItemStack')
+	etc.log.assert(etc.is_number(scale), 'Item display entity scale must be a number')
 	etc.log.assert(etc.is_vector(rotation) or rotation == 'random_flat', 'Display entity rotation must be a vector or the string \'random_flat\'')
 	
 	local entity = minetest.add_entity(pos, 'etcetera:item_display')
@@ -48,9 +48,9 @@ end
 
 -- If rotation = 'random_flat', lies flat and has a random Y axis rotation
 function etc.update_item_display (pos, item, scale, rotation)
-	etc.log.assert(etc.is_vector(pos), 'Display entity position must be a vector')
-	etc.log.assert(etc.is_itemstack(item), 'Display entity item must be an ItemStack')
-	etc.log.assert(etc.is_number(scale), 'Display entity scale must be a number')
+	etc.log.assert(etc.is_vector(pos), 'Item display entity position must be a vector')
+	etc.log.assert(etc.is_itemstack(item), 'Item display entity item must be an ItemStack')
+	etc.log.assert(etc.is_number(scale), 'Item display entity scale must be a number')
 	etc.log.assert(etc.is_vector(rotation) or rotation == 'random_flat', 'Display entity rotation must be a vector or the string \'random_flat\'')
 	
 	local objects = minetest.get_objects_inside_radius(pos, 0.5)
@@ -77,7 +77,7 @@ function etc.update_item_display (pos, item, scale, rotation)
 end
 
 function etc.remove_item_display (pos)
-	etc.log.assert(etc.is_vector(pos), 'Display entity position must be a vector')
+	etc.log.assert(etc.is_vector(pos), 'Item display entity position must be a vector')
 	
 	local objects = minetest.get_objects_inside_radius(pos, 0.5)
 	for _, entity in pairs(objects) do
@@ -87,7 +87,7 @@ function etc.remove_item_display (pos)
 	end
 end
 
-minetest.register_entity('etcetera:liquid_display', {
+minetest.register_entity('etcetera:node_display', {
 	initial_properties = {
 		physical = false,
 		collide_with_objects = false,
@@ -101,24 +101,24 @@ minetest.register_entity('etcetera:liquid_display', {
 		damage_texture_modifier = ''
 	},
 	
-	_etc_display_liquid = true,
+	_etc_display_node = true,
 	_scale = 1
 })
 
 -- initial_level should range from 0-1; sets the liquid level
 -- Be aware the entity will move down relative to <pos> depending on the level
-function etc.add_liquid_display (pos, tiles, scale, initial_level)
-	etc.log.assert(etc.is_vector(pos), 'Display entity position must be a vector')
-	etc.log.assert(etc.is_array(tiles), 'Display entity tiles must be an array')
-	etc.log.assert(etc.is_number(scale), 'Display entity scale must be a number')
-	etc.log.assert(etc.is_number(initial_level), 'Display entity level must be a number')
+function etc.add_node_display (pos, tiles, scale, initial_level)
+	etc.log.assert(etc.is_vector(pos), 'Node display entity position must be a vector')
+	etc.log.assert(etc.is_array(tiles), 'Node display entity tiles must be an array')
+	etc.log.assert(etc.is_number(scale), 'Node display entity scale must be a number')
+	etc.log.assert(etc.is_number(initial_level), 'Node display entity level must be a number')
 	
 	local level = initial_level or 1
 	
 	local height = scale * level -- set height to level% of the height of the object
 	local offset = -(scale*0.5)+(height*0.5) -- move the entity down half its' max height, then up half its' current height
 	
-	local entity = minetest.add_entity(vector.add(pos, vector.new(0, offset, 0)), 'etcetera:liquid_display')
+	local entity = minetest.add_entity(vector.add(pos, vector.new(0, offset, 0)), 'etcetera:node_display')
 	
 	local properties = entity: get_properties()
 	properties.textures = tiles
@@ -134,14 +134,14 @@ function etc.add_liquid_display (pos, tiles, scale, initial_level)
 	return entity
 end
 
-function etc.update_liquid_display (pos, level)
-	etc.log.assert(etc.is_vector(pos), 'Display entity position must be a vector')
-	etc.log.assert(etc.is_number(initial_level), 'Display entity level must be a number')
+function etc.update_node_display (pos, level)
+	etc.log.assert(etc.is_vector(pos), 'Node display entity position must be a vector')
+	etc.log.assert(etc.is_number(initial_level), 'Node display entity level must be a number')
 	
 	local objects = minetest.get_objects_inside_radius(pos, 0.5)
 	for _, entity in pairs(objects) do
 		local luaentity = entity: get_luaentity()
-		if luaentity and luaentity._etc_display_liquid then
+		if luaentity and luaentity._etc_display_node then
 			local properties = entity: get_properties()
 			local level = level or 1
 			local scale = luaentity._scale
@@ -158,12 +158,12 @@ function etc.update_liquid_display (pos, level)
 	end
 end
 
-function etc.remove_liquid_display (pos)
-	etc.log.assert(etc.is_vector(pos), 'Display entity position must be a vector')
+function etc.remove_node_display (pos)
+	etc.log.assert(etc.is_vector(pos), 'Node display entity position must be a vector')
 	
 	local objects = minetest.get_objects_inside_radius(pos, 0.5)
 	for _, entity in pairs(objects) do
-		if entity: get_luaentity() and entity: get_luaentity()._etc_display_liquid then
+		if entity: get_luaentity() and entity: get_luaentity()._etc_display_node then
 			entity: remove()
 		end
 	end

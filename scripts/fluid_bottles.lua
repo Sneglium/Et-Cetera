@@ -106,6 +106,8 @@ minetest.override_item('vessels:glass_bottle', {
 					itemstack: take_item(1)
 				end
 				return itemstack
+			elseif node.name == 'etcetera:apiary_full' or node.name == 'etcetera:apiary_half' then
+				return minetest.registered_nodes[node.name].on_punch(pointed_thing.under, node, user, pointed_thing)
 			end
 		end
 	end

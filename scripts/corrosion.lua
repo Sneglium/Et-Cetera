@@ -1,5 +1,5 @@
 
-local corrosion_nodes = {}
+local corrosion = {corrosion_nodes = {}}
 
 local corrosion_words = {
 	'Slightly',
@@ -7,6 +7,26 @@ local corrosion_words = {
 	'Mostly',
 	'Completely'
 }
+
+if unified_inventory then
+	unified_inventory.register_craft_type('etcetera:corrosion', {
+		description = 'Progressive Corrosion (In Water)',
+		icon = 'default_water.png',
+		width = 1,
+		height = 1,
+		dynamic_display_size = function(craft)
+			return {width = 1, height = 1}
+		end,
+		uses_crafting_grid = false
+	})
+end
+
+if i3 then
+	i3.register_craft_type('etcetera:corrosion', {
+		description = 'Progressive Corrosion (In Water)',
+		icon = 'default_water.png',
+	})
+end
 
 local function make_corrosion_group (modname, nodename)
 	for i = 1, 4 do
@@ -18,11 +38,11 @@ local function make_corrosion_group (modname, nodename)
 		def.groups.not_in_creative_inventory = i == 4 and 0 or 1
 		minetest.register_node('etcetera:'..nodename..'_corroded_'..i, def)
 		
-		corrosion_nodes['etcetera:'..nodename..'_corroded_'..i] = 'etcetera:'..nodename..'_corroded_'..(i+1)
+		corrosion.corrosion_nodes['etcetera:'..nodename..'_corroded_'..i] = 'etcetera:'..nodename..'_corroded_'..(i+1)
 	end
 	
-	corrosion_nodes[modname..':'..nodename] = 'etcetera:'..nodename..'_corroded_1'
-	corrosion_nodes['etcetera:'..nodename..'_corroded_4'] = nil
+	corrosion.corrosion_nodes[modname..':'..nodename] = 'etcetera:'..nodename..'_corroded_1'
+	corrosion.corrosion_nodes['etcetera:'..nodename..'_corroded_4'] = nil
 	
 	if etc.modules.basic_resources then
 		for i = 1, 4 do
@@ -32,6 +52,23 @@ local function make_corrosion_group (modname, nodename)
 				recipe = {'etcetera:'..nodename..'_corroded_'..i, 'etc:acid'}
 			}
 		end
+	end
+	
+	if unified_inventory then
+		unified_inventory.register_craft({
+		type = 'etcetera:corrosion',
+		output = 'etcetera:'..nodename..'_corroded_4',
+		items = {modname..':'..nodename},
+		width = 1
+	})
+	end
+	
+	if i3 then
+		i3.register_craft {
+			type   = 'etcetera:corrosion',
+			result = 'etcetera:'..nodename..'_corroded_4',
+			items  = {modname..':'..nodename},
+		}
 	end
 end
 
@@ -47,7 +84,7 @@ if technic then
 end
 
 local abm_list = {}
-for k, _ in pairs(corrosion_nodes) do
+for k, _ in pairs(corrosion.corrosion_nodes) do
 	table.insert(abm_list, k)
 end
 
@@ -61,6 +98,9 @@ minetest.register_abm {
 	chance = math.ceil(6 / speed_mult),
 	catch_up = true,
 	action = function(pos, node)
-		minetest.swap_node(pos, {name = corrosion_nodes[node.name], param2 = node.param2})
+		if minetest.get_meta(pos): get_string('sealed') == 'true' then return end
+		minetest.swap_node(pos, {name = corrosion.corrosion_nodes[node.name], param2 = node.param2})
 	end
 }
+
+return corrosion

@@ -34,7 +34,7 @@ end
 minetest.register_craft({
 	type = 'fuel',
 	recipe = 'etc:charcoal',
-	burntime = 40,
+	burntime = 32,
 })
 
 etc.register_item('pine_pitch', {

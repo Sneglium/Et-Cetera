@@ -61,6 +61,20 @@ Pitched Wood Planks=
 (Mostly Corroded)=
 (Completely Corroded)=
 
+## Bees
+
+Honey Bee=
+Use a bug net with <LMB> to collect=
+
+Glass Bottle (Honey)=
+Beeswax Nugget=
+
+Apiary Box=
+A single apiary box. Can be stacked to make taller apiaries.=
+<RMB> with another apiary box to make it taller=
+<LMB> with an empty bottle to collect honey=
+<LMB> with a carving knife to collect wax=
+
 ## Labelling Bench
 
 Labelling Bench=

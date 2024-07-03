@@ -12,8 +12,13 @@ minetest.register_craft {
 
 etc.register_node('slime_block', {
 	displayname = 'Slime Block',
-	tiles = {'etc_slime_block.png'},
-	groups = {snappy = 3, crumbly = 2, oddly_breakable_by_hand = 3, fall_damage_add_percent = -100, bouncy = 75, falling_node = 1},
+	tiles = {{name = 'etc_slime_block.png', backface_culling = true}},
+	drawtype = 'mesh',
+	mesh = 'etc_slime_block.obj',
+	paramtype = 'light',
+	sunlight_propagates = true,
+	use_texture_alpha = 'blend',
+	groups = {snappy = 3, crumbly = 2, oddly_breakable_by_hand = 3, fall_damage_add_percent = -100, bouncy = 75},
 	sounds = {
 		footstep = {name = 'etc_slime_dig', pitch = 1.5, gain = 0.5},
 		dig = {name = 'etc_slime_dig', pitch = 2},

@@ -149,8 +149,34 @@ etc.register_node('bottle_honey', {
 	on_use = minetest.item_eat(6, minetest.get_modpath 'vessels' and 'vessels:glass_bottle')
 })
 
+etc.register_node('honey_block', {
+	displayname = 'Honey Block',
+	tiles = {{name = 'etc_honey_block.png', backface_culling = true}},
+	drawtype = 'mesh',
+	mesh = 'etc_slime_block.obj',
+	paramtype = 'light',
+	sunlight_propagates = true,
+	use_texture_alpha = 'blend',
+	groups = {snappy = 3, crumbly = 2, oddly_breakable_by_hand = 3, fall_damage_add_percent = -100, bouncy = 50},
+	sounds = {
+		footstep = {name = 'etc_slime_dig', pitch = 1.5, gain = 0.5},
+		dig = {name = 'etc_slime_dig', pitch = 2},
+		dug = {name = 'etc_slime_dug', pitch = 2},
+		fall = {name = 'etc_slime_dug', pitch = 2},
+		place = {name = 'etc_slime_dug', pitch = 3}
+	}
+})
+
+minetest.register_craft {
+	type = 'shapeless',
+	output = 'etc:honey_block',
+	recipe = {'etc:bottle_honey', 'etc:bottle_honey', 'etc:bottle_honey', 'etc:bottle_honey', 'etc:bottle_honey', 'etc:bottle_honey', 'etc:bottle_honey', 'etc:bottle_honey', 'etc:bottle_honey'},
+	replacements = minetest.get_modpath 'vessels' and {{'etcetera:bottle_honey', 'vessels:glass_bottle'}, {'etcetera:bottle_honey', 'vessels:glass_bottle'}, {'etcetera:bottle_honey', 'vessels:glass_bottle'}, {'etcetera:bottle_honey', 'vessels:glass_bottle'}, {'etcetera:bottle_honey', 'vessels:glass_bottle'}, {'etcetera:bottle_honey', 'vessels:glass_bottle'}, {'etcetera:bottle_honey', 'vessels:glass_bottle'}, {'etcetera:bottle_honey', 'vessels:glass_bottle'}, {'etcetera:bottle_honey', 'vessels:glass_bottle'}}
+}
+
 etc.register_item('beeswax', {
 	displayname = 'Beeswax Nugget',
+	stats = etc.modules.corrosion and '<LMB> on a metal block to seal it against corrosion',
 	inventory_image = 'etc_beeswax.png',
 	on_use = etc.modules.corrosion and function (itemstack, user, pointed_thing)
 		local pos = pointed_thing.under
@@ -166,6 +192,25 @@ etc.register_item('beeswax', {
 		end
 	end
 })
+
+etc.register_node('beeswax_block', {
+	displayname = 'Beeswax Block',
+	tiles = {{name = 'etc_beeswax_block.png', backface_culling = true}},
+	groups = {snappy = 3, crumbly = 3, oddly_breakable_by_hand = 3},
+	sounds = default.node_sound_wood_defaults()
+})
+
+minetest.register_craft {
+	type = 'shapeless',
+	output = 'etc:beeswax_block',
+	recipe = {'etc:beeswax', 'etc:beeswax', 'etc:beeswax', 'etc:beeswax', 'etc:beeswax', 'etc:beeswax', 'etc:beeswax', 'etc:beeswax', 'etc:beeswax'}
+}
+
+minetest.register_craft {
+	type = 'shapeless',
+	output = 'etc:beeswax 9',
+	recipe = {'etc:beeswax_block'}
+}
 
 local function apiary_on_rightclick (pos, node, clicker, itemstack, pointed_thing)
 	if itemstack: get_name() == node.name then
@@ -343,3 +388,23 @@ etc.register_node('apiary_full', {
 	on_timer = apiary_on_timer,
 	drop = 'etcetera:apiary_half 2'
 })
+
+if etc.modules.treated_wood then
+	minetest.register_craft {
+		output = 'etcetera:apiary_half',
+		recipe = {
+			{'group:slab', 'group:slab', 'group:slab'},
+			{'etc:bee', 'etc:bee', 'etc:bee'},
+			{'etc:tarred_wood', 'etc:tarred_wood', 'etc:tarred_wood'}
+		}
+	}
+else
+	minetest.register_craft {
+		output = 'etcetera:apiary_half',
+		recipe = {
+			{'group:slab', 'group:slab', 'group:slab'},
+			{'etc:bee', 'etc:bee', 'etc:bee'},
+			{'group:wood', 'group:wood', 'group:wood'}
+		}
+	}
+end

@@ -2,7 +2,7 @@
 etc.translate = minetest.get_translator 'etcetera'
 
 etc.textcolors = {
-	description = '#38384a',
+	description = '#7f819a',
 	statblock   = '#f4315b'
 }
 

@@ -26,7 +26,7 @@ function etc.create_wrappers (modname, ...)
 	local translate = etc.gettext[modname] or get_translator(modname) or etc.ID
 	
 	return function (id, def)
-		def.description = def.displayname and translate(def.displayname) .. (def.description and '\n'..translate(def.description, 'description') or '') .. (def.stats and get_statblock(def.stats, translate) or '')
+		def.description = minetest.get_background_escape_sequence('#22242d')..(def.displayname and translate(def.displayname) or '').. (def.description and '\n'..translate(def.description, 'description') or '') .. (def.stats and get_statblock(def.stats, translate) or '')
 		
 		minetest.register_node(modname..':'.. id, def)
 		
@@ -38,7 +38,7 @@ function etc.create_wrappers (modname, ...)
 	end,
 
 	function (id, def)
-		def.description = def.displayname and translate(def.displayname) .. (def.description and '\n'..translate(def.description, 'description') or '') .. (def.stats and get_statblock(def.stats, translate) or '')
+		def.description = minetest.get_background_escape_sequence('#22242d')..(def.displayname and translate(def.displayname) or '').. (def.description and '\n'..translate(def.description, 'description') or '') .. (def.stats and get_statblock(def.stats, translate) or '')
 		
 		minetest.register_craftitem(modname..':'.. id, def)
 		
@@ -50,7 +50,7 @@ function etc.create_wrappers (modname, ...)
 	end,
 	
 	function (id, def)
-		def.description = def.displayname and translate(def.displayname) .. (def.description and '\n'..translate(def.description, 'description') or '') .. (def.stats and get_statblock(def.stats, translate) or '')
+		def.description = minetest.get_background_escape_sequence('#22242d')..(def.displayname and translate(def.displayname) or '').. (def.description and '\n'..translate(def.description, 'description') or '') .. (def.stats and get_statblock(def.stats, translate) or '')
 		
 		minetest.register_tool(modname..':'.. id, def)
 		

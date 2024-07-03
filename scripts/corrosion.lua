@@ -34,7 +34,7 @@ local function make_corrosion_group (modname, nodename)
 		local def = table.copy(minetest.registered_nodes[id])
 		
 		def.tiles = {def.tiles[1] .. '^(etc_corrosion_mask_'..i..'.png^[mask:etc_corrosion_'..nodename..'.png)'}
-		def.description = def.description .. ' ' .. etc.translate('('..corrosion_words[i]..' Corroded)')
+		def.description = minetest.get_background_escape_sequence('#22242d')..def.description .. ' ' .. etc.translate('('..corrosion_words[i]..' Corroded)')
 		def.groups.not_in_creative_inventory = i == 4 and 0 or 1
 		minetest.register_node('etcetera:'..nodename..'_corroded_'..i, def)
 		

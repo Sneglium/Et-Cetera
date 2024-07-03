@@ -84,7 +84,7 @@ minetest.register_lbm {
 		local meta = minetest.get_meta(pos)
 		local inv = meta: get_inventory()
 		if not inv: is_empty('item') then
-			etc.add_display_entity(vector.add(pos, vector.new(0, 0.35, 0)), inv: get_stack('item', 1), 1.5, true)
+			etc.add_item_display(vector.add(pos, vector.new(0, 0.35, 0)), inv: get_stack('item', 1), 1.5, 'random_flat')
 		end
 	end
 }
@@ -133,7 +133,7 @@ etc.register_node('anvil', {
 	end,
 	
 	on_dig = function (pos, node, digger)
-		etc.remove_display_entity(pos)
+		etc.remove_item_display(pos)
 		local meta = minetest.get_meta(pos)
 		local inv = meta: get_inventory()
 		
@@ -152,7 +152,7 @@ etc.register_node('anvil', {
 		local inv = meta: get_inventory()
 		
 		meta: set_int('progress', 0)
-		etc.remove_display_entity(pos)
+		etc.remove_item_display(pos)
 		
 		if not inv: is_empty('item') then
 			etc.give_or_drop(clicker, vector.add(pos, vector.new(0, 1, 0)), inv: get_stack('item', 1))
@@ -166,7 +166,7 @@ etc.register_node('anvil', {
 			inv: set_stack('item', 1, itemstack)
 			meta: set_int('progress_needed', math.floor((recipe and recipe.hits or 0)*(itemstack: get_count())))
 			meta: set_string('infotext', itemstack: get_short_description())
-			etc.add_display_entity(vector.add(pos, vector.new(0, 0.35, 0)), itemstack, 1.5, true)
+			etc.add_item_display(vector.add(pos, vector.new(0, 0.35, 0)), itemstack, 1.5, 'random_flat')
 			itemstack: clear()
 			clicker: set_wielded_item(itemstack)
 		end
@@ -194,7 +194,7 @@ etc.register_node('anvil', {
 					puncher: set_wielded_item(heldstack)
 					
 					meta: set_int('progress', meta: get_int('progress') + 1)
-					etc.update_display_entity(pos, stack: get_name(), true)
+					etc.update_item_display(pos, stack: get_name(), nil, 'random_flat')
 					
 					minetest.sound_play({name = 'default_dug_metal'}, {pos = pos, max_hear_distance = 16}, true)
 					
@@ -203,7 +203,7 @@ etc.register_node('anvil', {
 						output: set_count(output: get_count() * stack: get_count())
 						inv: set_stack('item', 1, output)
 						meta: set_string('infotext', stack: get_short_description())
-						etc.update_display_entity(pos, recipe.output, true)
+						etc.update_item_display(pos, recipe.output, nil, 'random_flat')
 						local recipe = etc.anvil_recipes[stack: get_name()]
 						if recipe then
 							local itemtime = recipe.hits*10

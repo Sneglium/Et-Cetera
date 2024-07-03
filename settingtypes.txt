@@ -185,6 +185,32 @@ etc.fall_tweaks_wool (Modify Wool) bool true
 # Boolean (true/false); default: true
 etc.fall_tweaks_fence (Modify Fences) bool true
 
+[Sneaking Tweaks]
+
+# Enable or disable the module entirely.
+# Boolean (true/false); default: true
+etc.load_module_sneak_tweaks (Load Module: Sneaking Tweaks) bool true
+
+# Player names will no longer be visible when that player is sneaking.
+# Boolean (true/false); default: true
+etc.sneak_tweaks_hide_nametag (Hide Nametag) bool true
+
+# Players will no longer make any footstep noises when sneaking.
+# Boolean (true/false); default: true
+etc.sneak_tweaks_silent_sneak (Silent Sneaking) bool true
+
+# The camera will lower by a set amount while sneaking to make it visually obvious.
+# Boolean (true/false); default: true
+etc.sneak_tweaks_lower_cam (Lower POV) bool true
+
+# Unless pressing a movement key, sneaking will allow players to reduce their movement speed in all directions while touching the ground.
+# Boolean (true/false); default: true
+etc.sneak_tweaks_anti_slip (Resist Movement) bool true
+
+# When sneaking the player's hitbox height will be reduced by this percentage, allowing them to sneak under smaller gaps than usual.
+# Boolean (true/false); default: true
+etc.sneak_tweaks_reduced_hitbox (Reduce Hitbox Height) bool true
+
 [Chalk]
 
 # Enable or disable the module entirely.

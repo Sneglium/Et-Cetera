@@ -67,7 +67,7 @@ minetest.register_lbm {
 		local meta = minetest.get_meta(pos)
 		local inv = meta: get_inventory()
 		if not inv: is_empty('item') then
-			etc.add_display_entity(vector.add(pos, vector.new(0, -0.25, 0)), inv: get_stack('item', 1), 1, true)
+			etc.add_item_display(vector.add(pos, vector.new(0, -0.25, 0)), inv: get_stack('item', 1), 1, 'random_flat')
 		end
 	end,
 }
@@ -113,7 +113,7 @@ etc.register_node('mortar', {
 	end,
 	
 	on_dig = function (pos, node, digger)
-		etc.remove_display_entity(pos)
+		etc.remove_item_display(pos)
 		local meta = minetest.get_meta(pos)
 		local inv = meta: get_inventory()
 		
@@ -132,7 +132,7 @@ etc.register_node('mortar', {
 		local inv = meta: get_inventory()
 		
 		meta: set_int('progress', 0)
-		etc.remove_display_entity(pos)
+		etc.remove_item_display(pos)
 		
 		if not inv: is_empty('item') then
 			etc.give_or_drop(clicker, vector.add(pos, vector.new(0, 1, 0)), inv: get_stack('item', 1))
@@ -147,7 +147,7 @@ etc.register_node('mortar', {
 			local itemtime = recipe.hits*10
 			meta: set_int('progress_needed', math.floor(itemtime+(itemtime-1)*(itemstack: get_count())*0.75)*hardness_mult)
 			meta: set_string('infotext', itemstack: get_short_description())
-			etc.add_display_entity(vector.add(pos, vector.new(0, -0.25, 0)), itemstack, 1, true)
+			etc.add_item_display(vector.add(pos, vector.new(0, -0.25, 0)), itemstack, 1, 'random_flat')
 			itemstack: clear()
 			clicker: set_wielded_item(itemstack)
 		end
@@ -170,7 +170,7 @@ etc.register_node('mortar', {
 				recipe = etc.mortar_recipes[inv: get_stack('item', 1): get_name()]
 				if recipe then
 					meta: set_int('progress', meta: get_int('progress') + math.random(9, 11))
-					etc.update_display_entity(pos, inv: get_stack('item', 1): get_name(), true)
+					etc.update_item_display(pos, inv: get_stack('item', 1): get_name(), nil, 'random_flat')
 					
 					minetest.sound_play({name = recipe.plant and 'etc_mortar_plant' or 'etc_mortar'}, {pos = pos, max_hear_distance = 16}, true)
 					if default then
@@ -192,7 +192,7 @@ etc.register_node('mortar', {
 						output: set_count(output: get_count() * stack: get_count())
 						inv: set_stack('item', 1, output)
 						meta: set_string('infotext', stack: get_short_description())
-						etc.update_display_entity(pos, recipe.output, true)
+						etc.update_item_display(pos, recipe.output, nil, 'random_flat')
 						local recipe = etc.mortar_recipes[stack: get_name()]
 						if recipe then
 							local itemtime = recipe.hits*10

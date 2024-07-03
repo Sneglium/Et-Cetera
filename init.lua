@@ -38,6 +38,7 @@ load_script_optional('anvil', '&craft_tools')
 load_script_optional('fluid_bottles', 'default', 'vessels')
 load_script_optional('paxels', 'default')
 load_script_optional('fall_tweaks', 'default')
+load_script_optional('sneak_tweaks')
 
 -- Misc. additions
 load_script_optional('chalk', '&craft_tools')

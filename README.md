@@ -271,6 +271,24 @@ The *Falling Tweaks* module (technical: `fall_tweaks`) changes some group values
  - *Modify Fences* (`etc.fall_tweaks_fence`, boolean): Makes fences and fence rails increase fall damage by 15%
 
 ---
+### Sneaking Tweaks
+
+**Depends on:**
+
+ - Nothing.
+
+The *Sneaking Tweaks* module (technical: `sneak_tweaks`) changes some mechanics around sneaking and adds new ones to make it feel more useful and immersive. Primarily, this module makes sneaking stealthier by disabling players' footstep sounds and hiding their nametags when sneaking. It also makes some interface changes to indicate visually that you're in sneak mode. Lastly, it adds a 'sneak jump' ability, allowing you to gain a small amount of extra height by jumping from a sneak and makes sneaking resist unwanted movement (ex. sliding on ice or being pushed by other objects).
+
+**List of Settings:**
+
+ - *Load Module: Sneaking Tweaks* (`etc.load_module_sneak_tweaks`, boolean): Enable or disable the module entirely.
+ - *Hide Nametag* (`etc.sneak_tweaks_hide_nametag`, boolean): Player names will no longer be visible when that player is sneaking.
+ - *Silent Sneak* (`etc.sneak_tweaks_silent_sneak`, boolean): Players will no longer make any footstep noises when sneaking.
+ - *Lower POV* (`etc.sneak_tweaks_lower_cam`, boolean): The camera will lower by a set amount while sneaking to make it visually obvious.
+ - *Resist Movement* (`etc.sneak_tweaks_anti_slip`, boolean): Unless pressing a movement key, sneaking will allow players to reduce their movement speed in all directions while touching the ground.
+ - *Reduce Hitbox Height* (`etc.sneak_tweaks_reduced_hitbox`, boolean): When sneaking the player's hitbox height will be reduced by a small amount, allowing them to sneak under smaller gaps than usual.
+
+---
 ### Chalk
 
 **Depends on:**

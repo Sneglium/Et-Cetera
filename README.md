@@ -121,10 +121,13 @@ The *Treated Wood* module (technical: `treated_wood`) adds two new decorative wo
 
 **Depends on:**
 
+ - `basic_resources` (Etc module; optional)
  - `default` (`minetest_game` Mod; required)
  - `technic` (Standalone mod; optional)
 
 The *Corrosion* module (technical: `corrosion`) adds decorative versions of the default metal blocks which can be made by placing them in or near water, causing the metal to slowly corrode over time. It will also add variants for some of the technic metal blocks if present.
+
+Corroded metal of any kind can be crafted with Acidic Extract from the basic resources module (if enabled) to remove the corrosion.
 
 **List of Settings:**
 

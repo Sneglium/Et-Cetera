@@ -23,6 +23,16 @@ local function make_corrosion_group (modname, nodename)
 	
 	corrosion_nodes[modname..':'..nodename] = 'etcetera:'..nodename..'_corroded_1'
 	corrosion_nodes['etcetera:'..nodename..'_corroded_4'] = nil
+	
+	if etc.modules.basic_resources then
+		for i = 1, 4 do
+			minetest.register_craft {
+				type = 'shapeless',
+				output = modname..':'..nodename,
+				recipe = {'etcetera:'..nodename..'_corroded_'..i, 'etc:acid'}
+			}
+		end
+	end
 end
 
 make_corrosion_group('default', 'steelblock')

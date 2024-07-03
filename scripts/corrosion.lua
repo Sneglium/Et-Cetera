@@ -14,8 +14,7 @@ local function make_corrosion_group (modname, nodename)
 		local def = table.copy(minetest.registered_nodes[id])
 		
 		def.tiles = {def.tiles[1] .. '^(etc_corrosion_mask_'..i..'.png^[mask:etc_corrosion_'..nodename..'.png)'}
-		local newdesc = def.description: gsub('@default%)', ''): gsub('[^a-zA-z ]', ''): sub(2, -2)
-		def.description = etc.translate(newdesc) .. ' ' .. etc.translate('('..corrosion_words[i]..' Corroded)')
+		def.description = def.description .. ' ' .. etc.translate('('..corrosion_words[i]..' Corroded)')
 		def.groups.not_in_creative_inventory = i == 4 and 0 or 1
 		minetest.register_node('etcetera:'..nodename..'_corroded_'..i, def)
 		
@@ -30,6 +29,12 @@ make_corrosion_group('default', 'steelblock')
 make_corrosion_group('default', 'copperblock')
 make_corrosion_group('default', 'bronzeblock')
 make_corrosion_group('default', 'tinblock')
+
+if technic then
+	make_corrosion_group('technic', 'carbon_steel_block')
+	make_corrosion_group('technic', 'cast_iron_block')
+	make_corrosion_group('technic', 'lead_block')
+end
 
 local abm_list = {}
 for k, _ in pairs(corrosion_nodes) do

@@ -83,6 +83,10 @@ if technic then
 	make_corrosion_group('technic', 'lead_block')
 end
 
+if etc.modules.wrought_iron then
+	make_corrosion_group('etcetera', 'wrought_iron_block')
+end
+
 local abm_list = {}
 for k, _ in pairs(corrosion.corrosion_nodes) do
 	table.insert(abm_list, k)

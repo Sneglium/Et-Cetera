@@ -170,7 +170,7 @@ etc.register_node('mortar', {
 				recipe = etc.mortar_recipes[inv: get_stack('item', 1): get_name()]
 				if recipe then
 					meta: set_int('progress', meta: get_int('progress') + math.random(9, 11))
-					etc.update_item_display(pos, inv: get_stack('item', 1): get_name(), nil, 'random_flat')
+					etc.update_item_display(pos, inv: get_stack('item', 1), nil, 'random_flat')
 					
 					minetest.sound_play({name = recipe.plant and 'etc_mortar_plant' or 'etc_mortar'}, {pos = pos, max_hear_distance = 16}, true)
 					if default then

@@ -23,8 +23,8 @@ minetest.register_entity('etcetera:item_display', {
 function etc.add_item_display (pos, item, scale, rotation)
 	etc.log.assert(etc.is_vector(pos), 'Item display entity position must be a vector')
 	etc.log.assert(etc.is_itemstack(item), 'Item display entity item must be an ItemStack')
-	etc.log.assert(etc.is_number(scale), 'Item display entity scale must be a number')
-	etc.log.assert(etc.is_vector(rotation) or rotation == 'random_flat', 'Display entity rotation must be a vector or the string \'random_flat\'')
+	etc.log.assert(not scale or etc.is_number(scale), 'Item display entity scale must be a number')
+	etc.log.assert(not rotation or etc.is_vector(rotation) or rotation == 'random_flat', 'Display entity rotation must be a vector or the string \'random_flat\'')
 	
 	local entity = minetest.add_entity(pos, 'etcetera:item_display')
 	local properties = entity: get_properties()
@@ -50,8 +50,8 @@ end
 function etc.update_item_display (pos, item, scale, rotation)
 	etc.log.assert(etc.is_vector(pos), 'Item display entity position must be a vector')
 	etc.log.assert(etc.is_itemstack(item), 'Item display entity item must be an ItemStack')
-	etc.log.assert(etc.is_number(scale), 'Item display entity scale must be a number')
-	etc.log.assert(etc.is_vector(rotation) or rotation == 'random_flat', 'Display entity rotation must be a vector or the string \'random_flat\'')
+	etc.log.assert(not scale or etc.is_number(scale), 'Item display entity scale must be a number')
+	etc.log.assert(not rotation or etc.is_vector(rotation) or rotation == 'random_flat', 'Display entity rotation must be a vector or the string \'random_flat\'')
 	
 	local objects = minetest.get_objects_inside_radius(pos, 0.5)
 	
@@ -111,7 +111,7 @@ function etc.add_node_display (pos, tiles, scale, initial_level)
 	etc.log.assert(etc.is_vector(pos), 'Node display entity position must be a vector')
 	etc.log.assert(etc.is_array(tiles), 'Node display entity tiles must be an array')
 	etc.log.assert(etc.is_number(scale), 'Node display entity scale must be a number')
-	etc.log.assert(etc.is_number(initial_level), 'Node display entity level must be a number')
+	etc.log.assert(not initial_level or etc.is_number(initial_level), 'Node display entity level must be a number')
 	
 	local level = initial_level or 1
 	

@@ -23,6 +23,22 @@ minetest.register_globalstep(function(dtime)
 		local head_node_def = minetest.registered_nodes[head_node.name]
 		
 		if controls.sneak or head_node_def.walkable then
+			local pos = player: get_pos()
+			local ray = minetest.raycast(pos + vector.new(0, 1.5, 0), pos + vector.new(0, 2.1, 0), false, false)
+			local collide = false
+			
+			for pointed_thing in ray do
+				if pointed_thing.type == 'node' then
+					local node = minetest.get_node(pointed_thing.under).name
+					local def = minetest.registered_nodes[node]
+					if def.walkable or def.walkable == nil then
+						collide = true
+						break
+					end
+				end
+			end
+				
+			
 			if silent_sneak then
 				properties.makes_footstep_sound = false
 			end
@@ -31,7 +47,7 @@ minetest.register_globalstep(function(dtime)
 				properties.nametag_color.a = 0
 			end
 			
-			if lower_cam and not player_stored_eye_height[playername] then
+			if lower_cam and (controls.sneak or collide) and not player_stored_eye_height[playername] then
 				player_stored_eye_height[playername] = properties.eye_height
 				properties.eye_height = properties.eye_height - (properties.eye_height * 0.15)
 			end
@@ -42,16 +58,18 @@ minetest.register_globalstep(function(dtime)
 			end
 			
 			if not controls.sneak then
-				local physics = player: get_physics_override()
-				player_stored_physics[playername] = player_stored_physics[playername] or table.copy(physics)
-				
-				physics.speed = player_stored_physics[playername].speed / ((minetest.settings: get 'movement_speed_walk' or 4) /  minetest.settings: get 'movement_speed_crouch' or 1.35)
-				physics.jump = 0
-				
-				player: set_physics_override(physics)
+				if collide then
+					local physics = player: get_physics_override()
+					player_stored_physics[playername] = player_stored_physics[playername] or table.copy(physics)
+					
+					physics.speed = player_stored_physics[playername].speed / ((minetest.settings: get 'movement_speed_walk' or 4) /  minetest.settings: get 'movement_speed_crouch' or 1.35)
+					physics.jump = 0
+					
+					player: set_physics_override(physics)
+				end
 			else
 				if player_stored_physics[playername] then
-					player_stored_physics[playername].jump = head_node_def.walkable and 0 or 1
+					player_stored_physics[playername].jump = (collide) and 0 or player_stored_physics[playername]
 					player: set_physics_override(player_stored_physics[playername])
 					player_stored_physics[playername] = nil
 				end
@@ -59,15 +77,16 @@ minetest.register_globalstep(function(dtime)
 			
 			local moving = controls.left or controls.right or controls.up or controls.down or controls.jump
 			
-			if anti_slip and player: get_velocity().y < 0.0001 and not moving then
-				player: add_velocity(-player: get_velocity()*0.1)
+			if anti_slip and player: get_velocity().y > -0.0001 and not moving then
+				local vel = player: get_velocity()
+				vel.y = 0
+				player: add_velocity(-(vel)*0.1)
 			end
 		else
-			if player_stored_physics[playername] then
-				player_stored_physics[playername].jump = player_stored_physics[playername].jump ~= 0 and player_stored_physics[playername].jump or 1
-				player: set_physics_override(player_stored_physics[playername])
-				player_stored_physics[playername] = nil
-			end
+			player_stored_physics[playername] = player_stored_physics[playername] or {}
+			player_stored_physics[playername].jump = player_stored_physics[playername].jump ~= 0 and player_stored_physics[playername].jump or 1
+			player: set_physics_override(player_stored_physics[playername])
+			player_stored_physics[playername] = nil
 			
 			if silent_sneak then
 				properties.makes_footstep_sound = true
@@ -77,8 +96,8 @@ minetest.register_globalstep(function(dtime)
 				properties.nametag_color.a = 255
 			end
 			
-			if lower_cam and player_stored_eye_height[playername] then
-				properties.eye_height = player_stored_eye_height[playername]
+			if lower_cam then
+				properties.eye_height = player_stored_eye_height[playername] or properties.eye_height
 				player_stored_eye_height[playername] = nil
 			end
 			

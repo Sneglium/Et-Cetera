@@ -53,3 +53,14 @@ function etc.rotate_nodeboxes (boxes, axis, amount)
 	
 	return new_boxes
 end
+
+-- Place a node; if pointing at a node of the same type, copy its' rotation, else rotate as normal
+function etc.copy_or_calculate_rotation (itemstack, placer, pointed_thing)
+	local node = minetest.get_node(pointed_thing.under)
+	
+	if node.name == itemstack: get_name() then
+		minetest.item_place_node(itemstack, placer, pointed_thing, node.param2, true)
+	else
+		minetest.rotate_node(itemstack, placer, pointed_thing)
+	end
+end

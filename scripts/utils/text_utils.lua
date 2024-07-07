@@ -33,12 +33,17 @@ etc.breaking_characters = {
 -- If <hard> is true, it will break words, otherwise it will only break after it reaches a character
 -- in etc.breaking_characters; in this case it will follow the rule specified therein.
 -- Trailing spaces and tabs will also be removed always.
+-- You can safely add newlines anywhere in the text and wrapping will still behave correctly.
 function etc.wrap_text (text, limit, hard)
 	if hard then
-		local passed =  0
+		local passed = 0
 		local newtext = ''
 		
 		for i = 1, #text do
+			if text: sub(i, i) == '\n' then
+				passed = 0
+			end
+			
 			if passed == limit then
 				newtext = newtext .. '\n'
 				passed = 0
@@ -70,7 +75,15 @@ function etc.wrap_text (text, limit, hard)
 					if etc.breaking_characters[char] == 'on' then
 						newtext = newtext .. '\n'
 					else
-						newtext = newtext .. '\n' .. char
+						if char == '\n' then
+							if total > 0 and text: sub(total-1, total-1) ~= char then
+								newtext = newtext .. char
+							end
+							
+							passed = 0
+						else
+							newtext = newtext .. '\n' .. char
+						end
 					end
 					passed = 0
 				else
@@ -84,7 +97,15 @@ function etc.wrap_text (text, limit, hard)
 						state = 'just_after'
 						newtext = newtext .. char
 					else
-						newtext = newtext .. char
+						if char == '\n' then
+							if total > 0 and text: sub(total-1, total-1) ~= char then
+								newtext = newtext .. char
+							end
+							
+							passed = 0
+						else
+							newtext = newtext .. char
+						end
 					end
 				end
 			else

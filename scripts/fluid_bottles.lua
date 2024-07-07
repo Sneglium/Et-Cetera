@@ -8,8 +8,16 @@ etc.bottle_fluids = {
 
 etc.register_node('bottle_water', {
 	displayname = 'Glass Bottle (Water)',
-	inventory_image = (retexture and 'etc_bottle_water.png' or 'etc_bottle_water_old.png') .. '^' .. (retexture and 'etc_glass_bottle.png' or 'vessels_glass_bottle.png'),
-	tiles = {(retexture and 'etc_bottle_water.png' or 'etc_bottle_water_old.png') .. '^' .. (retexture and 'etc_glass_bottle.png' or 'vessels_glass_bottle.png')},
+	inventory_image = table.concat {
+		(retexture and 'etc_bottle_water.png' or 'etc_bottle_water_old.png'),
+		'^',
+		(retexture and 'etc_glass_bottle.png' or 'vessels_glass_bottle.png')
+	},
+	tiles = {table.concat {
+		(retexture and 'etc_bottle_water.png' or 'etc_bottle_water_old.png'),
+		'^',
+		(retexture and 'etc_glass_bottle.png' or 'vessels_glass_bottle.png')
+	}},
 	use_texture_alpha = 'blend',
 	drawtype = 'plantlike',
 	paramtype = 'light',
@@ -28,8 +36,16 @@ if minetest.settings: get_bool('etc.fluid_bottles_lava_bottle', true) then
 	
 	local lava_bottle_def = {
 		displayname = 'Glass Bottle (Lava)',
-		inventory_image = (retexture and 'etc_bottle_lava.png' or 'etc_bottle_lava_old.png') .. '^' .. (retexture and 'etc_glass_bottle.png' or 'vessels_glass_bottle.png'),
-		tiles = {(retexture and 'etc_bottle_lava.png' or 'etc_bottle_lava_old.png') .. '^' .. (retexture and 'etc_glass_bottle.png' or 'vessels_glass_bottle.png')},
+		inventory_image = table.concat {
+		(retexture and 'etc_bottle_lava.png' or 'etc_bottle_lava_old.png'),
+		'^',
+		(retexture and 'etc_glass_bottle.png' or 'vessels_glass_bottle.png')
+	},
+		tiles = {table.concat {
+		(retexture and 'etc_bottle_lava.png' or 'etc_bottle_lava_old.png'),
+		'^',
+		(retexture and 'etc_glass_bottle.png' or 'vessels_glass_bottle.png')
+	}},
 		use_texture_alpha = 'blend',
 		drawtype = 'plantlike',
 		paramtype = 'light',

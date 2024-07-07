@@ -43,7 +43,7 @@ etc.register_node('table_coloring', {
 	},
 	on_place = minetest.rotate_node,
 	groups = {choppy = 2, oddly_breakable_by_hand = 1},
-	sounds = default and default.node_sound_wood_defaults(),
+	sounds = minetest.global_exists('default') and default.node_sound_wood_defaults() or nil,
 	
 	on_construct = function(pos)
 		minetest.get_meta(pos): get_inventory(): set_size('item', 1)

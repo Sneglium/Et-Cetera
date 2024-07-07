@@ -8,7 +8,7 @@ local corrosion_words = {
 	'Completely'
 }
 
-if unified_inventory then
+if minetest.global_exists('unified_inventory') then
 	unified_inventory.register_craft_type('etcetera:corrosion', {
 		description = 'Progressive Corrosion (In Water)',
 		icon = 'default_water.png',
@@ -21,7 +21,7 @@ if unified_inventory then
 	})
 end
 
-if i3 then
+if minetest.global_exists('i3') then
 	i3.register_craft_type('etcetera:corrosion', {
 		description = 'Progressive Corrosion (In Water)',
 		icon = 'default_water.png',
@@ -33,8 +33,13 @@ local function make_corrosion_group (modname, nodename)
 		local id = modname .. ':' .. nodename
 		local def = table.copy(minetest.registered_nodes[id])
 		
-		def.tiles = {def.tiles[1] .. '^(etc_corrosion_mask_'..i..'.png^[mask:etc_corrosion_'..nodename..'.png)'}
-		def.description = minetest.get_background_escape_sequence('#22242d')..def.description .. ' ' .. etc.translate('('..corrosion_words[i]..' Corroded)')
+		def.tiles = {table.concat {def.tiles[1], '^(etc_corrosion_mask_', i, '.png^[mask:etc_corrosion_', nodename, '.png)'}}
+		def.description = table.concat {
+			minetest.get_background_escape_sequence('#22242d'),
+			def.description,
+			' ',
+			etc.translate('('..corrosion_words[i]..' Corroded)')
+		}
 		def.groups.not_in_creative_inventory = i == 4 and 0 or 1
 		minetest.register_node('etcetera:'..nodename..'_corroded_'..i, def)
 		
@@ -54,7 +59,7 @@ local function make_corrosion_group (modname, nodename)
 		end
 	end
 	
-	if unified_inventory then
+	if minetest.global_exists('unified_inventory') then
 		unified_inventory.register_craft({
 		type = 'etcetera:corrosion',
 		output = 'etcetera:'..nodename..'_corroded_4',
@@ -63,7 +68,7 @@ local function make_corrosion_group (modname, nodename)
 	})
 	end
 	
-	if i3 then
+	if minetest.global_exists('i3') then
 		i3.register_craft {
 			type   = 'etcetera:corrosion',
 			result = 'etcetera:'..nodename..'_corroded_4',
@@ -77,7 +82,7 @@ make_corrosion_group('default', 'copperblock')
 make_corrosion_group('default', 'bronzeblock')
 make_corrosion_group('default', 'tinblock')
 
-if technic then
+if minetest.global_exists('technic') then
 	make_corrosion_group('technic', 'carbon_steel_block')
 	make_corrosion_group('technic', 'cast_iron_block')
 	make_corrosion_group('technic', 'lead_block')
@@ -97,7 +102,12 @@ local speed_mult = minetest.settings: get 'etc.corrosion_speed_mult' or 1
 minetest.register_abm {
 	label = 'Metal Corrosion',
 	nodenames = abm_list,
-	neighbors = {'default:water_source', 'default:water_flowing', 'default:river_water_source', 'default:river_water_flowing'},
+	neighbors = {
+		'default:water_source',
+		'default:water_flowing',
+		'default:river_water_source',
+		'default:river_water_flowing'
+	},
 	interval = 8 / speed_mult,
 	chance = math.ceil(6 / speed_mult),
 	catch_up = true,

@@ -12,7 +12,7 @@ Et Cetera (abbreviated Etc from hereon) is divided into "Modules", which can be 
 
 When a module's dependencies are unsatisfied, it will silently disable itself.
 
-A comprehensive reference to the APIs and utilities provided to mod and game developers can be found in the `doc/` directory, starting with `doc/main.html`.  
+A comprehensive reference to the APIs and utilities provided to mod and game developers can be found in the `doc/` directory, starting with `doc/main.html`. References for the mini-APIs provided by individual modules can be found under `doc/module APIs/`.  
 
 (*Quick Note: Itemnames below use the `etc:` prefix, which is an alias. `etcetera:` is the registered prefix, but `etc:item_name` and `etcetera:item_name` are both defined for all items.*)
 

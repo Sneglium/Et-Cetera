@@ -131,6 +131,15 @@ function etc.is_number (...)
 	return true
 end
 
+function etc.is_integer (...)
+	for i = 1, select('#', ...) do
+		local n = select(i, ...)
+		if type(n) ~= 'number' or math.abs(n) ~= n then return false end
+	end
+	
+	return true
+end
+
 function etc.is_string (...)
 	for i = 1, select('#', ...) do
 		if type(select(i, ...)) ~= 'string' then return false end
@@ -211,6 +220,19 @@ function etc.is_itemstack (...)
 	return true
 end
 
+local function single_is_itemstring (v)
+	return minetest.registered_items[ItemStack(v): get_name()] ~= nil
+end
+
+-- Ensures all the passed arguments are valid strings representing registered items
+function etc.is_itemstring (...)
+	for i = 1, select('#', ...) do
+		if not single_is_itemstring(select(i, ...)) then return false end
+	end
+	
+	return true
+end
+
 -- Recursively tests if all the fields in a table match the types required in the template.
 -- Give the template with the exact structure of the table to test, where each non-table value is replaced by the type it should be as a string.
 -- Types prepended with a ? (e.g. '?boolean') are optional, but will still fail if a wrong type is supplied (other than nil).
@@ -248,16 +270,46 @@ end
 
 -- GENERAL HELPERS
 
+-- Returns an array of itemstacks resultant from dividing the input stack by the item's max stack size
+function etc.spilt_oversized_stack(item)
+	local count, stack_max = item: get_count(), item: get_stack_max()
+	if count <= stack_max then return {item} end
+	
+	local stacks = {}
+	local stacks_needed = math.floor(count / stack_max)
+	local remainder = count - (stacks_needed * stack_max)
+	
+	print(count, stacks_needed, remainder, count - remainder)
+	
+	for i = 1, stacks_needed do
+		local new_stack = ItemStack(item)
+		new_stack: set_count(stack_max)
+		table.insert(stacks, new_stack)
+	end
+	
+	local final_stack = ItemStack(item)
+	final_stack: set_count(remainder)
+	table.insert(stacks, final_stack)
+	
+	return stacks
+end
+
 -- Tries to give an item to a player, and drops it on the ground if unable
-function etc.give_or_drop (player, pos, item)
+-- Oversized stacks will be split up into correctly sized ones
+function etc.give_or_drop (player, pos, give_item)
 	etc.log.assert(etc.is_vector(pos), 'Item position must be a vector')
-	etc.log.assert(etc.is_itemstack(item), 'Item must be an ItemStack')
+	etc.log.assert(etc.is_itemstack(give_item), 'Item must be an ItemStack')
 	
 	local inv = player: get_inventory()
-	if inv: room_for_item('main', item) then
-		inv: add_item('main', item)
-	else
-		minetest.add_item(pos, item)
+	
+	local itemstacks = etc.spilt_oversized_stack(give_item)
+	
+	for _, item in pairs(itemstacks) do
+		if inv: room_for_item('main', item) then
+			inv: add_item('main', item)
+		else
+			minetest.add_item(pos, item)
+		end
 	end
 end
 

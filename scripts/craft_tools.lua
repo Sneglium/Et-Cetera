@@ -42,7 +42,7 @@ local ct_tools = {
 minetest.register_on_craft(function(itemstack, player, old_craft_grid, craft_inv)
 	for index, item in ipairs(old_craft_grid) do
 		if ct_tools[ItemStack(item): get_name()] then
-			item: set_wear(item: get_wear() + math.ceil(65535/ct_tools[ItemStack(item): get_name()]))
+			item: set_wear(item: get_wear() + math.ceil(65536 / ct_tools[ItemStack(item): get_name()]))
 			if item: get_wear() >= 65535 then
 				craft_inv: set_stack('craft', index, ItemStack())
 				minetest.sound_play({name = 'default_tool_breaks'}, {to_player = player: get_player_name()}, true)
@@ -53,7 +53,7 @@ minetest.register_on_craft(function(itemstack, player, old_craft_grid, craft_inv
 	end
 end)
 
-if default then
+if minetest.global_exists('default') then
 	minetest.register_craft {
 		recipe = {
 			{'', 'default:steel_ingot'},

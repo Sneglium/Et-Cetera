@@ -7,7 +7,7 @@ local no_break = minetest.settings: get_bool('etc.anvil_prevent_tool_break', tru
 
 etc.anvil_recipes = {}
 
-if unified_inventory then
+if minetest.global_exists('unified_inventory') then
 	unified_inventory.register_craft_type('etcetera:anvil', {
 		description = 'Anvil & Hammer',
 		icon = 'etc_anvil_side.png',
@@ -20,7 +20,7 @@ if unified_inventory then
 	})
 end
 
-if i3 then
+if minetest.global_exists('i3') then
 	i3.register_craft_type('etcetera:anvil', {
 		description = 'Anvil & Hammer',
 		icon = 'etc_anvil_side.png',
@@ -28,9 +28,13 @@ if i3 then
 end
 
 function etc.register_anvil_recipe (input, output, hits)
+	etc.log.assert(etc.is_itemstring(input), 'Input item must be an itemstring pointing to an extant item')
+	etc.log.assert(etc.is_itemstring(output), 'Output item must be an itemstring pointing to an extant item')
+	etc.log.assert(etc.is_integer(hits), 'Number of hits must be an integer number')
+	
 	etc.anvil_recipes[input] = {output = output, hits = hits}
 	
-	if unified_inventory then
+	if minetest.global_exists('unified_inventory') then
 		unified_inventory.register_craft({
 		type = 'etcetera:anvil',
 		output = output,
@@ -39,7 +43,7 @@ function etc.register_anvil_recipe (input, output, hits)
 	})
 	end
 	
-	if i3 then
+	if minetest.global_exists('i3') then
 		i3.register_craft {
 			type   = 'etcetera:anvil',
 			result = output,
@@ -55,7 +59,7 @@ etc.register_tool('blacksmith_hammer', {
 	tool_capabilities = {groupcaps={cracky={}}}
 })
 
-if default then
+if minetest.global_exists('default') then
 	minetest.register_craft {
 		recipe = {
 			{'etc:ct_file', 'default:steel_ingot', 'etc:ct_drill'},
@@ -97,7 +101,7 @@ etc.register_node('anvil', {
 	paramtype = 'light',
 	drawtype = 'nodebox',
 	groups = {cracky = 1},
-	sounds = default and default.node_sound_metal_defaults(),
+	sounds = minetest.global_exists('default') and default.node_sound_metal_defaults() or nil,
 	paramtype2 = '4dir',
 	on_place = minetest.rotate_node,
 	
@@ -194,16 +198,16 @@ etc.register_node('anvil', {
 					puncher: set_wielded_item(heldstack)
 					
 					meta: set_int('progress', meta: get_int('progress') + 1)
-					etc.update_item_display(pos, stack: get_name(), nil, 'random_flat')
+					etc.update_item_display(pos, stack, nil, 'random_flat')
 					
 					minetest.sound_play({name = 'default_dug_metal'}, {pos = pos, max_hear_distance = 16}, true)
 					
-					if meta: get_int('progress') > meta: get_int('progress_needed') then
+					if meta: get_int('progress') >= meta: get_int('progress_needed') then
 						local output = ItemStack(recipe.output)
 						output: set_count(output: get_count() * stack: get_count())
 						inv: set_stack('item', 1, output)
 						meta: set_string('infotext', stack: get_short_description())
-						etc.update_item_display(pos, recipe.output, nil, 'random_flat')
+						etc.update_item_display(pos, output, nil, 'random_flat')
 						local recipe = etc.anvil_recipes[stack: get_name()]
 						if recipe then
 							local itemtime = recipe.hits*10
@@ -257,7 +261,7 @@ etc.register_node('anvil', {
 	end
 })
 
-if default then
+if minetest.global_exists('default') then
 	if wrought_iron and etc.modules.wrought_iron then
 		minetest.register_craft {
 			recipe = {

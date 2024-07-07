@@ -133,8 +133,16 @@ local retexture = minetest.settings: get_bool('etc.load_module_fluid_bottles', t
 
 etc.register_node('bottle_honey', {
 	displayname = 'Glass Bottle (Honey)',
-	inventory_image = (retexture and 'etc_bottle_honey.png' or 'etc_bottle_honey_old.png') .. '^' .. (retexture and 'etc_glass_bottle.png' or 'vessels_glass_bottle.png'),
-	tiles = {(retexture and 'etc_bottle_honey.png' or 'etc_bottle_honey_old.png') .. '^' .. (retexture and 'etc_glass_bottle.png' or 'vessels_glass_bottle.png')},
+	inventory_image = table.concat {
+		(retexture and 'etc_bottle_honey.png' or 'etc_bottle_honey_old.png'),
+		'^',
+		(retexture and 'etc_glass_bottle.png' or 'vessels_glass_bottle.png')
+	},
+	tiles = {table.concat {
+		(retexture and 'etc_bottle_honey.png' or 'etc_bottle_honey_old.png'),
+		'^',
+		(retexture and 'etc_glass_bottle.png' or 'vessels_glass_bottle.png')
+	}},
 	use_texture_alpha = 'blend',
 	drawtype = 'plantlike',
 	paramtype = 'light',
@@ -157,7 +165,13 @@ etc.register_node('honey_block', {
 	paramtype = 'light',
 	sunlight_propagates = true,
 	use_texture_alpha = 'blend',
-	groups = {snappy = 3, crumbly = 2, oddly_breakable_by_hand = 3, fall_damage_add_percent = -100, bouncy = 50},
+	groups = {
+		snappy = 3,
+		crumbly = 2,
+		oddly_breakable_by_hand = 3,
+		fall_damage_add_percent = -100,
+		bouncy = 50
+	},
 	sounds = {
 		footstep = {name = 'etc_slime_dig', pitch = 1.5, gain = 0.5},
 		dig = {name = 'etc_slime_dig', pitch = 2},
@@ -170,8 +184,18 @@ etc.register_node('honey_block', {
 minetest.register_craft {
 	type = 'shapeless',
 	output = 'etc:honey_block',
-	recipe = {'etc:bottle_honey', 'etc:bottle_honey', 'etc:bottle_honey', 'etc:bottle_honey', 'etc:bottle_honey', 'etc:bottle_honey', 'etc:bottle_honey', 'etc:bottle_honey', 'etc:bottle_honey'},
-	replacements = minetest.get_modpath 'vessels' and {{'etcetera:bottle_honey', 'vessels:glass_bottle'}, {'etcetera:bottle_honey', 'vessels:glass_bottle'}, {'etcetera:bottle_honey', 'vessels:glass_bottle'}, {'etcetera:bottle_honey', 'vessels:glass_bottle'}, {'etcetera:bottle_honey', 'vessels:glass_bottle'}, {'etcetera:bottle_honey', 'vessels:glass_bottle'}, {'etcetera:bottle_honey', 'vessels:glass_bottle'}, {'etcetera:bottle_honey', 'vessels:glass_bottle'}, {'etcetera:bottle_honey', 'vessels:glass_bottle'}}
+	recipe = {
+		'etc:bottle_honey', 'etc:bottle_honey', 'etc:bottle_honey',
+		'etc:bottle_honey', 'etc:bottle_honey', 'etc:bottle_honey',
+		'etc:bottle_honey', 'etc:bottle_honey', 'etc:bottle_honey'
+	},
+	replacements = minetest.get_modpath 'vessels' and {
+	{'etcetera:bottle_honey', 'vessels:glass_bottle'}, {'etcetera:bottle_honey', 'vessels:glass_bottle'},
+	{'etcetera:bottle_honey', 'vessels:glass_bottle'}, {'etcetera:bottle_honey', 'vessels:glass_bottle'},
+	{'etcetera:bottle_honey', 'vessels:glass_bottle'}, {'etcetera:bottle_honey', 'vessels:glass_bottle'},
+	{'etcetera:bottle_honey', 'vessels:glass_bottle'}, {'etcetera:bottle_honey', 'vessels:glass_bottle'},
+	{'etcetera:bottle_honey', 'vessels:glass_bottle'}
+	}
 }
 
 etc.register_item('beeswax', {
@@ -203,7 +227,11 @@ etc.register_node('beeswax_block', {
 minetest.register_craft {
 	type = 'shapeless',
 	output = 'etc:beeswax_block',
-	recipe = {'etc:beeswax', 'etc:beeswax', 'etc:beeswax', 'etc:beeswax', 'etc:beeswax', 'etc:beeswax', 'etc:beeswax', 'etc:beeswax', 'etc:beeswax'}
+	recipe = {
+		'etc:beeswax', 'etc:beeswax', 'etc:beeswax',
+		'etc:beeswax', 'etc:beeswax', 'etc:beeswax',
+		'etc:beeswax', 'etc:beeswax', 'etc:beeswax'
+	}
 }
 
 minetest.register_craft {
@@ -340,6 +368,7 @@ etc.register_node('apiary_half', {
 		'etc_apiary_side.png',
 		'etc_apiary_front.png'
 	},
+	use_texture_alpha = 'clip',
 	drawtype = 'nodebox',
 	paramtype = 'light',
 	paramtype2 = '4dir',
@@ -368,6 +397,7 @@ etc.register_node('apiary_full', {
 		'etc_apiary_side.png',
 		'etc_apiary_front.png'
 	},
+	use_texture_alpha = 'clip',
 	drawtype = 'nodebox',
 	paramtype = 'light',
 	paramtype2 = '4dir',

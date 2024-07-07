@@ -1,6 +1,6 @@
 etc.mortar_recipes = {}
 
-if unified_inventory then
+if minetest.global_exists('unified_inventory') then
 	unified_inventory.register_craft_type('etcetera:mortar', {
 		description = 'Mortar & Pestle',
 		icon = 'etc_mortar_side.png',
@@ -13,7 +13,7 @@ if unified_inventory then
 	})
 end
 
-if i3 then
+if minetest.global_exists('i3') then
 	i3.register_craft_type('etcetera:mortar', {
 		description = 'Mortar & Pestle',
 		icon = 'etc_mortar_side.png',
@@ -21,9 +21,14 @@ if i3 then
 end
 
 function etc.register_mortar_recipe (input, output, hits, use_plant_sound)
+	etc.log.assert(etc.is_itemstring(input), 'Input item must be an itemstring pointing to an extant item')
+	etc.log.assert(etc.is_itemstring(output), 'Output item must be an itemstring pointing to an extant item')
+	etc.log.assert(etc.is_integer(hits), 'Number of hits must be an integer number')
+	etc.log.assert(use_plant_sound == nil or etc.is_bool(use_plant_sound), 'Condition: "use plant sound" must be a boolean or nil')
+	
 	etc.mortar_recipes[input] = {output = output, hits = hits, plant = use_plant_sound}
 	
-	if unified_inventory then
+	if minetest.global_exists('unified_inventory') then
 		unified_inventory.register_craft({
 		type = 'etcetera:mortar',
 		output = output,
@@ -32,7 +37,7 @@ function etc.register_mortar_recipe (input, output, hits, use_plant_sound)
 	})
 	end
 	
-	if i3 then
+	if minetest.global_exists('i3') then
 		i3.register_craft {
 			type   = 'etcetera:mortar',
 			result = output,
@@ -49,7 +54,7 @@ etc.register_item('pestle', {
 	stack_max = 1
 })
 
-if default then
+if minetest.global_exists('default') then
 	minetest.register_craft {
 		recipe = {
 			{'default:steel_ingot', 'etc:sandpaper_0'},
@@ -145,7 +150,7 @@ etc.register_node('mortar', {
 		if recipe then
 			inv: set_stack('item', 1, itemstack)
 			local itemtime = recipe.hits*10
-			meta: set_int('progress_needed', math.floor(itemtime+(itemtime-1)*(itemstack: get_count())*0.75)*hardness_mult)
+			meta: set_int('progress_needed', math.floor(itemtime*math.ceil(itemstack: get_count()*0.75)*hardness_mult))
 			meta: set_string('infotext', itemstack: get_short_description())
 			etc.add_item_display(vector.add(pos, vector.new(0, -0.25, 0)), itemstack, 1, 'random_flat')
 			itemstack: clear()
@@ -167,9 +172,16 @@ etc.register_node('mortar', {
 			meta: set_float('last_hit', os.clock())
 			
 			if not inv: is_empty('item') then
-				recipe = etc.mortar_recipes[inv: get_stack('item', 1): get_name()]
+				local stack = inv: get_stack('item', 1)
+				local recipe = etc.mortar_recipes[stack: get_name()]
 				if recipe then
 					meta: set_int('progress', meta: get_int('progress') + math.random(9, 11))
+					meta: set_string('infotext', table.concat {
+						stack: get_short_description(),
+						': ~',
+						tostring(100 / meta: get_int 'progress_needed' * meta: get_int'progress'): sub(1,2): gsub('%.', ''),
+						'% crushed'
+					})
 					etc.update_item_display(pos, inv: get_stack('item', 1), nil, 'random_flat')
 					
 					minetest.sound_play({name = recipe.plant and 'etc_mortar_plant' or 'etc_mortar'}, {pos = pos, max_hear_distance = 16}, true)
@@ -187,12 +199,11 @@ etc.register_node('mortar', {
 					end
 					
 					if meta: get_int('progress') > meta: get_int('progress_needed') then
-						local stack = inv: get_stack('item', 1)
 						local output = ItemStack(recipe.output)
 						output: set_count(output: get_count() * stack: get_count())
 						inv: set_stack('item', 1, output)
-						meta: set_string('infotext', stack: get_short_description())
-						etc.update_item_display(pos, recipe.output, nil, 'random_flat')
+						meta: set_string('infotext', inv: get_stack('item', 1): get_short_description())
+						etc.update_item_display(pos, ItemStack(recipe.output), nil, 'random_flat')
 						local recipe = etc.mortar_recipes[stack: get_name()]
 						if recipe then
 							local itemtime = recipe.hits*10
@@ -206,8 +217,7 @@ etc.register_node('mortar', {
 	end
 })
 
-
-if default then
+if minetest.global_exists('default') then
 	minetest.register_craft {
 		recipe = {
 			{'', 'etc:sandpaper_0', ''},
@@ -237,7 +247,7 @@ if default then
 	end
 end
 
-if farming then
+if minetest.global_exists('farming') then
 	etc.register_mortar_recipe('farming:wheat', 'farming:flour', 10, true)
 end
 
@@ -255,7 +265,7 @@ end
 
 if minetest.settings: get_bool('etc.mortar_and_pestle_technic_support', true) then
 	minetest.after(0.05, function()
-		if technic then
+		if minetest.global_exists('technic') then
 			for _, recipe in pairs(technic.recipes.grinding.recipes) do
 				if type(recipe.output) == 'string' then
 					for input, __ in pairs(recipe.input) do

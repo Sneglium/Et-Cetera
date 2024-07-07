@@ -4,7 +4,7 @@ etc.register_item('pine_tar', {
 	inventory_image = 'etc_pine_tar.png'
 })
 
-if default then
+if minetest.global_exists('default') then
 	minetest.register_craft {
 		type = 'cooking',
 		recipe = 'default:pine_wood',
@@ -17,7 +17,7 @@ etc.register_item('charcoal', {
 	inventory_image = 'etc_charcoal.png'
 })
 
-if default then
+if minetest.global_exists('default') then
 	minetest.register_craft {
 		type = 'cooking',
 		recipe = 'group:tree',
@@ -53,7 +53,7 @@ etc.register_item('acid', {
 	inventory_image = 'etc_acid.png'
 })
 
-if default then
+if minetest.global_exists('default') then
 	minetest.register_craft {
 		type = 'cooking',
 		recipe = 'default:fern_1',
@@ -66,7 +66,7 @@ etc.register_item('algin', {
 	inventory_image = 'etc_algin.png'
 })
 
-if default then
+if minetest.global_exists('default') then
 	minetest.register_craft {
 		type = 'cooking',
 		recipe = 'default:sand_with_kelp',
@@ -122,7 +122,7 @@ etc.register_item('sandpaper_0', {
 	inventory_image = 'etc_sandpaper_raw.png'
 })
 
-if default then
+if minetest.global_exists('default') then
 	minetest.register_craft {
 		recipe = {
 			{'etc:pine_tar', 'group:sand', 'etc:pine_tar'},
@@ -138,7 +138,7 @@ etc.register_item('sandpaper_1', {
 	inventory_image = 'etc_sandpaper_1.png'
 })
 
-if default then
+if minetest.global_exists('default') then
 	minetest.register_craft {
 		recipe = {
 			{'etc:pine_tar', 'etc:flint_dust', 'etc:pine_tar'},
@@ -154,7 +154,7 @@ etc.register_item('sandpaper_2', {
 	inventory_image = 'etc_sandpaper_2.png'
 })
 
-if default then
+if minetest.global_exists('default') then
 	minetest.register_craft {
 		recipe = {
 			{'etc:pine_tar', 'etc:mese_dust', 'etc:pine_tar'},
@@ -170,7 +170,7 @@ etc.register_item('sandpaper_3', {
 	inventory_image = 'etc_sandpaper_3.png'
 })
 
-if default then
+if minetest.global_exists('default') then
 	minetest.register_craft {
 		recipe = {
 			{'etc:pine_tar', 'etc:diamond_dust', 'etc:pine_tar'},

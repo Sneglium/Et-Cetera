@@ -55,6 +55,7 @@ function etc.rotate_nodeboxes (boxes, axis, amount)
 end
 
 -- Place a node; if pointing at a node of the same type, copy its' rotation, else rotate as normal
+-- Can be used directly as a replacement for a node's on_place method
 function etc.copy_or_calculate_rotation (itemstack, placer, pointed_thing)
 	local node = minetest.get_node(pointed_thing.under)
 	

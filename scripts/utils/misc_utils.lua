@@ -1,6 +1,7 @@
--- A bunch of different helper functions that wouldn't make much sense as part of a different category
-
 -- MISC. PLACEHOLDERS
+-- These are mostly for cases when a method or procedure asks for a function as its' argument,
+-- and you only need it to do something very simple (or nothing)
+
 -- Does nothing
 function etc.NOP () end
 
@@ -40,7 +41,8 @@ end
 -- General stuff for manipulating tables
 
 -- Converts a table with multiple dimensions into a flat array while preserving apparent order of bottom-level elements
--- Bottom-level elements may not be tables
+-- Bottom-level elements may not be tables (since they would be counted as an additional dimension)
+-- The table's dimensions do not need to be the same size (the table can actually be any tree)
 function etc.flatten (table)
 	local array = {}
 	
@@ -72,6 +74,8 @@ function etc.merge (table_a, table_b)
 	return new_table
 end
 
+-- Finds the index of an entry in an array
+-- Also returns the object at the index for convenience
 function etc.array_find (array, data)
 	for index, v in pairs(array) do
 		if v == data then return index, v end
@@ -83,16 +87,20 @@ end
 -- TYPE & ERROR HELPERS
 
 -- Table that holds the various log functions
+-- Each correspond ro a built-in MT error level except fatal and assert
+-- Can also be called directly; equivalent to etc.log.info
 etc.log = {}
 
-function etc.log.fatal (msg)
+-- Log an error properly, then throw a plain Lua error
+function etc.log.fatal (msg, code_add)
 	minetest.log('error', table.concat {'<', minetest.get_current_modname() or '@active', '/FATAL> ', msg})
-	error(msg, 3)
+	error(msg, code_add and code_add + 2 or 2)
 end
 
+-- Same as the above, but only errors if a condition is not met
 function etc.log.assert (cond, msg)
 	if not cond then
-		etc.log.fatal(msg)
+		etc.log.fatal(msg, 1)
 	end
 	
 	return cond
@@ -184,7 +192,7 @@ function etc.is_dict (table)
 end
 
 -- Ensures all the keys in a table are numbers
--- Does NOT check if they are continuous
+-- Does NOT check if they are continuous, so not properly a mathematical array
 function etc.is_array (table)
 	for key, _ in pairs(table) do
 		if type(key) ~= 'number' then return false end
@@ -238,8 +246,9 @@ end
 -- Types prepended with a ? (e.g. '?boolean') are optional, but will still fail if a wrong type is supplied (other than nil).
 -- Does not test for keys not present in the template, arbitrary keys are allowed.
 -- Returns a boolean for successful match; if false, secondarily returns the non-matching "key path" ('table.<key>.<key>...') as a string.
+-- Set <parent> to change the name of the root table in the error key path
 function etc.validate_table_struc (table, template, parent)
-	parent = parent or 'table.'
+	parent = parent and (parent .. '.') or 'table.'
 	if type(table) ~= 'table' then return false, parent end
 	
 	for k, v in pairs(template) do
@@ -271,15 +280,13 @@ end
 -- GENERAL HELPERS
 
 -- Returns an array of itemstacks resultant from dividing the input stack by the item's max stack size
-function etc.spilt_oversized_stack(item)
+function etc.split_oversized_stack (item)
 	local count, stack_max = item: get_count(), item: get_stack_max()
 	if count <= stack_max then return {item} end
 	
 	local stacks = {}
 	local stacks_needed = math.floor(count / stack_max)
 	local remainder = count - (stacks_needed * stack_max)
-	
-	print(count, stacks_needed, remainder, count - remainder)
 	
 	for i = 1, stacks_needed do
 		local new_stack = ItemStack(item)
@@ -302,7 +309,7 @@ function etc.give_or_drop (player, pos, give_item)
 	
 	local inv = player: get_inventory()
 	
-	local itemstacks = etc.spilt_oversized_stack(give_item)
+	local itemstacks = etc.split_oversized_stack(give_item)
 	
 	for _, item in pairs(itemstacks) do
 		if inv: room_for_item('main', item) then

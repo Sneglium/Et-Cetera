@@ -8,6 +8,7 @@ end
 local function load_script_optional (fn, ...)
 	if etc.check_depends(...) and minetest.settings: get_bool('etc.load_module_'..fn, true) then
 		etc.modules[fn] = dofile(table.concat {etc.modpath, '/scripts/', fn, '.lua'}) or true
+		etc[fn] = etc.modules[fn]
 	end
 end
 

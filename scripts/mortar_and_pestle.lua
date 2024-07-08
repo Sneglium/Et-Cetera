@@ -21,8 +21,6 @@ if minetest.global_exists('i3') then
 end
 
 function etc.register_mortar_recipe (input, output, hits, use_plant_sound)
-	etc.log.assert(etc.is_itemstring(input), 'Input item must be an itemstring pointing to an extant item')
-	etc.log.assert(etc.is_itemstring(output), 'Output item must be an itemstring pointing to an extant item')
 	etc.log.assert(etc.is_integer(hits), 'Number of hits must be an integer number')
 	etc.log.assert(use_plant_sound == nil or etc.is_bool(use_plant_sound), 'Condition: "use plant sound" must be a boolean or nil')
 	
@@ -270,7 +268,14 @@ if minetest.settings: get_bool('etc.mortar_and_pestle_technic_support', true) th
 				if type(recipe.output) == 'string' then
 					for input, __ in pairs(recipe.input) do
 						if not etc.mortar_recipes[input] then
-							etc.register_mortar_recipe(input, recipe.output, 5)
+							local input = ItemStack(input)
+							local new_output = ItemStack(recipe.output)
+							
+							if input: get_count() ~= 1 then
+								new_output: set_count(math.floor(new_output: get_count() / input: get_count()))
+							end
+							
+							etc.register_mortar_recipe(input: get_name(), new_output: to_string(), 5)
 						end
 					end
 				end

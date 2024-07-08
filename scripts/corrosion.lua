@@ -28,12 +28,18 @@ if minetest.global_exists('i3') then
 	})
 end
 
-local function make_corrosion_group (modname, nodename)
+local function make_corrosion_group (modname, nodename, texname)
+	local corrosion_tex = texname or ('etc_corrosion_' .. nodename .. '.png')
+	local id = modname .. ':' .. nodename
+	
+	local newgroups = minetest.registered_nodes[id].groups
+	newgroups.etc_corrodable = 1
+	
+	minetest.override_item(id, {groups=newgroups})
+	
 	for i = 1, 4 do
-		local id = modname .. ':' .. nodename
 		local def = table.copy(minetest.registered_nodes[id])
-		
-		def.tiles = {table.concat {def.tiles[1], '^(etc_corrosion_mask_', i, '.png^[mask:etc_corrosion_', nodename, '.png)'}}
+		def.tiles = {table.concat {def.tiles[1], '^(etc_corrosion_mask_', i, '.png^[mask:', corrosion_tex, ')'}}
 		def.description = table.concat {
 			minetest.get_background_escape_sequence('#22242d'),
 			def.description,
@@ -41,6 +47,7 @@ local function make_corrosion_group (modname, nodename)
 			etc.translate('('..corrosion_words[i]..' Corroded)')
 		}
 		def.groups.not_in_creative_inventory = i == 4 and 0 or 1
+		def.groups.etc_corrodable = i == 4 and 0 or 1
 		minetest.register_node('etcetera:'..nodename..'_corroded_'..i, def)
 		
 		corrosion.corrosion_nodes['etcetera:'..nodename..'_corroded_'..i] = 'etcetera:'..nodename..'_corroded_'..(i+1)
@@ -82,26 +89,25 @@ make_corrosion_group('default', 'copperblock')
 make_corrosion_group('default', 'bronzeblock')
 make_corrosion_group('default', 'tinblock')
 
-if minetest.global_exists('technic') then
-	make_corrosion_group('technic', 'carbon_steel_block')
-	make_corrosion_group('technic', 'cast_iron_block')
-	make_corrosion_group('technic', 'lead_block')
-end
-
 if etc.modules.wrought_iron then
 	make_corrosion_group('etcetera', 'wrought_iron_block')
 end
 
-local abm_list = {}
-for k, _ in pairs(corrosion.corrosion_nodes) do
-	table.insert(abm_list, k)
+function corrosion.add_metal_block (item, texname_override)
+	etc.log.assert(etc.is_itemstring(item), 'Item name to add as corrodable block must be a valid itemstring')
+	etc.log.assert(texname_override == nil or etc.is_string(texname_override), 'Corrosion texture override must be a string or nil')
+	
+	local texname_override = texname_override or 'etc_corrosion_steelblock.png'
+	local itemstring_split = string.split(ItemStack(item): get_name(), ':')
+	
+	make_corrosion_group(itemstring_split[1], itemstring_split[2], texname_override)
 end
 
-local speed_mult = minetest.settings: get 'etc.corrosion_speed_mult' or 1
+local speed_mult = minetest.settings: get 'etc.corrosion_speed_mult' or 8
 
 minetest.register_abm {
 	label = 'Metal Corrosion',
-	nodenames = abm_list,
+	nodenames = {'group:etc_corrodable'},
 	neighbors = {
 		'default:water_source',
 		'default:water_flowing',
@@ -113,8 +119,15 @@ minetest.register_abm {
 	catch_up = true,
 	action = function(pos, node)
 		if minetest.get_meta(pos): get_string('sealed') == 'true' then return end
+		print(node.name, corrosion.corrosion_nodes[node.name])
 		minetest.swap_node(pos, {name = corrosion.corrosion_nodes[node.name], param2 = node.param2})
 	end
 }
+
+if minetest.global_exists('technic') then
+	corrosion.add_metal_block('technic:carbon_steel_block', 'etc_corrosion_carbon_steel_block.png')
+	corrosion.add_metal_block('technic:cast_iron_block', 'etc_corrosion_cast_iron_block.png')
+	corrosion.add_metal_block('technic:lead_block', 'etc_corrosion_lead_block.png')
+end
 
 return corrosion

@@ -87,6 +87,8 @@ function etc.remove_item_display (pos)
 	end
 end
 
+-- An entity for displaying a node-like object
+-- mainly for showing liquids filling containers and so on
 minetest.register_entity('etcetera:node_display', {
 	initial_properties = {
 		physical = false,
@@ -105,8 +107,27 @@ minetest.register_entity('etcetera:node_display', {
 	_scale = 1
 })
 
+ -- scales and positions the side textures such that the bottom edge of the texture is aligned with the bottom
+ -- of the display entity and pixel aspect ratio is preserved
+local function get_levelled_tiles (tiles, level)
+	if level == 1 then return tiles end
+	
+	local sixteenths = math.ceil(16 * level)
+	
+	for i = 3, 6 do
+		tiles[i] = table.concat {
+			'[combine:16x',
+			tostring(sixteenths),
+			':0,', tostring(level > 0.9 and 0 or -(16-sixteenths)), '=', tiles[i]
+		}
+	end
+	
+	return tiles
+end
+
 -- initial_level should range from 0-1; sets the liquid level
--- Be aware the entity will move down relative to <pos> depending on the level
+-- be aware the entity will move down relative to <pos> depending on the level
+-- only really works with 16x tiles for anything other than level = 1
 function etc.add_node_display (pos, tiles, scale, initial_level)
 	etc.log.assert(etc.is_vector(pos), 'Node display entity position must be a vector')
 	etc.log.assert(etc.is_array(tiles), 'Node display entity tiles must be an array')
@@ -121,7 +142,7 @@ function etc.add_node_display (pos, tiles, scale, initial_level)
 	local entity = minetest.add_entity(vector.add(pos, vector.new(0, offset, 0)), 'etcetera:node_display')
 	
 	local properties = entity: get_properties()
-	properties.textures = tiles
+	properties.textures = get_levelled_tiles(tiles, level)
 	
 	properties.visual_size = {x = scale, y = height, z = scale}
 	

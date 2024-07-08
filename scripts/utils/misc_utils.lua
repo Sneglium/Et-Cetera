@@ -304,8 +304,10 @@ end
 -- Tries to give an item to a player, and drops it on the ground if unable
 -- Oversized stacks will be split up into correctly sized ones
 function etc.give_or_drop (player, pos, give_item)
-	etc.log.assert(etc.is_vector(pos), 'Item position must be a vector')
+	etc.log.assert(pos == nil or etc.is_vector(pos), 'Item position must be a vector')
 	etc.log.assert(etc.is_itemstack(give_item), 'Item must be an ItemStack')
+	
+	pos = pos or player: get_pos() + vector.new(0, 1.5, 0) + player: get_look_dir()
 	
 	local inv = player: get_inventory()
 	

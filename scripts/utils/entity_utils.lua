@@ -130,7 +130,7 @@ end
 -- only really works with 16x tiles for anything other than level = 1
 function etc.add_node_display (pos, tiles, scale, initial_level)
 	etc.log.assert(etc.is_vector(pos), 'Node display entity position must be a vector')
-	etc.log.assert(etc.is_array(tiles), 'Node display entity tiles must be an array')
+	etc.log.assert(etc.is_string(tiles) or etc.is_array(tiles), 'Node display entity tiles must be an array or a single string')
 	etc.log.assert(etc.is_number(scale), 'Node display entity scale must be a number')
 	etc.log.assert(not initial_level or etc.is_number(initial_level), 'Node display entity level must be a number')
 	
@@ -142,6 +142,10 @@ function etc.add_node_display (pos, tiles, scale, initial_level)
 	local entity = minetest.add_entity(vector.add(pos, vector.new(0, offset, 0)), 'etcetera:node_display')
 	
 	local properties = entity: get_properties()
+	
+	if etc.is_string(tiles) then
+		tiles = {tiles, tiles, tiles, tiles, tiles, tiles}
+	end
 	properties.textures = get_levelled_tiles(tiles, level)
 	
 	properties.visual_size = {x = scale, y = height, z = scale}
@@ -189,3 +193,24 @@ function etc.remove_node_display (pos)
 		end
 	end
 end
+
+-- An entity for displaying a linear beam between two points
+-- For lasers, taut ropes/chains, poles, and such that don't move often
+minetest.register_entity('etcetera:beam_display', {
+	initial_properties = {
+		physical = false,
+		collide_with_objects = false,
+		pointable = false,
+		visual = 'cube',
+		textures = '',
+		use_texture_alpha = true,
+		visual_size = {x = 1, y = 1, z = 1},
+		is_visible = true,
+		static_save = false,
+		damage_texture_modifier = ''
+	},
+	
+	_etc_display_beam = true,
+	_width = 1
+})
+

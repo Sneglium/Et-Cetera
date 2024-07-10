@@ -69,7 +69,7 @@ minetest.register_globalstep(function(dtime)
 				end
 			else
 				if player_stored_physics[playername] then
-					player_stored_physics[playername].jump = (collide) and 0 or player_stored_physics[playername]
+					player_stored_physics[playername].jump = (collide) and 0 or player_stored_physics[playername].jump
 					player: set_physics_override(player_stored_physics[playername])
 					player_stored_physics[playername] = nil
 				end

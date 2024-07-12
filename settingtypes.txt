@@ -69,6 +69,12 @@ etc.bees_wax_rate (Wax Generation Rate) float 1.0 0 10
 # Integer (0-10); default: 2
 etc.bees_memory_length (Apiary Memory Length) int 2 0 10
 
+[Gems]
+
+# Enable or disable the module entirely.
+# Boolean (true/false); default: true
+etc.load_module_gems (Load Module: Gems) bool true
+
 [Item Cosmetic Stations]
 
 # Enable or disable the module entirely.
@@ -258,6 +264,10 @@ etc.more_loot_anvil (Anvil & hammer) bool true
 # Add chalk sticks and pressed charcoal stick as loot items.
 # Boolean (true/false); default: true
 etc.more_loot_chalk (Chalk) bool true
+
+# Add gemstones from Etc as loot items.
+# Boolean (true/false); default: true
+etc.more_loot_gems (Gems) bool true
 
 # Add various resource items from Etc as loot items.
 # Boolean (true/false); default: true

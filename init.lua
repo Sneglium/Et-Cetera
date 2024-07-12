@@ -28,6 +28,7 @@ load_script_optional('slime', '&basic_resources')
 load_script_optional('treated_wood', '&basic_resources')
 load_script_optional('corrosion', 'default')
 load_script_optional('bees', 'default')
+load_script_optional('gems')
 
 -- Crafting stations and such
 load_script_optional('labelling_bench')

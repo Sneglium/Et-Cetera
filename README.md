@@ -166,6 +166,31 @@ If the `corrosion` module is enabled, wax can be used to seal metal blocks and p
  - *Apiary Memory Length* (`etc.bees_memory_length`, integer): How many visited flowers can the apiary remember.
 
 ---
+### Gems
+
+**Depends on:**
+
+ - Nothing
+
+The *Gems* module (technical: `gems`) includes various gemstones, intended for use in recipes. If More Dungeon Loot is enabled, they can be found in dungeon chests; otherwise they are unobtainable by default.
+
+**List of Items:**
+
+ - *Quartz Crystal* (`etc:gem_quartz`): Part of the `quartz` group.
+ - *Citrine Crystal* (`etc:gem_citrine`): Part of the `quartz` group.
+ - *Rose Quartz Crystal* (`etc:gem_rose_quartz`): Part of the `quartz` group.
+ - *Amethyst* (`etc:gem_amethyst`): Part of the `quartz` group.
+ - *Tanzanite* (`etc:gem_tanzanite`)
+ - *Scarlet Jasper* (`etc:gem_red_jasper`)
+ - *Verdant Jasper* (`etc:gem_green_jasper`)
+ - *Topaz* (`etc:gem_topaz`)
+ - *Opal* (`etc:gem_opal`)
+
+**List of Settings:**
+
+ - *Load Module: Gems* (`etc.load_module_gems`, boolean): Enable or disable the module entirely.
+
+---
 ### Item Cosmetic Stations
 
 #### Labelling Bench
@@ -349,6 +374,7 @@ The *More Dungeon Loot* module (technical: `more_loot`) adds a number or additio
  - *Wrought Iron* (`etc.more_loot_wrought_iron`, boolean): Add wrought iron ingots as loot items.
  - *Anvil & hammer* (`etc.more_loot_anvil`, boolean): Add the anvil and blacksmith's hammer as loot items.
  - *Chalk* (`etc.more_loot_chalk`, boolean): Add chalk sticks and pressed charcoal stick as loot items.
+ - *Gems* (`etc.more_loot_gems`, boolean): Add gemstones from Etc as loot items.
  - *Basic Resources* (`etc.more_loot_basic_resources`, boolean): Add various resource items from Etc as loot items.
  - *MTG Items* (`etc.more_loot_misc`, boolean): Add various additional items from Minetest Game as loot items.
 

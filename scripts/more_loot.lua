@@ -5,14 +5,14 @@ if etc.modules.craft_tools and minetest.settings: get_bool('etc.more_loot_ct_too
 		{name = 'etcetera:ct_cutters', chance = 0.15, y = {-32768, -100}},
 		{name = 'etcetera:ct_drill', chance = 0.15, y = {-32768, -100}},
 		{name = 'etcetera:ct_knife', chance = 0.15, y = {-32768, -100}},
-		{name = 'etcetera:ct_hammer', chance = 0.075, y = {-32768, -100}},
+		{name = 'etcetera:ct_hammer', chance = 0.075, y = {-32768, -100}}
 	}
 end
 
 if etc.modules.bees and minetest.settings: get_bool('etc.more_loot_honey', true) then
 	dungeon_loot.register {
 		{name = 'etcetera:bottle_honey', chance = 0.25, count = {2, 8}},
-		{name = 'etcetera:honey_block', chance = 0.03, count = {1, 3}},
+		{name = 'etcetera:honey_block', chance = 0.03, count = {1, 3}}
 	}
 end
 
@@ -58,7 +58,21 @@ if etc.modules.basic_resources and minetest.settings: get_bool('etc.more_loot_ba
 		{name = 'etcetera:canvas_tarred', chance = 0.045},
 		{name = 'etcetera:sandpaper_0', chance = 0.1, count = {1,4}},
 		{name = 'etcetera:sandpaper_1', chance = 0.035, count = {1,4}, y = {-32768, -100}},
-		{name = 'etcetera:sandpaper_2', chance = 0.015, count = {1,6}, y = {-32768, -300}},
+		{name = 'etcetera:sandpaper_2', chance = 0.015, count = {1,6}, y = {-32768, -300}}
+	}
+end
+
+if etc.modules.gems and minetest.settings: get_bool('etc.more_loot_gems', true) then
+	dungeon_loot.register {
+		{name = 'etcetera:gem_quartz', chance = 0.25, count = {1,2}},
+		{name = 'etcetera:gem_citrine', chance = 0.25, count = {1,2}},
+		{name = 'etcetera:gem_rose_quartz', chance = 0.25, count = {1,2}},
+		{name = 'etcetera:gem_amethyst', chance = 0.25, count = {1,2}},
+		{name = 'etcetera:gem_tanzanite', chance = 0.25, count = {1,2}},
+		{name = 'etcetera:gem_red_jasper', chance = 0.25, count = {1,2}},
+		{name = 'etcetera:gem_green_jasper', chance = 0.25, count = {1,2}},
+		{name = 'etcetera:gem_topaz', chance = 0.25, count = {1,2}},
+		{name = 'etcetera:gem_opal', chance = 0.25, count = {1,2}}
 	}
 end
 
@@ -73,6 +87,6 @@ if minetest.settings: get_bool('etc.more_loot_misc', true) then
 		{name = 'default:sign_wall_wood', chance = 0.4, count = {2, 4}},
 		{name = 'fireflies:bug_net', chance = 0.1},
 		{name = 'map:mapping_kit', chance = 0.01},
-		{name = 'binoculars:binoculars', chance = 0.01},
+		{name = 'binoculars:binoculars', chance = 0.01}
 	}
 end

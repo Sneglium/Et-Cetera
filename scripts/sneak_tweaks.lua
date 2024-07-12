@@ -15,6 +15,8 @@ minetest.register_globalstep(function(dtime)
 	for i = 1, #players do
 		local player = players[i]
 		local playername = player: get_player_name()
+		if minetest.get_player_privs(playername).fly then return end
+		
 		local properties = player: get_properties()
 		
 		local controls = player: get_player_control()

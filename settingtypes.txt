@@ -229,6 +229,44 @@ etc.sneak_tweaks_anti_slip (Resist Movement) bool true
 # Boolean (true/false); default: true
 etc.sneak_tweaks_reduced_hitbox (Reduce Hitbox Height) bool true
 
+[More Dungeon Loot]
+
+# Enable or disable the module entirely.
+# Boolean (true/false); default: true
+etc.load_module_more_loot (Load Module: More Dungeon Loot) bool true
+
+# Add craft grid tools as loot items.
+# Boolean (true/false); default: true
+etc.more_loot_ct_tools (Craft Grid Tools) bool true
+
+# Add honey bottles and honey blocks as loot items.
+# Boolean (true/false); default: true
+etc.more_loot_honey (Honey) bool true
+
+# Add slimeballs as loot items.
+# Boolean (true/false); default: true
+etc.more_loot_slime (Slime) bool true
+
+# Add wrought iron ingots as loot items.
+# Boolean (true/false); default: true
+etc.more_loot_wrought_iron (Wrought Iron) bool true
+
+# Add the anvil and blacksmith's hammer as loot items.
+# Boolean (true/false); default: true
+etc.more_loot_anvil (Anvil & hammer) bool true
+
+# Add chalk sticks and pressed charcoal stick as loot items.
+# Boolean (true/false); default: true
+etc.more_loot_chalk (Chalk) bool true
+
+# Add various resource items from Etc as loot items.
+# Boolean (true/false); default: true
+etc.more_loot_basic_resources (Basic Resources) bool true
+
+# Add various additional items from Minetest Game as loot items.
+# Boolean (true/false); default: true
+etc.more_loot_misc (MTG Items) bool true
+
 [Chalk]
 
 # Enable or disable the module entirely.

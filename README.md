@@ -311,7 +311,9 @@ The *Falling Tweaks* module (technical: `fall_tweaks`) changes some group values
 
  - Nothing.
 
-The *Sneaking Tweaks* module (technical: `sneak_tweaks`) changes some mechanics around sneaking and adds new ones to make it feel more useful and immersive. Primarily, this module makes sneaking stealthier by disabling players' footstep sounds and hiding their nametags when sneaking. It also makes some interface changes to indicate visually that you're in sneak mode. Lastly, it adds a 'sneak jump' ability, allowing you to gain a small amount of extra height by jumping from a sneak and makes sneaking resist unwanted movement (ex. sliding on ice or being pushed by other objects).
+The *Sneaking Tweaks* module (technical: `sneak_tweaks`) changes some mechanics around sneaking and adds new ones to make it feel more useful and immersive. Primarily, this module makes sneaking stealthier by disabling players' footstep sounds and hiding their nametags when sneaking. It also changes the camera height to indicate visually that you're in sneak mode. Lastly, it makes sneaking resist unwanted movement (ex. sliding on ice or being pushed by other objects).
+
+Note that none of these changes will affect players with the `fly` privilege.
 
 **List of Settings:**
 
@@ -321,6 +323,34 @@ The *Sneaking Tweaks* module (technical: `sneak_tweaks`) changes some mechanics 
  - *Lower POV* (`etc.sneak_tweaks_lower_cam`, boolean): The camera will lower by a set amount while sneaking to make it visually obvious.
  - *Resist Movement* (`etc.sneak_tweaks_anti_slip`, boolean): Unless pressing a movement key, sneaking will allow players to reduce their movement speed in all directions while touching the ground.
  - *Reduce Hitbox Height* (`etc.sneak_tweaks_reduced_hitbox`, boolean): When sneaking the player's hitbox height will be reduced by a small amount, allowing them to sneak under smaller gaps than usual.
+
+---
+### More Dungeon Loot
+
+**Depends on:**
+
+ - `dungeon_loot` (`minetest_game` Mod; required)
+ - `craft_tools` (Etc module; optional)
+ - `bees` (Etc module; optional)
+ - `slime` (Etc module; optional)
+ - `wrought_iron` (Etc module; optional)
+ - `anvil` (Etc module; optional)
+ - `chalk` (Etc module; optional)
+ - `basic_resources` (Etc module; optional)
+
+The *More Dungeon Loot* module (technical: `more_loot`) adds a number or additional entries for the `dungeon_loot` MTG mod both for things from the base game and from various Etc modules. 
+
+**List of Settings:**
+
+ - *Load Module: More Dungeon Loot* (`etc.load_module_more_loot`, boolean): Enable or disable the module entirely.
+ - *Craft Grid Tools* (`etc.more_loot_ct_tools`, boolean): Add craft grid tools as loot items.
+ - *Honey* (`etc.more_loot_honey`, boolean): Add honey bottles and honey blocks as loot items.
+ - *Slime* (`etc.more_loot_slime`, boolean): Add slimeballs as loot items.
+ - *Wrought Iron* (`etc.more_loot_wrought_iron`, boolean): Add wrought iron ingots as loot items.
+ - *Anvil & hammer* (`etc.more_loot_anvil`, boolean): Add the anvil and blacksmith's hammer as loot items.
+ - *Chalk* (`etc.more_loot_chalk`, boolean): Add chalk sticks and pressed charcoal stick as loot items.
+ - *Basic Resources* (`etc.more_loot_basic_resources`, boolean): Add various resource items from Etc as loot items.
+ - *MTG Items* (`etc.more_loot_misc`, boolean): Add various additional items from Minetest Game as loot items.
 
 ---
 ### Chalk

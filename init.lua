@@ -36,11 +36,12 @@ load_script_optional('mortar_and_pestle', '&basic_resources')
 load_script_optional('dust', '&mortar_and_pestle', 'bucket')
 load_script_optional('anvil', '&craft_tools')
 
+-- Misc. additions
+load_script_optional('chalk', '&craft_tools')
+
 -- Tweaks and additions for MTG/the engine
 load_script_optional('fluid_bottles', 'default', 'vessels')
 load_script_optional('paxels', 'default')
 load_script_optional('fall_tweaks', 'default')
 load_script_optional('sneak_tweaks')
-
--- Misc. additions
-load_script_optional('chalk', '&craft_tools')
+load_script_optional('more_loot', 'dungeon_loot')

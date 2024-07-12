@@ -255,12 +255,13 @@ end
 
 local function get_apiary_infotext (pos)
 	local meta = minetest.get_meta(pos)
+	local limit = minetest.get_node(pos).name == 'etcetera:apiary_half' and '1000' or '2000'
 	
 	meta: set_string('infotext', table.concat {
 		'Honey: '..meta: get_int 'honey' or 0,
-		'/1000ml\n',
+		'/'..limit..'ml\n',
 		'Wax: '..meta: get_int 'wax' or 0,
-		'/1000g',
+		'/'..limit..'g',
 	})
 end
 
@@ -327,16 +328,16 @@ local function apiary_on_timer (pos, elapsed)
 		
 		if selected_flower_pos then
 			local new_honey = node == 'etcetera:apiary_full' and math.random(12, 24) or math.random(6, 12)
-			meta: set_int('honey', math.min((meta: get_int 'honey' or 0) + math.ceil(new_honey * honey_rate), 1000))
+			meta: set_int('honey', math.min((meta: get_int 'honey' or 0) + math.ceil(new_honey * honey_rate), node == 'etcetera:apiary_half' and 1000 or 2000))
 		end
 	end
 	
 	local new_wax = node == 'etcetera:apiary_full' and math.random(12, 24) or math.random(6, 12)
-	meta: set_int('wax', math.min((meta: get_int 'wax' or 0) + math.ceil(new_wax * wax_rate), 1000))
+	meta: set_int('wax', math.min((meta: get_int 'wax' or 0) + math.ceil(new_wax * wax_rate), node == 'etcetera:apiary_half' and 1000 or 2000))
 	
 	get_apiary_infotext(pos)
 	
-	minetest.get_node_timer(pos): start(10)
+	minetest.get_node_timer(pos): start(9.5)
 end
 
 local function apiary_on_construct (pos)

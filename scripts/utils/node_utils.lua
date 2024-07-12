@@ -54,12 +54,46 @@ function etc.rotate_nodeboxes (boxes, axis, amount)
 	return new_boxes
 end
 
+-- flips a single box along an axis
+-- <axis> is either 'x', 'y', or 'z'
+function etc.flip_nodebox (box, axis)
+	local box = table.copy(box)
+	
+	if axis == 'x' then
+		box[1] = -box[4]
+		box[4] = -box[1]
+	elseif axis == 'y' then
+		box[2] = -box[5]
+		box[5] = -box[2]
+	else
+		box[3] = -box[6]
+		box[6] = -box[3]
+	end
+	
+	return box
+end
+
+-- Same as above but can handle either a single box or a list of boxes
+function etc.flip_nodeboxes (boxes, axis)
+	if type(boxes[1]) == 'number' then
+		return etc.flip_nodebox(boxes, axis)
+	end
+	
+	local new_boxes = {}
+	
+	for k, v in ipairs(boxes) do
+		new_boxes[k] = etc.flip_nodebox(v, axis)
+	end
+	
+	return new_boxes
+end
+
 -- Place a node; if pointing at a node of the same type, copy its' rotation, else rotate as normal
 -- Can be used directly as a replacement for a node's on_place method
 function etc.copy_or_calculate_rotation (itemstack, placer, pointed_thing)
 	local node = minetest.get_node(pointed_thing.under)
 	
-	if node.name == itemstack: get_name() then
+	if node.name == itemstack: get_name() and not placer: get_player_control().sneak then
 		minetest.item_place_node(itemstack, placer, pointed_thing, node.param2, true)
 	else
 		minetest.rotate_node(itemstack, placer, pointed_thing)

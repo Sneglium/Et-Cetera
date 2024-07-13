@@ -11,6 +11,11 @@ function etc.ID (...) return ... end
 -- Reverses its' inputs
 function etc.INV (a, b) return b, a end
 
+-- Replaces functions that aren't allowed to run after modloading is finished
+function etc.DEAD (oldname)
+	etc.log.fatal('Function or method "' .. oldname .. '" must be used during mod loading!')
+end
+
 -- MODULE & MOD MANAGEMENT
 
 -- Tests for various kinds of dependency condition and returns true if all are satisfied.
@@ -132,6 +137,8 @@ etc.log = setmetatable(etc.log, {__call = etc.log.info})
 -- Useful for passing to methods that require a verifier
 
 function etc.is_number (...)
+	if select('#', ...) == 1 and type(...) == 'number' then return true end
+	
 	for i = 1, select('#', ...) do
 		if type(select(i, ...)) ~= 'number' then return false end
 	end
@@ -140,6 +147,8 @@ function etc.is_number (...)
 end
 
 function etc.is_integer (...)
+	if select('#', ...) == 1 and type(...) == 'number' and math.abs(...) == (...)  then return true end
+	
 	for i = 1, select('#', ...) do
 		local n = select(i, ...)
 		if type(n) ~= 'number' or math.abs(n) ~= n then return false end
@@ -149,6 +158,8 @@ function etc.is_integer (...)
 end
 
 function etc.is_string (...)
+	if select('#', ...) == 1 and type(...) == 'string' then return true end
+	
 	for i = 1, select('#', ...) do
 		if type(select(i, ...)) ~= 'string' then return false end
 	end
@@ -157,6 +168,8 @@ function etc.is_string (...)
 end
 
 function etc.is_bool (...)
+	if select('#', ...) == 1 and type(...) == 'boolean' then return true end
+	
 	for i = 1, select('#', ...) do
 		if type(select(i, ...)) ~= 'boolean' then return false end
 	end
@@ -165,6 +178,8 @@ function etc.is_bool (...)
 end
 
 function etc.is_table (...)
+	if select('#', ...) == 1 and type(...) == 'table' then return true end
+	
 	for i = 1, select('#', ...) do
 		if type(select(i, ...)) ~= 'table' then return false end
 	end
@@ -173,6 +188,8 @@ function etc.is_table (...)
 end
 
 function etc.is_function (...)
+	if select('#', ...) == 1 and type(...) == 'function' then return true end
+	
 	for i = 1, select('#', ...) do
 		if type(select(i, ...)) ~= 'function' then return false end
 	end
@@ -201,19 +218,16 @@ function etc.is_array (table)
 	return true
 end
 
-local function single_is_vector (v)
-	return getmetatable(v) and getmetatable(v) == vector.metatable
-end
-
 -- Ensures all the passed arguments are vectors with metatables
 function etc.is_vector (...)
+	if select('#', ...) == 1 and vector.check(...) then return true end
+	
 	for i = 1, select('#', ...) do
-		if not single_is_vector(select(i, ...)) then return false end
+		if not vector.check(select(i, ...)) then return false end
 	end
 	
 	return true
 end
-
 
 local function single_is_itemstack (v)
 	return ItemStack(v) == v
@@ -221,6 +235,8 @@ end
 
 -- Ensures all the passed arguments are itemstack objects
 function etc.is_itemstack (...)
+	if select('#', ...) == 1 and single_is_itemstack(...) then return true end
+	
 	for i = 1, select('#', ...) do
 		if not single_is_itemstack(select(i, ...)) then return false end
 	end
@@ -234,6 +250,8 @@ end
 
 -- Ensures all the passed arguments are valid strings representing registered items
 function etc.is_itemstring (...)
+	if select('#', ...) == 1 and single_is_itemstring(...) then return true end
+	
 	for i = 1, select('#', ...) do
 		if not single_is_itemstring(select(i, ...)) then return false end
 	end

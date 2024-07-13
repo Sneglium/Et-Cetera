@@ -7,16 +7,19 @@ end
 
 local function load_script_optional (fn, ...)
 	if etc.check_depends(...) and minetest.settings: get_bool('etc.load_module_'..fn, true) then
-		etc.modules[fn] = dofile(table.concat {etc.modpath, '/scripts/', fn, '.lua'}) or true
+		etc.modules[fn] = dofile(table.concat {etc.modpath, '/scripts/modules/', fn, '.lua'}) or true
 		etc[fn] = etc.modules[fn]
 	end
 end
 
-load_script 'utils/misc_utils'
-load_script 'utils/text_utils'
-load_script 'utils/reg_utils'
-load_script 'utils/node_utils'
-load_script 'utils/entity_utils'
+load_script 'misc_utils'
+load_script 'text_utils'
+load_script 'reg_utils'
+load_script 'node_utils'
+
+load_script 'item_display'
+load_script 'node_display'
+load_script 'beam_display'
 
 etc.register_node, etc.register_item, etc.register_tool = etc.create_wrappers('etcetera', 'etc')
 

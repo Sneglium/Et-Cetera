@@ -151,3 +151,7 @@ Mithril Shpavel=
 
 Compost=
 Boosts growth of plants growing in it.=
+
+Trowel=
+Used to swap dirt or farmland for compost without breaking the crop above.=
+<LMB> to swap nodes=

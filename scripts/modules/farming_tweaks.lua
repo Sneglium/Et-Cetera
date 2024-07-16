@@ -74,13 +74,14 @@ function module.register_plant (name_prefix, stages, seed, guide_node)
 		module.plants[name_prefix .. i] = name_prefix .. i+1
 	end
 	
+	module.plants[name_prefix .. stages] = true
 	module.plants[seed] = replace_plant
 end
 
 local function boost_growth (pos)
 	local node = minetest.get_node(pos)
 	local plant = module.plants[node.name]
-	if plant then
+	if type(plant) == 'string' then
 		node.name = plant
 		local plant_def = minetest.registered_nodes[plant]
 		if plant_def.place_param2 ~= nil and node.param2 ~= plant_def.place_param2 then
@@ -227,7 +228,54 @@ if minetest.settings: get_bool('etc.farming_tweaks_compost', true) then
 		end
 	}
 	
+	local trowel_nodes = {
+		['default:dirt'] = 'etcetera:compost',
+		['farming:soil'] = 'etcetera:compost_tilled',
+		['farming:soil_wet'] = 'etcetera:compost_tilled_wet',
+		['default:dry_dirt'] = 'etcetera:compost',
+		['farming:dry_soil'] = 'etcetera:compost_tilled',
+		['farming:dry_soil_wet'] = 'etcetera:compost_tilled_wet',
+		['default:desert_sand'] = 'etcetera:compost',
+		['farming:desert_sand_soil'] = 'etcetera:compost_tilled',
+		['farming:desert_sand_soil_wet'] = 'etcetera:compost_tilled_wet'
+	}
 	
+	etc.register_tool('trowel', {
+		displayname = 'Trowel',
+		description = 'Used to swap dirt or farmland for compost without breaking the crop above.',
+		stats = '<LMB> to swap nodes',
+		inventory_image = 'etc_trowel.png',
+		wield_image = 'etc_trowel.png^[transformFX',
+		on_use = function (itemstack, user, pointed_thing)
+			local pos = pointed_thing.under
+			local node = minetest.get_node(pos)
+			
+			local inv = user: get_inventory()
+			
+			if module.plants[node.name] then
+				pos = pos - vector.new(0, 1, 0)
+				node = minetest.get_node(pos)
+			end
+			
+			if trowel_nodes[node.name] then
+				if inv: contains_item('main', 'etcetera:compost') then
+					inv: remove_item('main', 'etcetera:compost')
+					local node_base = minetest.registered_items[node.name].soil.base
+					node.name = trowel_nodes[node.name]
+					minetest.swap_node(pos, node)
+					etc.give_or_drop(user, user: get_pos(), ItemStack(node_base))
+				end
+			end
+		end
+	})
+	
+	minetest.register_craft {
+		recipe = {
+			{'etc:ct_hammer', 'default:steel_ingot'},
+			{'default:stick', ''}
+		},
+		output = 'etc:trowel'
+	}
 end
 
 return module

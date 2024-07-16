@@ -26,7 +26,7 @@ etc.register_tool('ct_hammer', {
 etc.register_tool('ct_knife', {
 	displayname = 'Carving Knife',
 	description = 'Will not be consumed in recipes until durability runs out.',
-	inventory_image = 'etc_knife.png',
+	inventory_image = 'etc_knife.png'
 })
 
 local uses = minetest.settings: get 'etc.craft_tools_num_uses' or 150

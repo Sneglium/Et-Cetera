@@ -270,6 +270,27 @@ WARNING: This option may play weirdly with tools made via a compound parts syste
  - *Forgiving Tool Breakage* (`etc.anvil_prevent_tool_break`, boolean): Digging tools will not be destroyed when they reach 0 durability, and will instead become useless until repaired.
 
 ---
+### Chalk
+
+**Depends on:**
+
+ - `craft_tools` (Etc module; required)
+ - `basic_resources` (Etc module; required)
+ - `dust` (Etc module; optional)
+ - `default` (`minetest_game` Mod; optional)
+ - `dye` (`minetest_game` Mod; optional)
+
+The *Chalk* module (technical: `chalk`) adds a few colored chalk sticks that can draw on any face of an eligible node. By default, a node is eligible if it is a full block and has a 'hard' digging group (for example, stone and wood planks are eligible but stone stairs are not). Chalk will normally not use durability when replacing a symbol of the same color, though this can be disabled.
+
+**List of Settings:**
+
+ - *Load Module: Chalk* (`etc.load_module_chalk`, boolean): Enable or disable the module entirely.
+ - *Full Blocks Only* (`etc.chalk_cubes_only`, boolean): When enabled, chalk will only be able to draw on full cube nodes.
+ - *Hard Nodes Only* (`etc.chalk_hard_only`, boolean): When enabled, chalk will only be able to draw on nodes with a `cracky` or `choppy` digging group.
+ - *Free Re-Drawing* (`etc.chalk_free_switching`, boolean): Enable chalk to replace symbols of the same color without losing durability.
+ - *Durability* (`etc.chalk_num_uses`, integer): How many symbols a single stick of chalk can draw.
+
+---
 ### Fluid Bottles
 
 **Depends on:**
@@ -314,7 +335,6 @@ The *All-In-One-Tools* module (technical: `paxels`) adds a "Shpavel" for each ba
 **Depends on:**
 
  - `default` (`minetest_game` Mod; required)
- - `farming` (`minetest_game` Mod; optional)
  - `beds` (`minetest_game` Mod; optional)
  - `wool` (`minetest_game` Mod; optional)
 
@@ -323,7 +343,6 @@ The *Falling Tweaks* module (technical: `fall_tweaks`) changes some group values
 **List of Settings:**
 
  - *Load Module: Falling Tweaks* (`etc.load_module_fall_tweaks`, boolean): Enable or disable the module entirely.
- - *Modify Straw* (`etc.fall_tweaks_straw`, boolean): Makes the straw block from farming reduce fall damage by 20%
  - *Modify Beds* (`etc.fall_tweaks_beds`, boolean): Makes beds reduce fall damage by 50% and bounce the player slightly.
  - *Modify Leaves* (`etc.fall_tweaks_leaves`, boolean): Makes leaves reduce fall damage by 40%
  - *Modify Wool* (`etc.fall_tweaks_wool`, boolean): Makes wool reduce fall damage by 55%
@@ -379,25 +398,27 @@ The *More Dungeon Loot* module (technical: `more_loot`) adds a number or additio
  - *MTG Items* (`etc.more_loot_misc`, boolean): Add various additional items from Minetest Game as loot items.
 
 ---
-### Chalk
+### Farming Tweaks
 
 **Depends on:**
 
- - `craft_tools` (Etc module; required)
- - `basic_resources` (Etc module; required)
- - `dust` (Etc module; optional)
- - `default` (`minetest_game` Mod; optional)
- - `dye` (`minetest_game` Mod; optional)
+ - `farming` (`minetest_game` Mod OR standalone mod; required)
+ - `default` (`minetest_game` Mod; required)
+ - `moreores` (standalone mod; optional)
 
-The *Chalk* module (technical: `chalk`) adds a few colored chalk sticks that can draw on any face of an eligible node. By default, a node is eligible if it is a full block and has a 'hard' digging group (for example, stone and wood planks are eligible but stone stairs are not). Chalk will normally not use durability when replacing a symbol of the same color, though this can be disabled.
+The *Farming Tweaks* module (technical: `farming_tweaks`) makes some changes to the crops system provided either by the MTG `farming` mod, or "Farming Redo". Primarily it allows harvesting and automatically replanting crops by right-clicking on them, and harvesting larger areas at once by right-clicking with a hoe.
+
+It also adds some new nodes: a compost bin, which can be used to make _compost_ from plant materials; and compost itself which can be used as an alternative soil for growing plants on that boosts their growth rate.
+
+
 
 **List of Settings:**
 
- - *Load Module: Chalk* (`etc.load_module_chalk`, boolean): Enable or disable the module entirely.
- - *Full Blocks Only* (`etc.chalk_cubes_only`, boolean): When enabled, chalk will only be able to draw on full cube nodes.
- - *Hard Nodes Only* (`etc.chalk_hard_only`, boolean): When enabled, chalk will only be able to draw on nodes with a `cracky` or `choppy` digging group.
- - *Free Re-Drawing* (`etc.chalk_free_switching`, boolean): Enable chalk to replace symbols of the same color without losing durability.
- - *Durability* (`etc.chalk_num_uses`, integer): How many symbols a single stick of chalk can draw.
+ - *Load Module: Farming Tweaks* (`etc.load_module_farming_tweaks`, boolean): Enable or disable the module entirely.
+ - *Right-Click to Harvest* (`etc.farming_tweaks_rightclick_harvest`, boolean): Enable right-clicking crops to receive their drops and automatically replant them instead if they would have dropped a seed.
+ - *Enable Composting* (`etc.farming_tweaks_compost`, boolean): Add a 'compost' node which acts as a higher-quality soil for crops, and a compost bin that can be used to make it.
+ - *Compost Avg. Boost Interval* (`etc.farming_tweaks_compost_tickrate`, floating-point): The average amount of time in seconds between cycles of a compost node ticking the plant above it to grow. Non-wet compost soil will take 1.5x this long between cycles, on average.
+ - *Fertility Exhaustion Chance* (`etc.farming_tweaks_compost_exhaust_chance`, integer): Every ticking cycle, compost will have 1 in this many chances to turn into regular dirt.
 
 ## Support
 

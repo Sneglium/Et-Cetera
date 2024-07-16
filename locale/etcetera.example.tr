@@ -77,6 +77,18 @@ A single apiary box. Can be stacked to make taller apiaries.=
 <LMB> with an empty bottle to collect honey=
 <LMB> with a carving knife to collect wax=
 
+## Gems
+
+Quartz Crystal=
+Citrine Crystal=
+Rose Quartz Crystal=
+Amethyst=
+Tanzanite=
+Scarlet Jasper=
+Verdant Jasper=
+Topaz=
+Opal=
+
 ## Labelling Bench
 
 Labelling Bench=
@@ -134,3 +146,8 @@ Diamond Shpavel=
 
 Silver Shpavel=
 Mithril Shpavel=
+
+## Farming Tweaks
+
+Compost=
+Boosts growth of plants growing in it.=

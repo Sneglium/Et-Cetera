@@ -265,40 +265,61 @@ local function get_apiary_infotext (pos)
 	})
 end
 
-local function apiary_on_punch (pos, node, puncher, pointed_thing)
-	local itemstack = puncher: get_wielded_item()
-	local meta = minetest.get_meta(pos)
-
-	if itemstack: get_name() == 'etcetera:ct_knife' then
-		local wax = meta: get_int 'wax'
-		if wax >= 100 then
-			local wax_available = math.floor(wax/100)
-			local wax_item = ItemStack 'etc:beeswax'
-			wax_item: set_count(wax_available)
-			etc.give_or_drop(puncher, puncher: get_pos() + puncher: get_look_dir(), wax_item)
-			meta: set_int('wax', math.max(wax - (wax_available * 100), 0))
-		end
-	elseif itemstack: get_name() == 'vessels:glass_bottle' then
-		local honey = meta: get_int 'honey'
-		if honey >= 100 then
-			local honey_available = math.floor(honey/100)
-			local bottles_available = itemstack: get_count()
-			local total_take = math.min(honey_available, bottles_available)
+minetest.override_item('vessels:glass_bottle', {
+	on_use = function (itemstack, user, pointed_thing)
+		if pointed_thing.type == 'node' then
+			local pos = pointed_thing.under
+			local node = minetest.get_node(pos)
 			
-			local honey_item = ItemStack 'etc:bottle_honey'
-			honey_item: set_count(total_take)
-			etc.give_or_drop(puncher, puncher: get_pos() + puncher: get_look_dir(), honey_item)
-			meta: set_int('honey', math.max(honey - (total_take * 100), 0))
-			
-			get_apiary_infotext(pos)
-			
-			itemstack: take_item(total_take)
-			return itemstack
+			if node.name == 'etcetera:apiary_half' or node.name == 'etcetera:apiary_full' then
+				local meta = minetest.get_meta(pos)
+				
+				local honey = meta: get_int 'honey'
+				if honey >= 100 then
+					local honey_available = math.floor(honey/100)
+					local bottles_available = itemstack: get_count()
+					local total_take = math.min(honey_available, bottles_available)
+					
+					local honey_item = ItemStack 'etc:bottle_honey'
+					honey_item: set_count(total_take)
+					etc.give_or_drop(user, user: get_pos() + user: get_look_dir(), honey_item)
+					meta: set_int('honey', math.max(honey - (total_take * 100), 0))
+					
+					get_apiary_infotext(pos)
+					
+					itemstack: take_item(total_take)
+					return itemstack, true
+				end
+			end
 		end
 	end
-	
-	get_apiary_infotext(pos)
-end
+})
+
+minetest.override_item('etcetera:ct_knife', {
+	on_use = function (itemstack, user, pointed_thing)
+		if pointed_thing.type == 'node' then
+			local pos = pointed_thing.under
+			local node = minetest.get_node(pos)
+			
+			if node.name == 'etcetera:apiary_half' or node.name == 'etcetera:apiary_full' then
+				local meta = minetest.get_meta(pos)
+				
+				local wax = meta: get_int 'wax'
+				if wax >= 100 then
+					local wax_available = math.floor(wax/100)
+					local wax_item = ItemStack 'etc:beeswax'
+					wax_item: set_count(wax_available)
+					etc.give_or_drop(user, user: get_pos() + user: get_look_dir(), wax_item)
+					meta: set_int('wax', math.max(wax - (wax_available * 100), 0))
+					
+					get_apiary_infotext(pos)
+					
+					return itemstack
+				end
+			end
+		end
+	end
+})
 
 local apiary_flower_memory = {}
 

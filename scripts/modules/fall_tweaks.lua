@@ -1,10 +1,4 @@
 
-if farming and minetest.settings: get_bool('etc.fall_tweaks_straw', true) then
-	local straw_groups = table.copy(minetest.registered_items['farming:straw'].groups)
-	straw_groups.fall_damage_add_percent = -20
-	minetest.override_item('farming:straw', {groups = straw_groups})
-end
-
 if beds and minetest.settings: get_bool('etc.fall_tweaks_beds', true) then
 	local bed_groups = table.copy(minetest.registered_items['beds:bed_bottom'].groups)
 	bed_groups.fall_damage_add_percent = -50

@@ -47,11 +47,12 @@ local function get_vertical_beam_tex (tile, length, tile_size)
 end
 
 -- Adds a beam between pos1 and pos2 with a specified <width> (in fractions of a node)
--- Tiles can be a table or a string; if a string, the specified texture will be used for all long faces and the ends will be untextured.
+-- Tiles can be a table or a string; if a string, the specified texture will be used for all faces
 -- each tile must be square to avoid visual artifacts
 -- <tile_size> will be used to determine how many tiles are needed for the long sides of a beam with a given length and width, maintaining a square aspect ratio for each tile
 -- if <tile_size> is 0, the textures will be stretched instead of tiling along the length of the beam
--- <identifier> is an arbitrary value optionally used to specify a particular beam
+-- tiles[3] and [4] will tile horizontally, while [1] and [2] will tile vertically (in terms of the texture's initial orientation)
+-- <identifier> is an arbitrary value optionally used to specify a particular beam for the update and remove functions
 function etc.add_beam_display (pos1, pos2, tiles, tile_size, width, identifier)
 	etc.log.assert(etc.is_vector(pos1), 'Beam display entity end positions must be vectors')
 	etc.log.assert(etc.is_vector(pos2), 'Beam display entity end positions must be vectors')
@@ -73,7 +74,7 @@ function etc.add_beam_display (pos1, pos2, tiles, tile_size, width, identifier)
 	
 	local old_tiles = tiles
 	if type(tiles) == 'string' then
-		tiles = {tiles, tiles, tiles, tiles, 'empty.png', 'empty.png'}
+		tiles = {tiles, tiles, tiles, tiles, tiles, tiles}
 	end
 	
 	if tile_size ~= 0 then
@@ -134,7 +135,7 @@ function etc.update_beam_display (pos1, pos2, pos1_new, pos2_new, width_new, ide
 			
 			local tiles = luaent._tiles
 			if type(tiles) == 'string' then
-				tiles = {tiles, tiles, tiles, tiles, 'empty.png', 'empty.png'}
+				tiles = {tiles, tiles, tiles, tiles, tiles, tiles}
 			end
 			
 			if tile_size ~= 0 then

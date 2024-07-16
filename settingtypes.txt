@@ -142,6 +142,28 @@ etc.anvil_use_wrought_iron (Wrought Iron Recipe) bool true
 # Boolean (true/false); default: true
 etc.anvil_prevent_tool_break (Forgiving Tool Breakage) bool true
 
+[Chalk]
+
+# Enable or disable the module entirely.
+# Boolean (true/false); default: true
+etc.load_module_chalk (Load Module: Chalk) bool true
+
+# Disable to allow drawing on non-full cube nodes. Will look bad.
+# Boolean (true/false); default: true
+etc.chalk_cubes_only (Full Blocks Only) bool true
+
+# Disable to allow drawing on softer nodes like grass and leaves.
+# Boolean (true/false); default: true
+etc.chalk_hard_only (Hard Nodes Only) bool true
+
+# Can the player change an existing chalk symbol of the same color without losing durability.
+# Boolean (true/false); default: true
+etc.chalk_free_switching (Free Re-Drawing) bool true
+
+# How many symbols a stick of chalk can draw before it breaks.
+# Integer (0-1000); default: 100
+etc.chalk_num_uses (Durability) int 100 0 1000
+
 [Fluid Bottles]
 
 # Enable or disable the module entirely.
@@ -188,10 +210,6 @@ etc.paxels_moreores (All-In-One Tools for Moreores) bool true
 # Enable or disable the module entirely.
 # Boolean (true/false); default: true
 etc.load_module_fall_tweaks (Load Module: Falling Tweaks) bool true
-
-# Makes the straw block from farming reduce fall damage by 20%
-# Boolean (true/false); default: true
-etc.fall_tweaks_straw (Modify Straw) bool true
 
 # Makes beds reduce fall damage by 50% and bounce the player slightly
 # Boolean (true/false); default: true
@@ -277,24 +295,28 @@ etc.more_loot_basic_resources (Basic Resources) bool true
 # Boolean (true/false); default: true
 etc.more_loot_misc (MTG Items) bool true
 
-[Chalk]
+[Farming Tweaks]
 
 # Enable or disable the module entirely.
 # Boolean (true/false); default: true
-etc.load_module_chalk (Load Module: Chalk) bool true
+etc.load_module_farming_tweaks (Load Module: Farming Tweaks) bool true
 
-# Disable to allow drawing on non-full cube nodes. Will look bad.
+# Enable right-clicking crops to receive their drops and automatically replant them instead if they would have dropped a seed.
 # Boolean (true/false); default: true
-etc.chalk_cubes_only (Full Blocks Only) bool true
+etc.farming_tweaks_rightclick_harvest (Right-Click to Harvest) bool true
 
-# Disable to allow drawing on softer nodes like grass and leaves.
+# Add a 'compost' node which acts as a higher-quality soil for crops,
+# and a compost bin that can be used to make it.
 # Boolean (true/false); default: true
-etc.chalk_hard_only (Hard Nodes Only) bool true
+etc.farming_tweaks_compost (Enable Composting) bool true
 
-# Can the player change an existing chalk symbol of the same color without losing durability.
-# Boolean (true/false); default: true
-etc.chalk_free_switching (Free Re-Drawing) bool true
+# The average amount of time in seconds between cycles of a compost node ticking the plant above it to grow.
+# Non-wet compost soil will take 1.5x this long between cycles, on average.
+# Floating-point (30.0-1000.0); default: 45.0
+etc.farming_tweaks_compost_tickrate (Compost Avg. Boost Interval) float 45 30 1000
 
-# How many symbols a stick of chalk can draw before it breaks.
-# Integer (0-1000); default: 100
-etc.chalk_num_uses (Durability) int 100 0 1000
+# Every ticking cycle, compost will have 1 in this many chances to turn into regular dirt.
+# For example, 1=100% chance, 10=10% chance, 20=5% chance, 12=8.3% chance (default)
+# Set to 0 to disable exhaustion of compost nodes.
+# Integer (0-1000); default: 12
+etc.farming_tweaks_compost_exhaust_chance (Fertility Exhaustion Chance) int 12 0 1000

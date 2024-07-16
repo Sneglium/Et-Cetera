@@ -13,6 +13,8 @@ local function load_script_optional (fn, ...)
 end
 
 load_script 'misc_utils'
+load_script 'math_utils'
+
 load_script 'text_utils'
 load_script 'reg_utils'
 load_script 'node_utils'
@@ -49,3 +51,4 @@ load_script_optional('paxels', 'default')
 load_script_optional('fall_tweaks', 'default')
 load_script_optional('sneak_tweaks')
 load_script_optional('more_loot', 'dungeon_loot')
+load_script_optional('farming_tweaks', 'farming', 'default')

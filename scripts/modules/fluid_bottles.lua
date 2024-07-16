@@ -105,6 +105,8 @@ if minetest.settings: get_bool('etc.fluid_bottles_lava_bottle', true) then
 	etc.register_node('bottle_lava', lava_bottle_def)
 end
 
+local old_on_use = minetest.registered_items['vessels:glass_bottle'].on_use
+
 minetest.override_item('vessels:glass_bottle', {
 	tiles = retexture and {'etc_glass_bottle.png'} or {'vessels_glass_bottle.png'},
 	inventory_image = retexture and 'etc_glass_bottle.png' or 'fireflies_bottle.png',
@@ -112,13 +114,20 @@ minetest.override_item('vessels:glass_bottle', {
 	use_texture_alpha = 'blend',
 	liquids_pointable = true,
 	on_use = function (itemstack, user, pointed_thing)
+		if old_on_use then
+			local item, success = old_on_use(itemstack, user, pointed_thing)
+			if success then
+				return item
+			end
+		end
+		
 		if pointed_thing.type == 'node' then
 			local node = minetest.get_node(pointed_thing.under)
 			if etc.bottle_fluids[node.name] then
 				if itemstack: get_count() == 1 then
 					itemstack: set_name(etc.bottle_fluids[node.name])
 				else
-					etc.give_or_drop(user, user: get_pos() + user: get_look_dir(), etc.bottle_fluids[node.name])
+					etc.give_or_drop(user, user: get_pos() + user: get_look_dir(), ItemStack(etc.bottle_fluids[node.name]))
 					itemstack: take_item(1)
 				end
 				return itemstack

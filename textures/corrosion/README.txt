@@ -7,6 +7,6 @@ etc_corrosion_carbon_steel_block.png
 etc_corrosion_cast_iron_block.png
 etc_corrosion_lead_block.png
 LICENSE
-copied from minetest_game/default
+modified from minetest_game/default
 kilbith (CC BY-SA 3.0)
  - default_copper_block.png

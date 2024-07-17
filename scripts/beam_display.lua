@@ -118,6 +118,7 @@ function etc.update_beam_display (pos1, pos2, pos1_new, pos2_new, width_new, ide
 	local beam_center = pos1 + (beam_vector / 2)
 	
 	local objects = minetest.get_objects_inside_radius(beam_center, 0.5)
+	local found_one = false
 	for _, entity in pairs(objects) do
 		local luaent = entity: get_luaentity()
 		if luaent
@@ -158,8 +159,12 @@ function etc.update_beam_display (pos1, pos2, pos1_new, pos2_new, width_new, ide
 			
 			local luaentity = entity: get_luaentity()
 			luaentity._width = width_new
+			
+			found_one = true
 		end
 	end
+	
+	return found_one
 end
 
 -- Remove any beam entities CURRENTLY between <pos1> and <pos2>

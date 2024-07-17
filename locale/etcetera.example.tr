@@ -52,7 +52,7 @@ Slime Block=
 ## Treated Wood
 
 Treated Wood Planks=
-Pitched Wood Planks=
+Pitch-Sealed Wood Planks=
 
 ## Corrosion
 
@@ -151,7 +151,13 @@ Mithril Shpavel=
 
 Compost=
 Boosts growth of plants growing in it.=
+Boosts growth of plants growing in it. Will@neventually convert to regular soil.=
 
 Trowel=
 Used to swap dirt or farmland for compost without breaking the crop above.=
-<LMB> to swap nodes=
+<LMB> on soil or the plant above it to swap@nfor compost=
+
+Compost Bin=
+Converts plant material into compost over@ntime.=
+<RMB> to add items=
+<LMB> with a shovel to remove compost=

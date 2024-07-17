@@ -38,7 +38,7 @@ local function get_levelled_tiles (tiles, level)
 end
 
 -- add an axis-aligned node display entity at <pos>
--- initial_level should range from 0-1; sets the liquid level
+-- initial_level should range from 0-1; sets the node height
 -- be aware the entity will move down relative to <pos> depending on the level
 -- only really works with 16x tiles for anything other than level = 1
 function etc.add_node_display (pos, tiles, scale, initial_level)
@@ -72,11 +72,12 @@ function etc.add_node_display (pos, tiles, scale, initial_level)
 	return entity
 end
 
-function etc.update_node_display (pos, level)
+function etc.update_node_display (pos, level, tiles)
 	etc.log.assert(etc.is_vector(pos), 'Node display entity position must be a vector')
-	etc.log.assert(etc.is_number(initial_level), 'Node display entity level must be a number')
+	etc.log.assert(etc.is_number(level), 'Node display entity level must be a number')
 	
 	local objects = minetest.get_objects_inside_radius(pos, 0.5)
+	local found_one = false
 	for _, entity in pairs(objects) do
 		local luaentity = entity: get_luaentity()
 		if luaentity and luaentity._etc_display_node then
@@ -87,13 +88,23 @@ function etc.update_node_display (pos, level)
 			local height = scale * level
 			local offset = -(scale*0.5)+(height*0.5)
 			
+			if tiles then
+				if type(tiles) == 'string' then
+					tiles = {tiles, tiles, tiles, tiles, tiles, tiles}
+				end
+				properties.textures = get_levelled_tiles(tiles, level)
+			end
+			
 			properties.visual_size = {x = scale, y = height, z = scale}
 			
 			entity: set_properties(properties)
 			
 			entity: set_pos(vector.add(luaentity._basepos, vector.new(0, offset, 0)))
+			found_one = true
 		end
 	end
+	
+	return found_one
 end
 
 function etc.remove_node_display (pos)

@@ -410,6 +410,8 @@ The *Farming Tweaks* module (technical: `farming_tweaks`) makes some changes to 
 
 It also adds some new nodes: a compost bin, which can be used to make _compost_ from plant materials; and compost itself which can be used as an alternative soil for growing plants on that boosts their growth rate.
 
+The _trowel_ item can be used to painlessly replace dirt or tilled soil with compost without breaking any plant that might be growing on top.
+
 
 
 **List of Settings:**
@@ -419,6 +421,9 @@ It also adds some new nodes: a compost bin, which can be used to make _compost_ 
  - *Enable Composting* (`etc.farming_tweaks_compost`, boolean): Add a 'compost' node which acts as a higher-quality soil for crops, and a compost bin that can be used to make it.
  - *Compost Avg. Boost Interval* (`etc.farming_tweaks_compost_tickrate`, floating-point): The average amount of time in seconds between cycles of a compost node ticking the plant above it to grow. Non-wet compost soil will take 1.5x this long between cycles, on average.
  - *Fertility Exhaustion Chance* (`etc.farming_tweaks_compost_exhaust_chance`, integer): Every ticking cycle, compost will have 1 in this many chances to turn into regular dirt.
+ - *Enable Trowel* (`etc.farming_tweaks_trowel`, boolean): Add a 'trowel' item that allows quickly replacing dirt/desert sand and the tilled variants of both with the compost version.
+ - *Trowel Durability* (`etc.farming_tweaks_trowel_uses`, integer): How many dirt or sand nodes the trowel can replace before breaking.
+ - *Compost Bin Interval* (`etc.farming_tweaks_compost_process_rate`, floating-point): Interval in seconds between compost processing cycles in the Compost Bin.
 
 ## Support
 

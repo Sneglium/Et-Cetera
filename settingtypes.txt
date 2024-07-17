@@ -312,11 +312,23 @@ etc.farming_tweaks_compost (Enable Composting) bool true
 
 # The average amount of time in seconds between cycles of a compost node ticking the plant above it to grow.
 # Non-wet compost soil will take 1.5x this long between cycles, on average.
-# Floating-point (30.0-1000.0); default: 45.0
-etc.farming_tweaks_compost_tickrate (Compost Avg. Boost Interval) float 45 30 1000
+# Floating-point (30.0-1000.0); default: 120.0
+etc.farming_tweaks_compost_tickrate (Compost Avg. Boost Interval) float 120 30 1000
 
 # Every ticking cycle, compost will have 1 in this many chances to turn into regular dirt.
-# For example, 1=100% chance, 10=10% chance, 20=5% chance, 12=8.3% chance (default)
+# For example, 1=100% chance, 10=10% chance, 20=5% chance, 60=1.6% chance (default)
 # Set to 0 to disable exhaustion of compost nodes.
-# Integer (0-1000); default: 12
-etc.farming_tweaks_compost_exhaust_chance (Fertility Exhaustion Chance) int 12 0 1000
+# Integer (0-1000); default: 60
+etc.farming_tweaks_compost_exhaust_chance (Fertility Exhaustion Chance) int 60 0 1000
+
+# Add a 'trowel' item that allows quickly replacing dirt/desert sand and the tilled variants of both with the compost version.
+# Boolean (true/false); default: true
+etc.farming_tweaks_trowel (Enable Trowel) bool true
+
+# How many dirt or sand nodes the trowel can replace before breaking.
+# Integer (0-1000); default: 180
+etc.farming_tweaks_trowel_uses (Trowel Durability) int 180 0 1000
+
+# Interval in seconds between compost processing cycles in the Compost Bin.
+# Floating-point (0.0-1000.0); default: 0.5
+etc.farming_tweaks_compost_process_rate (Compost Bin Interval) float 0.5 0 1000

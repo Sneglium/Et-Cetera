@@ -200,6 +200,19 @@ etc.register_node('anvil', {
 					meta: set_int('progress', meta: get_int('progress') + 1)
 					etc.update_item_display(pos, stack, nil, 'random_flat')
 					
+					if default then
+						for i = 1, 5 do
+							minetest.add_particle {
+								pos = pos,
+								velocity = vector.new((math.random()-0.5)*2, 3.5, (math.random()-0.5)*2),
+								acceleration = vector.new(0, -9.8, 0),
+								expirationtime = 2.5,
+								size = 0,
+								node = {name = 'default:tinblock'}
+							}
+						end
+					end
+					
 					minetest.sound_play({name = 'default_dug_metal'}, {pos = pos, max_hear_distance = 16}, true)
 					
 					if meta: get_int('progress') >= meta: get_int('progress_needed') then

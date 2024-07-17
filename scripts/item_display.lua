@@ -51,7 +51,7 @@ function etc.update_item_display (pos, item, scale, rotation)
 	etc.log.assert(not rotation or etc.is_vector(rotation) or rotation == 'random_flat', 'Display entity rotation must be a vector or the string \'random_flat\'')
 	
 	local objects = minetest.get_objects_inside_radius(pos, 0.5)
-	
+	local found_one = false
 	for _, entity in pairs(objects) do
 		if entity: get_luaentity() and entity: get_luaentity()._etc_display_item then
 			local properties = entity: get_properties()
@@ -69,8 +69,12 @@ function etc.update_item_display (pos, item, scale, rotation)
 			elseif rotation ~= nil then
 				entity: set_rotation(rotation)
 			end
+			
+			found_one = true
 		end
 	end
+	
+	return found_one
 end
 
 function etc.remove_item_display (pos)

@@ -10,7 +10,7 @@ etc.register_node('tarred_wood', {
 })
 
 etc.register_node('pitched_wood', {
-	displayname = 'Pitched Wood Planks',
+	displayname = 'Pitch-Sealed Wood Planks',
 	paramtype2 = 'facedir',
 	place_param2 = 0,
 	tiles = {'etc_pitched_wood.png'},

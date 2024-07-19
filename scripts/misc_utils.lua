@@ -68,12 +68,14 @@ function etc.flatten (table)
 	return array
 end
 
--- Merges two tables together, with keys present in both being prioritized from the second table
-function etc.merge (table_a, table_b)
+-- Merges any number of tables together, with keys present in later tables overriding keys from previous tables
+function etc.merge (table_a, ...)
 	local new_table = table.copy(table_a)
 	
-	for k, v in pairs(table_b) do
-		new_table[k] = v
+	for _, curr_table in ipairs {...} do
+		for k, v in pairs(curr_table) do
+			new_table[k] = v
+		end
 	end
 	
 	return new_table
@@ -393,4 +395,29 @@ function etc.hex_to_rgb (hex)
 				 tonumber('0x' .. hex: sub(3+offset, 4+offset))/255,
 				 tonumber('0x' .. hex: sub(5+offset, 6+offset))/255,
 				 tonumber('0x' .. (#hex-offset > 6 and hex: sub(7+offset, 8+offset) or 'FF'))/255
+end
+
+-- return the current pointing range of the player
+function etc.get_player_range (player)
+	local item = player: get_wielded_item()
+	
+	local meta = item: get_meta()
+	if meta: contains 'range' then
+		return item: get_float 'range'
+	end
+	
+	local def = item: get_definition()
+	return def and def.range or player: get_inventory(): get_stack('hand', 1): get_definition().range or 0
+end
+
+-- returns the thing the player is pointing at, not including the player themself
+-- <objects> and <liquids> are booleans specifying whether the player can point those things.
+function etc.get_player_pointed_thing (player, objects, liquids)
+	local properties = player: get_properties()
+	local pos1 = player: get_pos() + vector.new(0, properties.eye_height, 0)
+	local pos2 = pos1 + (player: get_look_dir() *  etc.get_player_range(player))
+	
+	local ray = Raycast(pos1, pos2, objects, liquids); ray: next()
+	
+	return ray: next()
 end

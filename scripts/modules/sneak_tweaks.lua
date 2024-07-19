@@ -26,7 +26,7 @@ minetest.register_globalstep(function(dtime)
 		
 		if controls.sneak or head_node_def.walkable then
 			local pos = player: get_pos()
-			local ray = minetest.raycast(pos + vector.new(0, 1.5, 0), pos + vector.new(0, 2.1, 0), false, false)
+			local ray = minetest.raycast(pos + vector.new(0, 1.45, 0), pos + vector.new(0, 1.65, 0), false, false)
 			local collide = false
 			
 			for pointed_thing in ray do

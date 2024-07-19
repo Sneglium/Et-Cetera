@@ -113,6 +113,12 @@ etc.mortar_and_pestle_hardness_mult (Hardness Multiplier) float 1.0 0 10
 # Boolean (true/false); default: true
 etc.load_module_dust (Enable Dust) bool true
 
+[Duststone]
+
+# Add various decorative stonelike nodes based on dust.
+# Boolean (true/false); default: true
+etc.load_module_duststone (Load Module: Dustsone) bool true
+
 [Anvil]
 
 # Enable or disable the module entirely.
@@ -312,14 +318,14 @@ etc.farming_tweaks_compost (Enable Composting) bool true
 
 # The average amount of time in seconds between cycles of a compost node ticking the plant above it to grow.
 # Non-wet compost soil will take 1.5x this long between cycles, on average.
-# Floating-point (30.0-1000.0); default: 120.0
-etc.farming_tweaks_compost_tickrate (Compost Avg. Boost Interval) float 120 30 1000
+# Floating-point (60.0-1000.0); default: 120.0
+etc.farming_tweaks_compost_tickrate (Compost Avg. Boost Interval) float 120 60 1000
 
 # Every ticking cycle, compost will have 1 in this many chances to turn into regular dirt.
-# For example, 1=100% chance, 10=10% chance, 20=5% chance, 60=1.6% chance (default)
+# For example, 1=100% chance, 10=10% chance, 20=5% chance, 30=3.3% chance (default)
 # Set to 0 to disable exhaustion of compost nodes.
-# Integer (0-1000); default: 60
-etc.farming_tweaks_compost_exhaust_chance (Fertility Exhaustion Chance) int 60 0 1000
+# Integer (0-1000); default: 30
+etc.farming_tweaks_compost_exhaust_chance (Fertility Exhaustion Chance) int 30 0 1000
 
 # Add a 'trowel' item that allows quickly replacing dirt/desert sand and the tilled variants of both with the compost version.
 # Boolean (true/false); default: true
@@ -330,5 +336,27 @@ etc.farming_tweaks_trowel (Enable Trowel) bool true
 etc.farming_tweaks_trowel_uses (Trowel Durability) int 180 0 1000
 
 # Interval in seconds between compost processing cycles in the Compost Bin.
-# Floating-point (0.0-1000.0); default: 0.5
-etc.farming_tweaks_compost_process_rate (Compost Bin Interval) float 0.5 0 1000
+# Floating-point (0.0-1000.0); default: 1
+etc.farming_tweaks_compost_process_rate (Compost Bin Interval) float 1 0 1000
+
+# Add a 'watering can' item that wets soil nodes faster, and helps the growth of crops slightly.
+# Boolean (true/false); default: true
+etc.farming_tweaks_watering_can (Enable Watering Can) bool true
+
+# How many (approximately) pouring seconds worth of water the watering can can hold.
+# The can will take 1/3 this amount of time to refill.
+# Integer (0-1000); default: 36
+etc.farming_tweaks_watering_can_limit (Watering Can Capacity) int 36 0 1000
+
+# The watering can has one in this many chances to boost the growth of a crop each step.
+# Integer (0-1000); default: 300
+etc.farming_tweaks_watering_can_boost_chances (Watering Can: Chance to Boost) int 300 0 1000
+
+# The watering can will select this many crop nodes within its' radius to potentially boost each step.
+# Integer (0-9); default: 3
+etc.farming_tweaks_watering_can_boost_max (Watering Can: Boost Limit) int 3 0 9
+
+# The watering can will be capable of delaying the exhaustion of a compost node by at most this many cycles.
+# Set to 0 to disable exhaustion prevention.
+# Integer (0-1000); default: 4
+etc.farming_tweaks_watering_can_anti_exhaust_limit (Watering Can: Exhaust Delay Limit) int 4 0 1000

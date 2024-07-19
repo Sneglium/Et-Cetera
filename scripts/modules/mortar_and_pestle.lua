@@ -247,6 +247,7 @@ end
 
 if minetest.global_exists('farming') then
 	etc.register_mortar_recipe('farming:wheat', 'farming:flour', 10, true)
+	etc.register_mortar_recipe('wool:white', 'farming:string 4', 5, true)
 end
 
 if minetest.get_modpath 'flowers' and minetest.get_modpath 'dye' then

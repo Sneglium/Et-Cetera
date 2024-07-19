@@ -40,6 +40,7 @@ load_script_optional('labelling_bench')
 load_script_optional('coloring_bench')
 load_script_optional('mortar_and_pestle', '&basic_resources')
 load_script_optional('dust', '&mortar_and_pestle', 'bucket')
+load_script_optional('duststone', '&dust')
 load_script_optional('anvil', '&craft_tools')
 
 -- Misc. additions

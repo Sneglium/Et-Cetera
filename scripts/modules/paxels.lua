@@ -28,7 +28,8 @@ local function make_paxel (name, resource, pick, shovel, axe, sword)
 			full_punch_interval = sword_def.full_punch_interval,
 			damage_groups = {fleshy = math.ceil(sword_def.damage_groups.fleshy*damage_multiplier)},
 			groupcaps = digging_groups,
-		}
+		},
+		groups = etc.merge(pick_def.groups or {pick = 1}, shovel_def.groups or {shovel = 1}, axe_def.groups or {axe = 1}, sword_def.groups or {sword = 1})
 	})
 	
 	minetest.register_craft {

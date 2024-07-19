@@ -6,8 +6,15 @@ local module = {
 		['farming:hoe_steel'] = 2,
 		['farming:hoe_mese'] = 2,
 		['farming:hoe_diamond'] = 3,
+		['moreores:hoe_silver'] = 2,
 		['moreores:hoe_mithril'] = 3,
-		['moreores:hoe_silver'] = 2
+		['etcetera:paxel_stone'] = 1,
+		['etcetera:paxel_bronze'] = 1,
+		['etcetera:paxel_steel'] = 2,
+		['etcetera:paxel_mese'] = 2,
+		['etcetera:paxel_diamond'] = 3,
+		['etcetera:paxel_silver'] = 2,
+		['etcetera:paxel_mithril'] = 3
 	},
 	plants = {},
 	compost_values = {}
@@ -88,6 +95,10 @@ function module.register_plant (name_prefix, stages, seed, guide_node, compost_v
 		groups.crop = groups.crop or 1
 		minetest.override_item(nodename, {groups = groups})
 	end
+	
+	local groups = minetest.registered_items[seed].groups
+	groups.crop = groups.crop or 1
+	minetest.override_item(seed, {groups = groups})
 end
 
 local function boost_growth (pos)
@@ -96,8 +107,10 @@ local function boost_growth (pos)
 	if type(plant) == 'string' then
 		node.name = plant
 		local plant_def = minetest.registered_nodes[plant]
+		local success = false
 		if plant_def.place_param2 ~= nil and node.param2 ~= plant_def.place_param2 then
 			node.param2 = plant_def.place_param2
+			success = true
 		end
 		minetest.swap_node(pos, node)
 		
@@ -113,6 +126,8 @@ local function boost_growth (pos)
 				texture = 'etc_growth_particle.png'
 			}
 		end
+		
+		return success
 	end
 end
 
@@ -164,9 +179,10 @@ end
 
 if minetest.settings: get_bool('etc.farming_tweaks_compost', true) then
 	local compost_tickrate = minetest.settings: get('etc.farming_tweaks_compost_tickrate') or 120
-	compost_tickrate = math.max(30, compost_tickrate - 30)
+	compost_tickrate = math.max(60, compost_tickrate - 60)
 	
-	local compost_exhaust_chance = minetest.settings: get('etc.farming_tweaks_compost_exhaust_chance') or 60
+	local compost_exhaust_chance = minetest.settings: get('etc.farming_tweaks_compost_exhaust_chance') or 30
+	
 	local should_exhaust
 	if compost_exhaust_chance == 0 then
 		should_exhaust = function ()
@@ -180,7 +196,7 @@ if minetest.settings: get_bool('etc.farming_tweaks_compost', true) then
 	
 	local function set_next_tick (pos, mult)
 		local timer = minetest.get_node_timer(pos)
-		timer: start(math.random(30, 30 + math.floor(compost_tickrate * 2 * mult)))
+		timer: start(math.random(60, 60 + math.floor(compost_tickrate * 2 * mult)))
 	end
 	
 	local function compost_on_construct (pos)
@@ -191,13 +207,20 @@ if minetest.settings: get_bool('etc.farming_tweaks_compost', true) then
 	local function compost_on_timer (pos)
 		local name = minetest.get_node(pos).name
 		
-		if should_exhaust() then
+		local success = boost_growth(pos + vector.new(0, 1, 0))
+		
+		if success and should_exhaust() then
+			local meta = minetest.get_meta(pos)
+			if meta: get_int 'anti_exhaust' > 0 then
+				meta: set_int('anti_exhaust', meta: get_int 'anti_exhaust' - 1)
+				return
+			end
+			
 			local new_name = name == 'etcetera:compost_tilled' and 'farming:soil' or 'farming:soil_wet'
 			minetest.set_node(pos, {name = new_name})
 			return
 		end
 		
-		boost_growth(pos + vector.new(0, 1, 0))
 		set_next_tick(pos, name == 'etcetera:compost_tilled' and 1.5 or 1)
 	end
 	
@@ -248,7 +271,11 @@ if minetest.settings: get_bool('etc.farming_tweaks_compost', true) then
 		interval = compost_tickrate + 30,
 		catch_up = true,
 		action = function(pos, node)
-			set_next_tick(pos, name == 'etcetera:compost_tilled' and 1.5 or 1)
+			local timer = minetest.get_node_timer(pos)
+			
+			if not timer: is_started() then
+				set_next_tick(pos, name == 'etcetera:compost_tilled' and 1.5 or 1)
+			end
 		end
 	}
 	
@@ -311,13 +338,23 @@ if minetest.settings: get_bool('etc.farming_tweaks_compost', true) then
 			end
 		})
 		
-		minetest.register_craft {
-			recipe = {
-				{'etc:ct_hammer', 'default:steel_ingot'},
-				{'default:stick', ''}
-			},
-			output = 'etc:trowel'
-		}
+		if etc.modules.ct_tools then
+			minetest.register_craft {
+				recipe = {
+					{'etc:ct_hammer', 'default:steel_ingot'},
+					{'default:stick', ''}
+				},
+				output = 'etc:trowel'
+			}
+		else
+			minetest.register_craft {
+				recipe = {
+					{'', 'default:stick'},
+					{'default:steel_ingot', ''}
+				},
+				output = 'etc:trowel'
+			}
+		end
 	end
 	
 	local function get_composter_infotext (pos)
@@ -336,10 +373,10 @@ if minetest.settings: get_bool('etc.farming_tweaks_compost', true) then
 		local waste = meta: get_int('waste') / 100
 		local compost = meta: get_int('compost') / 100
 		
-		local found = etc.update_node_display(pos, compost > waste and compost or waste, compost > waste and 'etc_compost.png' or 'etc_greenwaste.png')
+		local found = etc.update_node_display(pos, waste > compost and waste or compost, waste > compost and 'etc_greenwaste.png' or 'etc_compost.png')
 		
-		if (not found) and (waste+compost) ~= 0 then
-			etc.add_node_display(pos, compost > waste and 'etc_compost.png' or 'etc_greenwaste.png', 15.25/16, compost > waste and compost or waste)
+		if (not found) and waste+compost ~= 0 then
+			etc.add_node_display(pos, waste > compost and 'etc_greenwaste.png' or 'etc_compost.png', 15.25/16, compost > waste and compost or waste)
 		end
 	end
 	
@@ -352,7 +389,7 @@ if minetest.settings: get_bool('etc.farming_tweaks_compost', true) then
 		end,
 	}
 	
-	local compost_process_rate = minetest.settings: get('etc.farming_tweaks_compost_process_rate') or 0.5
+	local compost_process_rate = minetest.settings: get('etc.farming_tweaks_compost_process_rate') or 1
 	
 	etc.register_node('composter', {
 		displayname = 'Compost Bin',
@@ -362,6 +399,7 @@ if minetest.settings: get_bool('etc.farming_tweaks_compost', true) then
 			'<LMB> with a shovel to remove compost'
 		},
 		tiles = {'etc_tarred_wood.png', 'etc_tarred_wood.png', 'etc_composter_side.png'},
+		use_texture_alpha = 'clip',
 		paramtype = 'light',
 		sunlight_propagates = true,
 		drawtype = 'nodebox',
@@ -449,9 +487,9 @@ if minetest.settings: get_bool('etc.farming_tweaks_compost', true) then
 		end,
 		
 		on_punch = function (pos, node, puncher, pointed_thing)
-			local itemstack = puncher: get_wielded_item()
+			local itemdef = puncher: get_wielded_item(): get_definition()
 			
-			if minetest.get_item_group(itemstack: get_name(), 'shovel') then
+			if itemdef.groups and itemdef.groups.shovel then
 				local meta = minetest.get_meta(pos)
 				local compost = meta: get_int 'compost'
 				local compost_available = math.floor(compost/10)
@@ -502,11 +540,11 @@ if minetest.settings: get_bool('etc.farming_tweaks_compost', true) then
 	module.compost_values['default:acacia_bush_leaves'] = 6
 	module.compost_values['default:blueberry_bush_leaves'] = 6
 	module.compost_values['default:bush_leaves'] = 6
-	module.compost_values['default:pine_bush_leaves'] = 6
+	module.compost_values['default:pine_bush_needles'] = 6
 	module.compost_values['default:acacia_leaves'] = 6
 	module.compost_values['default:aspen_leaves'] = 6
 	module.compost_values['default:jungleleaves'] = 6
-	module.compost_values['default:pine_leaves'] = 6
+	module.compost_values['default:pine_needles'] = 6
 	module.compost_values['default:leaves'] = 6
 	
 	module.compost_values['default:grass_1'] = 6
@@ -534,6 +572,166 @@ if minetest.settings: get_bool('etc.farming_tweaks_compost', true) then
 		module.compost_values['flowers:tulip'] = 12
 		module.compost_values['flowers:tulip_black'] = 12
 		module.compost_values['flowers:viola'] = 12
+	end
+end
+
+if minetest.settings: get_bool('etc.farming_tweaks_watering_can', true) then	
+	local capacity = math.ceil((minetest.settings: get('etc.farming_tweaks_watering_can_limit') or 36) * (1 / (minetest.settings: get 'dedicated_server_step' or 0.09)))
+	local boost_chances = minetest.settings: get('etc.farming_tweaks_watering_can_boost_chances') or 300
+	local boost_max = minetest.settings: get('etc.farming_tweaks_watering_can_boost_max') or 3
+	local anti_exhaust_limit = minetest.settings: get('etc.farming_tweaks_watering_can_anti_exhaust_limit') or 4
+	
+	local watering_can_sound = {}
+	
+	minetest.register_globalstep(function (dtime)
+		local players = minetest.get_connected_players()
+		
+		for _, player in pairs(players) do
+			local itemstack = player: get_wielded_item()
+			
+			if itemstack: get_name() == 'etcetera:watering_can' and player: get_player_control().LMB then
+				local pointed = etc.get_player_pointed_thing(player, true, true)
+				
+				if pointed and pointed.type == 'node' then
+					local node = minetest.get_node(pointed.under)
+					
+					if node.name == 'default:water_source' or node.name == 'default:river_water_source' then
+						local meta = itemstack: get_meta()
+						
+						local water = meta: get_int 'water' + 3
+						meta: set_int('water', math.min(capacity, water))
+						itemstack: set_wear(math.max(0, 65536 - (65536/capacity) * water))
+						
+						player: set_wielded_item(itemstack)
+						return
+					end
+				end
+				
+				local meta = itemstack: get_meta()
+				
+				local water = meta: get_int 'water' - 1
+				if water >= 0 then
+					local water_pos = pointed and pointed.under or player: get_pos()
+					local add_vec = vector.new(1, 0, 1)
+					local crops = minetest.find_nodes_in_area(water_pos + add_vec, water_pos - add_vec, 'group:crop')
+					
+					local boosted = 0
+					for _, pos in pairs(crops) do
+						if boosted == boost_max then break end
+						local should_boost = math.random(1, boost_chances)
+						if should_boost == 1 then
+							boost_growth(pos)
+							boosted = boosted + 1
+						end
+					end
+					
+					local add_vec_2 = vector.new(1, 1, 1)
+					local add_vec_3 = vector.new(0, -1, 0)
+					local soil = minetest.find_nodes_in_area(water_pos + add_vec_2 + add_vec_3, water_pos - add_vec_2 + add_vec_3, 'group:soil')
+					
+					for _, pos in pairs(soil) do
+						local node = minetest.get_node(pos)
+						local def = minetest.registered_nodes[node.name]
+						if def.soil and def.soil.dry == node.name then
+							node.name = def.soil.wet
+							minetest.swap_node(pos, node)
+						end
+						
+						if node.name == 'etcetera:compost_tilled' or node.name == 'etcetera:compost_tilled_wet' then
+							local meta = minetest.get_meta(pos)
+							meta: set_int('anti_exhaust', math.min(anti_exhaust_limit, meta: get_int 'anti_exhaust' + 1))
+						end
+					end
+					
+					meta: set_int('water', water)
+					itemstack: set_wear(math.min(65535, 65536 - (65536/capacity) * water))
+					
+					local sound = watering_can_sound[player: get_player_name()]
+					if sound then
+						if sound.age >= 14.4 then
+							minetest.sound_fade(sound.handle, 1.5, 0)
+							watering_can_sound[player: get_player_name()] = nil
+						end
+						
+						sound.age = sound.age + dtime
+					else
+						local handle = minetest.sound_play({name = 'etc_watering_can', gain = 1}, {object = player, max_hear_distance = 8})
+						watering_can_sound[player: get_player_name()] = {handle = handle, age = 0}
+					end
+					
+					for i = 1, 8 do
+						local vel = (player: get_look_dir() * 1.5) + vector.new(((math.random() - 0.5) * 1.5), 0, ((math.random() - 0.5) * 1.5))
+						minetest.add_particle {
+							pos = player: get_pos() + vector.new(0, 1.3, 0) + (player: get_look_dir() * 0.5),
+							velocity = vector.new(vel.x, 0, vel.z),
+							acceleration = vector.new(0, -9.8, 0),
+							expirationtime = math.random()*3,
+							size = math.random()*1.5,
+							texture = 'etc_water_particle.png',
+							collisiondetection = true,
+							bounce = {min = 0, max = 0.5, bias = 1}
+						}
+					end
+				else
+					local sound = watering_can_sound[player: get_player_name()]
+					if sound then
+						minetest.sound_fade(sound.handle, 1.5, 0)
+						watering_can_sound[player: get_player_name()] = nil
+					end
+				end
+				
+				player: set_wielded_item(itemstack)
+				return
+			else
+				local sound = watering_can_sound[player: get_player_name()]
+				if sound then
+					minetest.sound_fade(sound.handle, 1.5, 0)
+					watering_can_sound[player: get_player_name()] = nil
+				end
+			end
+		end
+	end)
+	
+	etc.register_tool('watering_can', {
+		displayname = 'Watering Can',
+		description = 'Wets soil, which helps crops grow and prevents exhaustion of soil fertility.',
+		stats = '<LMB> to pour or refill',
+		inventory_image = 'etc_watering_can.png',
+		liquids_pointable = true,
+		on_use = etc.NOP,
+		wear_color = {
+		blend = 'linear',
+			color_stops = {
+				[1.0] = '#0e46ff',
+				[0.75] = '#257cff',
+				[0.25] = '#4267e3',
+				[0.0] = '#77a8f1'
+			}
+		},
+	})
+	
+	local can_with_meta = ItemStack 'etcetera:watering_can'
+	can_with_meta: get_meta(): set_int('water', 0)
+	can_with_meta: set_wear(-1)
+	
+	if etc.modules.craft_tools then
+		minetest.register_craft {
+			output = can_with_meta: to_string(),
+			recipe = {
+				{'', 'etc:ct_hammer', 'default:tin_ingot'},
+				{'default:tin_ingot', 'bucket:bucket_empty', 'default:tin_ingot'},
+				{'', 'default:tin_ingot', ''}
+			}
+		}
+	else
+		minetest.register_craft {
+			output = can_with_meta: to_string(),
+			recipe = {
+				{'', '', 'default:tin_ingot'},
+				{'default:tin_ingot', 'bucket:bucket_empty', 'default:tin_ingot'},
+				{'', 'default:tin_ingot', ''}
+			}
+		}
 	end
 end
 

@@ -245,6 +245,30 @@ Additionally, if enabled, a Dust node will be added which can be obtained by cru
  - *Hardness Multiplier* (`etc.mortar_and_pestle_hardness_mult`, floating-point): A multiplier for the average number of hits it will take to complete a recipe.
  - *Enable Dust* (`etc.load_module_dust`, boolean): Add a 'dust' node, which is made by crushing sand and can be used to create clay.
 
+_**Note:** the `etc.load_module_dust` setting pertains to a module called `dust`, which is not listed separately for brevity._
+
+---
+### Duststone
+
+**Depends on:**
+
+ - `dust` (Etc module; required)
+
+The *Duststone* module (technical: `duststone`) includes various decorative `cracky` (stone-like) nodes based on dust, similar to sandstone from sand.
+
+**List of Items:**
+
+ - *Duststone* (`etc:duststone`): The base duststone node, made directly from dust.
+ - *Duststone Bricks* (`etc:duststone_bricks`): Large half-node sized bricks similar to MTG stone bricks.
+ - *Duststone Tile* (`etc:duststone_block`): A single large tile of duststone with a bevelled border.
+ - *Ornate Duststone Tile* (`etc:duststone_block_chiselled`): A fancy decorative spiral of duststone.
+ - *Duststone Quartertiles* (`etc:duststone_tiles`): Similar to Duststone Tile, but split in four small tiles.
+ - *Duststone Column* (`etc:duststone_column`): A pair of vertically-oriented strips of duststone, for pillars or bordering windows and doors.
+
+**List of Settings:**
+
+ - *Load Module: Duststone* (`etc.load_module_duststone`, boolean): Enable or disable the module entirely.
+
 ---
 ### Anvil
 
@@ -408,11 +432,11 @@ The *More Dungeon Loot* module (technical: `more_loot`) adds a number or additio
 
 The *Farming Tweaks* module (technical: `farming_tweaks`) makes some changes to the crops system provided either by the MTG `farming` mod, or "Farming Redo". Primarily it allows harvesting and automatically replanting crops by right-clicking on them, and harvesting larger areas at once by right-clicking with a hoe.
 
-It also adds some new nodes: a compost bin, which can be used to make _compost_ from plant materials; and compost itself which can be used as an alternative soil for growing plants on that boosts their growth rate.
+It also adds some new nodes: a compost bin, which can be used to make _compost_ from plant materials; and compost itself which can be used as an alternative soil for growing plants on that boosts their growth rate. Compost (by default) will eventually lose its' fertility and 'exhaust', turning into plain dirt soil.
 
 The _trowel_ item can be used to painlessly replace dirt or tilled soil with compost without breaking any plant that might be growing on top.
 
-
+The _watering can_ item wets soil faster, slightly boosts crop growth and prevents exhaustion of compost for a set number of cycles. Hold leftclick while pointing at water to fill it, then again over your crops to water them. Its' durability bar represents how full it is; don't worry, it won't break!
 
 **List of Settings:**
 
@@ -424,6 +448,11 @@ The _trowel_ item can be used to painlessly replace dirt or tilled soil with com
  - *Enable Trowel* (`etc.farming_tweaks_trowel`, boolean): Add a 'trowel' item that allows quickly replacing dirt/desert sand and the tilled variants of both with the compost version.
  - *Trowel Durability* (`etc.farming_tweaks_trowel_uses`, integer): How many dirt or sand nodes the trowel can replace before breaking.
  - *Compost Bin Interval* (`etc.farming_tweaks_compost_process_rate`, floating-point): Interval in seconds between compost processing cycles in the Compost Bin.
+ - *Enable Watering Can* (`etc.farming_tweaks_watering_can`, boolean)
+ - *Watering Can Capacity* (`etc.farming_tweaks_watering_can_limit`, integer)
+ - *Watering Can: Chance to Boost* (`etc.farming_tweaks_watering_can_boost_chances`, integer)
+ - *Watering Can: Boost Limit* (`etc.farming_tweaks_watering_can_boost_max`, integer)
+ - *Watering Can: Exhaust Delay Limit* (`etc.farming_tweaks_watering_can_anti_exhaust_limit`, integer)
 
 ## Support
 

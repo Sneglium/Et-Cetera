@@ -94,8 +94,8 @@ function etc.copy_or_calculate_rotation (itemstack, placer, pointed_thing)
 	local node = minetest.get_node(pointed_thing.under)
 	
 	if node.name == itemstack: get_name() and not placer: get_player_control().sneak then
-		minetest.item_place_node(itemstack, placer, pointed_thing, node.param2, true)
+		return minetest.item_place_node(itemstack, placer, pointed_thing, node.param2, true)
 	else
-		minetest.rotate_node(itemstack, placer, pointed_thing)
+		return minetest.rotate_node(itemstack, placer, pointed_thing)
 	end
 end

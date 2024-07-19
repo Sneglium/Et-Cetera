@@ -47,7 +47,7 @@ function etc.add_node_display (pos, tiles, scale, initial_level)
 	etc.log.assert(etc.is_number(scale), 'Node display entity scale must be a number')
 	etc.log.assert(not initial_level or etc.is_number(initial_level), 'Node display entity level must be a number')
 	
-	local level = initial_level or 1
+	local level = initial_level and math.max(0.0001, initial_level) or 1
 	
 	local height = scale * level -- set height to level% of the height of the object
 	local offset = -(scale*0.5)+(height*0.5) -- move the entity down half its' max height, then up half its' current height
@@ -82,7 +82,7 @@ function etc.update_node_display (pos, level, tiles)
 		local luaentity = entity: get_luaentity()
 		if luaentity and luaentity._etc_display_node then
 			local properties = entity: get_properties()
-			local level = level or 1
+			local level = level and math.max(0.0001, level) or 1
 			local scale = luaentity._scale
 	
 			local height = scale * level

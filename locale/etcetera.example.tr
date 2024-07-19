@@ -109,6 +109,15 @@ Add and remove items with <RMB>=
 
 Dust=
 
+## Duststone
+
+Duststone=
+Duststone Bricks=
+Duststone Tile=
+Ornate Duststone Tile=
+Duststone Quartertiles=
+Duststone Column=
+
 ## Anvil
 
 Blacksmith's Hammer=
@@ -161,3 +170,7 @@ Compost Bin=
 Converts plant material into compost over@ntime.=
 <RMB> to add items=
 <LMB> with a shovel to remove compost=
+
+Watering Can=
+Wets soil, which helps crops grow and prevents@nexhaustion of soil fertility.=
+<LMB> to pour or refill=

@@ -575,9 +575,9 @@ if minetest.settings: get_bool('etc.farming_tweaks_compost', true) then
 	end
 end
 
-if minetest.settings: get_bool('etc.farming_tweaks_watering_can', true) then	
+if minetest.settings: get_bool('etc.farming_tweaks_watering_can', true) then
 	local capacity = math.ceil((minetest.settings: get('etc.farming_tweaks_watering_can_limit') or 36) * (1 / (minetest.settings: get 'dedicated_server_step' or 0.09)))
-	local boost_chances = minetest.settings: get('etc.farming_tweaks_watering_can_boost_chances') or 300
+	local boost_chances = minetest.settings: get('etc.farming_tweaks_watering_can_boost_chances') or 150
 	local boost_max = minetest.settings: get('etc.farming_tweaks_watering_can_boost_max') or 3
 	local anti_exhaust_limit = minetest.settings: get('etc.farming_tweaks_watering_can_anti_exhaust_limit') or 4
 	
@@ -596,6 +596,7 @@ if minetest.settings: get_bool('etc.farming_tweaks_watering_can', true) then
 					local node = minetest.get_node(pointed.under)
 					
 					if node.name == 'default:water_source' or node.name == 'default:river_water_source' then
+						
 						local meta = itemstack: get_meta()
 						
 						local water = meta: get_int 'water' + 3
@@ -698,7 +699,7 @@ if minetest.settings: get_bool('etc.farming_tweaks_watering_can', true) then
 		stats = '<LMB> to pour or refill',
 		inventory_image = 'etc_watering_can.png',
 		liquids_pointable = true,
-		on_use = etc.NOP,
+		on_use = etc.ID,
 		wear_color = {
 		blend = 'linear',
 			color_stops = {

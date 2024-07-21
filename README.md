@@ -253,6 +253,7 @@ _**Note:** the `etc.load_module_dust` setting pertains to a module called `dust`
 **Depends on:**
 
  - `dust` (Etc module; required)
+ - `stairs` (`minetest_game` Mod; optional)
 
 The *Duststone* module (technical: `duststone`) includes various decorative `cracky` (stone-like) nodes based on dust, similar to sandstone from sand.
 
@@ -453,6 +454,26 @@ The _watering can_ item wets soil faster, slightly boosts crop growth and preven
  - *Watering Can: Chance to Boost* (`etc.farming_tweaks_watering_can_boost_chances`, integer)
  - *Watering Can: Boost Limit* (`etc.farming_tweaks_watering_can_boost_max`, integer)
  - *Watering Can: Exhaust Delay Limit* (`etc.farming_tweaks_watering_can_anti_exhaust_limit`, integer)
+
+---
+### Wood Type Variants
+
+**Depends on:**
+
+ - `default` (`minetest_game` Mod; required)
+ - `doors` (`minetest_game` Mod; optional)
+ - `stairs` (`minetest_game` Mod; optional)
+ - `vessels` (`minetest_game` Mod; optional)
+
+The *Wood Type Variants* module (technical: `wood_variants`) includes new variations of MTG 'wooden' nodes which only come in one flavour. The default behaviour is to rename the base version to 'applewood', and add new versions for each of the other four MTG wood types plus tarred and pitched wood if the `treated_wood` module is enabled.
+
+**List of Settings:**
+
+ - *Load Module: Wood Type Variants* (`etc.load_module_wood_variants`, boolean): Enable or disable the module entirely.
+ - *Treated Wood Variants* (`etc.wood_variants_treated`, boolean): Enable or disable Treated Wood and Pitch-Sealed Wood variants of the enabled node types.
+ - *Node Type: Shelves* (`etc.wood_variants_shelves`, boolean): Enable or disable wood variants of bookshelves and vessels shelves.
+ - *Node Type: Ladders* (`etc.wood_variants_ladders`, boolean): Enable or disable wood variants of ladders.
+ - *Node Type: Doors* (`etc.wood_variants_doors`, boolean): Enable or disable wood variants of doors and trapdoors.
 
 ## Support
 

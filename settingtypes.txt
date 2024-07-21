@@ -349,8 +349,8 @@ etc.farming_tweaks_watering_can (Enable Watering Can) bool true
 etc.farming_tweaks_watering_can_limit (Watering Can Capacity) int 36 0 1000
 
 # The watering can has one in this many chances to boost the growth of a crop each step.
-# Integer (0-1000); default: 300
-etc.farming_tweaks_watering_can_boost_chances (Watering Can: Chance to Boost) int 300 0 1000
+# Integer (0-1000); default: 150
+etc.farming_tweaks_watering_can_boost_chances (Watering Can: Chance to Boost) int 150 0 1000
 
 # The watering can will select this many crop nodes within its' radius to potentially boost each step.
 # Integer (0-9); default: 3
@@ -360,3 +360,25 @@ etc.farming_tweaks_watering_can_boost_max (Watering Can: Boost Limit) int 3 0 9
 # Set to 0 to disable exhaustion prevention.
 # Integer (0-1000); default: 4
 etc.farming_tweaks_watering_can_anti_exhaust_limit (Watering Can: Exhaust Delay Limit) int 4 0 1000
+
+[Wood Type Variants]
+
+# Enable or disable the module entirely.
+# Boolean (true/false); default: true
+etc.load_module_wood_variants (Load Module: Wood Type Variants) bool true
+
+# Enable or disable Treated Wood and Pitch-Sealed Wood variants of the enabled node types.
+# Boolean (true/false); default: true
+etc.wood_variants_treated (Treated Wood Variants) bool true
+
+# Enable or disable wood variants of bookshelves and vessels shelves.
+# Boolean (true/false); default: true
+etc.wood_variants_shelves (Node Type: Shelves) bool true
+
+# Enable or disable wood variants of ladders.
+# Boolean (true/false); default: true
+etc.wood_variants_ladders (Node Type: Ladders) bool true
+
+# Enable or disable wood variants of doors & trapdoors.
+# Boolean (true/false); default: true
+etc.wood_variants_doors (Node Type: Doors) bool true

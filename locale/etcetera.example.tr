@@ -118,6 +118,19 @@ Ornate Duststone Tile=
 Duststone Quartertiles=
 Duststone Column=
 
+Duststone Stairs=
+Duststone Slab=
+Duststone Stairs (Inner Corner)=
+Duststone Stairs (Outer Corner)=
+Duststone Brick Stairs=
+Duststone Brick Slab=
+Duststone Brick Stairs (Inner Corner)=
+Duststone Brick Stairs (Outer Corner)=
+Duststone Quartertile Stairs=
+Duststone Quartertile Slab=
+Duststone Quartertile Stairs (Inner Corner)=
+Duststone Quartertile Stairs (Outer Corner)=
+
 ## Anvil
 
 Blacksmith's Hammer=
@@ -174,3 +187,64 @@ Converts plant material into compost over@ntime.=
 Watering Can=
 Wets soil, which helps crops grow and prevents@nexhaustion of soil fertility.=
 <LMB> to pour or refill=
+
+## Wood Type Variants
+
+Treated Wood Stairs=
+Treated Wood Slab=
+Treated Wood Stairs (Inner Corner)=
+Treated Wood Stairs (Outer Corner)=
+Pitch-Sealed Wood Stairs=
+Pitch-Sealed Wood Slab=
+Pitch-Sealed Wood Stairs (Inner Corner)=
+Pitch-Sealed Wood Stairs (Outer Corner)=
+
+Treated Wood Fence=
+Treated Wood Fence Rail=
+Treated Wood Fence Gate=
+Treated Wood Mese Post Light=
+
+Pitch-Sealed Wood Fence=
+Pitch-Sealed Wood Fence Rail=
+Pitch-Sealed Wood Fence Gate=
+Pitch-Sealed Wood Mese Post Light=
+
+Acacia Wood Bookshelf=
+Aspen Wood Bookshelf=
+Junglewood Bookshelf=
+Pine Wood Bookshelf=
+Applewood Bookshelf=
+Treated Wood Bookshelf=
+Pitch-Sealed Bookshelf=
+
+Acacia Wood Vessels Shelf=
+Aspen Wood Vessels Shelf=
+Junglewood Vessels Shelf=
+Pine Wood Vessels Shelf=
+Applewood Vessels Shelf=
+Treated Wood Vessels Shelf=
+Pitch-Sealed Vessels Shelf=
+
+Acacia Wood Ladder=
+Aspen Wood Ladder=
+Junglewood Ladder=
+Pine Wood Ladder=
+Applewood Ladder=
+Treated Wood Ladder=
+Pitch-Sealed Ladder=
+
+Acacia Wood Door=
+Aspen Wood Door=
+Junglewood Door=
+Pine Wood Door=
+Applewood Door=
+Treated Wood Door=
+Pitch-Sealed Door=
+
+Acacia Wood Trapdoor=
+Aspen Wood Trapdoor=
+Junglewood Trapdoor=
+Pine Wood Trapdoor=
+Applewood Trapdoor=
+Treated Wood Trapdoor=
+Pitch-Sealed Trapdoor=

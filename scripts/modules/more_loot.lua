@@ -68,11 +68,11 @@ if etc.modules.gems and minetest.settings: get_bool('etc.more_loot_gems', true) 
 		{name = 'etcetera:gem_citrine', chance = 0.25, count = {1,2}},
 		{name = 'etcetera:gem_rose_quartz', chance = 0.25, count = {1,2}},
 		{name = 'etcetera:gem_amethyst', chance = 0.25, count = {1,2}},
-		{name = 'etcetera:gem_tanzanite', chance = 0.25, count = {1,2}},
-		{name = 'etcetera:gem_red_jasper', chance = 0.25, count = {1,2}},
-		{name = 'etcetera:gem_green_jasper', chance = 0.25, count = {1,2}},
-		{name = 'etcetera:gem_topaz', chance = 0.25, count = {1,2}},
-		{name = 'etcetera:gem_opal', chance = 0.25, count = {1,2}}
+		{name = 'etcetera:gem_tanzanite', chance = 0.15, count = {1,2}},
+		{name = 'etcetera:gem_red_jasper', chance = 0.15, count = {1,2}},
+		{name = 'etcetera:gem_green_jasper', chance = 0.15, count = {1,2}},
+		{name = 'etcetera:gem_topaz', chance = 0.15, count = {1,2}},
+		{name = 'etcetera:gem_opal', chance = 0.15, count = {1,2}}
 	}
 end
 

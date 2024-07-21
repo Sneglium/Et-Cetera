@@ -407,7 +407,7 @@ function etc.get_player_range (player)
 	end
 	
 	local def = item: get_definition()
-	return def and def.range or player: get_inventory(): get_stack('hand', 1): get_definition().range or 0
+	return def and def.range or player: get_inventory(): get_stack('hand', 1): get_definition().range or 4
 end
 
 -- returns the thing the player is pointing at, not including the player themself

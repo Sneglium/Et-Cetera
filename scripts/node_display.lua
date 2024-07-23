@@ -69,6 +69,8 @@ function etc.add_node_display (pos, tiles, scale, initial_level)
 	luaentity._scale = scale
 	luaentity._basepos = pos
 	
+	etc.log.verbose('Added node display entity at ', tostring(pos))
+	
 	return entity
 end
 
@@ -104,6 +106,8 @@ function etc.update_node_display (pos, level, tiles)
 		end
 	end
 	
+	etc.log.verbose('Updated node display entity at ', tostring(pos))
+	
 	return found_one
 end
 
@@ -116,4 +120,6 @@ function etc.remove_node_display (pos)
 			entity: remove()
 		end
 	end
+	
+	etc.log.verbose('Removed node display entity at ', tostring(pos))
 end

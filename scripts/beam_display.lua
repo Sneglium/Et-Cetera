@@ -98,6 +98,8 @@ function etc.add_beam_display (pos1, pos2, tiles, tile_size, width, identifier)
 	luaentity._tiles = old_tiles
 	luaentity._tile_size = tile_size
 	
+	etc.log.verbose('Added beam display entity between ', tostring(pos1), tostring(pos2))
+	
 	return entity
 end
 
@@ -164,6 +166,8 @@ function etc.update_beam_display (pos1, pos2, pos1_new, pos2_new, width_new, ide
 		end
 	end
 	
+	etc.log.verbose('Updated beam display entity between ', tostring(pos1), tostring(pos2))
+	
 	return found_one
 end
 
@@ -186,4 +190,6 @@ function etc.remove_beam_display (pos1, pos2, identifier)
 			entity: remove()
 		end
 	end
+	
+	etc.log.verbose('Removed beam display entity between ', tostring(pos1), tostring(pos2))
 end

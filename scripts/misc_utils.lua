@@ -30,13 +30,13 @@ function etc.check_depends (...)
 		local key = depend: sub(2,-1)
 		
 		if first_char == '$' then
-			if not rawget(_G, key) then return false end
+			if not rawget(_G, key) then return false, key end
 		elseif first_char == '@' then
-			if not minetest.registered_items[key] or minetest.registered_aliases[key] then return false end
+			if not minetest.registered_items[key] or minetest.registered_aliases[key] then return false, key end
 		elseif first_char == '&' then
-			if not etc.modules[key] then return false end
+			if not etc.modules[key] then return false, key end
 		else
-			if not minetest.get_modpath(depend) then return false end
+			if not minetest.get_modpath(depend) then return false, depend end
 		end
 	end
 	return true
@@ -94,7 +94,7 @@ end
 -- TYPE & ERROR HELPERS
 
 -- Table that holds the various log functions
--- Each correspond ro a built-in MT error level except fatal and assert
+-- Each correspond to a built-in MT error level except fatal and assert
 -- Can also be called directly; equivalent to etc.log.info
 etc.log = {}
 
@@ -113,27 +113,27 @@ function etc.log.assert (cond, msg)
 	return cond
 end
 
-function etc.log.error (msg)
-	minetest.log('error', table.concat {'<', minetest.get_current_modname() or '@active', '/ERROR> ', msg})
+function etc.log.error (...)
+	minetest.log('error', table.concat {'<', minetest.get_current_modname() or '@active', '> ', ...})
 end
 
-function etc.log.warn (msg)
-	minetest.log('warning', table.concat {'<', minetest.get_current_modname() or '@active', '/WARN> ', msg})
+function etc.log.warn (...)
+	minetest.log('warning', table.concat {'<', minetest.get_current_modname() or '@active', '> ', ...})
 end
 
-function etc.log.info (msg)
-	minetest.log('info', table.concat {'<', minetest.get_current_modname() or '@active', '/INFO> ', msg})
+function etc.log.info (...)
+	minetest.log('info', table.concat {'<', minetest.get_current_modname() or '@active', '> ', ...})
 end
 
-function etc.log.action (msg)
-	minetest.log('action', table.concat {'<', minetest.get_current_modname() or '@active', '/ACTION> ', msg})
+function etc.log.action (...)
+	minetest.log('action', table.concat {'<', minetest.get_current_modname() or '@active', '> ', ...})
 end
 
-function etc.log.apoc (msg)
-	minetest.log('verbose', table.concat {'<', minetest.get_current_modname() or '@active', '/APOC> ', msg})
+function etc.log.verbose (...)
+	minetest.log('verbose', table.concat {'<', minetest.get_current_modname() or '@active', '> ', ...})
 end
 
-etc.log = setmetatable(etc.log, {__call = etc.log.info})
+etc.log = setmetatable(etc.log, {__call = function (self, ...) self.info(...) end})
 
 -- Simple verification functions
 -- Useful for passing to methods that require a verifier

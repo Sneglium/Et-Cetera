@@ -40,6 +40,8 @@ function etc.add_item_display (pos, item, scale, rotation)
 		entity: set_rotation(rotation)
 	end
 	
+	etc.log.verbose('Added item display entity at ', tostring(pos))
+	
 	return entity
 end
 
@@ -74,6 +76,8 @@ function etc.update_item_display (pos, item, scale, rotation)
 		end
 	end
 	
+	etc.log.verbose('Updated item display entity at ', tostring(pos))
+	
 	return found_one
 end
 
@@ -86,4 +90,6 @@ function etc.remove_item_display (pos)
 			entity: remove()
 		end
 	end
+	
+	etc.log.verbose('Removed item display entity at ', tostring(pos))
 end

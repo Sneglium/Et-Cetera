@@ -382,3 +382,25 @@ etc.wood_variants_ladders (Node Type: Ladders) bool true
 # Enable or disable wood variants of doors & trapdoors.
 # Boolean (true/false); default: true
 etc.wood_variants_doors (Node Type: Doors) bool true
+
+[Door Tweaks]
+
+# Enable or disable the module entirely.
+# Boolean (true/false); default: true
+etc.load_module_door_tweaks (Load Module: Door Tweaks) bool true
+
+# Trapdoors in their 'open' state will be non-physical and climbable like a ladder.
+# Boolean (true/false); default: true
+etc.door_tweaks_climb_trapdoors (Climbable Trapdoors) bool true
+
+# Doors will open and shut in pairs.
+# Boolean (true/false); default: true
+etc.door_tweaks_double_doors (Double Doors) bool true
+
+# Trapdoors will open/close in a flat radius.
+# Boolean (true/false); default: true
+etc.door_tweaks_connected_trapdoors (Collateral Trapdoors) bool true
+
+# The radius in which trapdoors will open collaterally. This is a square region, not a circle.
+# Integer (0-10); default: 2
+etc.door_tweaks_connected_trapdoors_spread (Collateral Trapdoors: Radius) int 2 0 10

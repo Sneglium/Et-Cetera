@@ -10,7 +10,7 @@ Et Cetera is a combination of two types of library:
 
 Et Cetera (abbreviated Etc from hereon) is divided into "Modules", which can be configured or disabled independently from the main settings menu. The <u>gameplay</u> features of Etc are listed below organized by module.
 
-When a module's dependencies are unsatisfied, it will silently disable itself.
+When an enabled module's dependencies are unsatisfied, it will disable itself and (optionally, see settings) log a warning.
 
 A comprehensive reference to the APIs and utilities provided to mod and game developers can be found in the `doc/` directory, starting with `doc/main.html`. References for the mini-APIs provided by individual modules can be found under `doc/module APIs/`.  
 
@@ -449,11 +449,11 @@ The _watering can_ item wets soil faster, slightly boosts crop growth and preven
  - *Enable Trowel* (`etc.farming_tweaks_trowel`, boolean): Add a 'trowel' item that allows quickly replacing dirt/desert sand and the tilled variants of both with the compost version.
  - *Trowel Durability* (`etc.farming_tweaks_trowel_uses`, integer): How many dirt or sand nodes the trowel can replace before breaking.
  - *Compost Bin Interval* (`etc.farming_tweaks_compost_process_rate`, floating-point): Interval in seconds between compost processing cycles in the Compost Bin.
- - *Enable Watering Can* (`etc.farming_tweaks_watering_can`, boolean)
- - *Watering Can Capacity* (`etc.farming_tweaks_watering_can_limit`, integer)
- - *Watering Can: Chance to Boost* (`etc.farming_tweaks_watering_can_boost_chances`, integer)
- - *Watering Can: Boost Limit* (`etc.farming_tweaks_watering_can_boost_max`, integer)
- - *Watering Can: Exhaust Delay Limit* (`etc.farming_tweaks_watering_can_anti_exhaust_limit`, integer)
+ - *Enable Watering Can* (`etc.farming_tweaks_watering_can`, boolean): Add a 'watering can' item that wets soil nodes faster, and helps the growth of crops slightly.
+ - *Watering Can Capacity* (`etc.farming_tweaks_watering_can_limit`, integer): How many (approximately) pouring seconds worth of water the watering can can hold.
+ - *Watering Can: Chance to Boost* (`etc.farming_tweaks_watering_can_boost_chances`, integer): The watering can has one in this many chances to boost the growth of a crop each step.
+ - *Watering Can: Boost Limit* (`etc.farming_tweaks_watering_can_boost_max`, integer): The watering can will select this many crop nodes within its' radius to potentially boost each step.
+ - *Watering Can: Exhaust Delay Limit* (`etc.farming_tweaks_watering_can_anti_exhaust_limit`, integer): The watering can will be capable of delaying the exhaustion of a compost node by at most this many cycles.
 
 ---
 ### Wood Type Variants
@@ -474,6 +474,29 @@ The *Wood Type Variants* module (technical: `wood_variants`) includes new variat
  - *Node Type: Shelves* (`etc.wood_variants_shelves`, boolean): Enable or disable wood variants of bookshelves and vessels shelves.
  - *Node Type: Ladders* (`etc.wood_variants_ladders`, boolean): Enable or disable wood variants of ladders.
  - *Node Type: Doors* (`etc.wood_variants_doors`, boolean): Enable or disable wood variants of doors and trapdoors.
+
+---
+### Door Tweaks
+
+**Depends on:**
+
+ - `doors` (`minetest_game` Mod; required)
+
+The *Door Tweaks* module (technical: `door_tweaks`) makes a number of changes to the way doors work in MTG. By default, it does the following:
+
+ - Open trapdoors are now climbable like ladders (this means they are not physical, however)
+ - Doors open in pairs if placed in the 'double door' configuration.
+ - Trapdoors open in a flat radius around the first trapdoor (by default, a maximum of a 5x5 area)
+
+All of these can be configured.
+
+**List of Settings:**
+
+ - *Load Module: Door Tweaks* (`etc.load_module_door_tweaks`, boolean): Enable or disable the module entirely.
+ - *Climbable Trapdoors* (`etc.door_tweaks_climb_trapdoors`, boolean): Trapdoors in their 'open' state will be non-physical and climbable like a ladder.
+ - *Double Doors* (`etc.door_tweaks_double_doors`, boolean): Doors will open and shut in pairs.
+ - *Collateral Trapdoors* (`etc.door_tweaks_connected_trapdoors`, boolean): Trapdoors will open/close in a flat radius.
+ - *Collateral Trapdoors: Radius* (`etc.door_tweaks_connected_trapdoors_spread`, integer): The radius in which trapdoors will open collaterally. This is a square region, not a circle.
 
 ## Support
 

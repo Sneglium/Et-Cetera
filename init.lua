@@ -18,7 +18,7 @@ else
 			etc.modules[fn] = dofile(table.concat {etc.modpath, '/scripts/modules/', fn, '.lua'}) or true
 			etc[fn] = etc.modules[fn]
 			etc.log('Loaded module ', fn, ' in ', tostring((os.clock() - time) * 0.001): sub(1, 4), 'ms')
-		else
+		elseif minetest.settings: get_bool('etc.dependency_warning', true) then
 			etc.log.warn('Module ', fn, ' is enabled but has unsatisfied dependency: ', missing)
 		end
 	end

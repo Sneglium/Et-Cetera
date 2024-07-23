@@ -24,6 +24,7 @@ end
 -- $<var>: Fail if the GLOBAL variable <var> is nil or false.
 -- @<mod:resource>: Fail if no node or item with the name <mod:resource> is registered. Aliases supported.
 -- &<module>: Fail if the Et Cetera module <module> is missing or did not load.
+-- Upon failure, the key that failed to resolve will be returned.
 function etc.check_depends (...)
 	for _, depend in pairs {...} do
 		local first_char = depend: sub(1,1)
@@ -84,8 +85,9 @@ end
 -- Finds the index of an entry in an array
 -- Also returns the object at the index for convenience
 function etc.array_find (array, data)
-	for index, v in pairs(array) do
-		if v == data then return index, v end
+	for i = 1, #array do
+		local v = array[i]
+		if v == data then return i, v end
 	end
 	
 	return nil

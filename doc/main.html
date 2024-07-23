@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<head>
+<link rel="stylesheet" href="res/main.css">
+<meta charset="UTF-8">
+</head>
+
+<body>
+<script src="res/generate_sidebar.js"></script>
+<script>
+sidebar('main.html', 'pages/')
+</script>
+
+<div id='mainDoc'>
+<h1> Et Cetera: API &amp; Utilities Reference </h1>
+<hr>
+<p>
+	This file is the index for the official Et Cetera API documentation. This does not include mini-APIs provided by modules; every util mentioned here is always enabled, as opposed to module APIs which can be disabled or have unsatisfied dependencies.
+	<br>
+	<b>Useful Links</b>
+	<ul>
+		<li><b>Forum Page: [NYI]<b></li>
+		<li><b>CDB Package: [NYI]<b></li>
+		<li><b>Github Repository: [NYI]<b></li>
+	</ul>
+	<noscript>javascript must be supported and enabled in order to use the automatic sidebar navigation.</noscript>
+</p>
+</body>
+
+<script>
+	const newpara = document.createElement('div');
+	newpara.innerHTML = 'The sidebar to the left can be used to navigate between documentation files.';
+	document.getElementById('mainDoc').appendChild(newpara);
+</script>
+

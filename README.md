@@ -5,20 +5,24 @@
 
 Et Cetera is a combination of two types of library:
 
- - A library of miscellaneous tweaks and gameplay features (primarily targeted at Minetest Game) for players and for mod devs to use as crafting dependencies;
+ - A library of miscellaneous tweaks and gameplay features (primarily targeted at Minetest Game) for players to play with and for mod devs to use as crafting dependencies;
  - A library of common code with no singular primary purpose, though mainly useful for automating the creation of various kinds of mod boilerplate.
 
 Et Cetera (abbreviated Etc from hereon) is divided into "Modules", which can be configured or disabled independently from the main settings menu. The <u>gameplay</u> features of Etc are listed below organized by module.
 
 When an enabled module's dependencies are unsatisfied, it will disable itself and (optionally, see settings) log a warning.
 
-A comprehensive reference to the APIs and utilities provided to mod and game developers can be found in the `doc/` directory, starting with `doc/main.html`. References for the mini-APIs provided by individual modules can be found under `doc/module APIs/`.  
+A comprehensive reference to the APIs and utilities provided to mod and game developers can be found in the `doc/` directory, starting with `doc/main.html`. This doc is meant to be viewd in the browser, and makes use of CSS and JavaScript. References for the mini-APIs provided by individual modules can be found under `doc/module APIs/`.  
+
+**Warning: the Etc API documentation is very much a work in progress! Don't expect it to be up to date until Etc is out of the pre-release stage!**  
 
 (*Quick Note: Itemnames below use the `etc:` prefix, which is an alias. `etcetera:` is the registered prefix, but `etc:item_name` and `etcetera:item_name` are both defined for all items.*)
 
 ## General Settings
 
 *Library Mode* (`etc.library_mode`, boolean): Disable all modules and only load the APIs and utilities depended on by other mods.
+
+*Warn Missing Dependencies* (`etc.dependency_warning`, boolean): Log a warning when a module is enabled but missing dependencies.
 
 ## Modules
 
@@ -508,8 +512,18 @@ All of these can be configured.
  - *Collateral Trapdoors* (`etc.door_tweaks_connected_trapdoors`, boolean): Trapdoors will open/close in a flat radius.
  - *Collateral Trapdoors: Radius* (`etc.door_tweaks_connected_trapdoors_spread`, integer): The radius in which trapdoors will open collaterally. This is a square region, not a circle.
 
-## Support
-
-## Contributing
-
 ## Licensing
+```
+Et Cetera (etcetera) (c) 2024 Hagatha (Sneglium)  
+
+License of code & data files (*.lua, *.conf, *.txt, *.tr, *.md, *.html): Apache-2.0  
+https://www.apache.org/licenses/LICENSE-2.0.txt  
+see LICENSING/code.LICENSE  
+
+License of media and other files (*.obj, *.ogg, *.png): Attribution-ShareAlike 4.0 International  
+https://creativecommons.org/licenses/by-sa/4.0/legalcode.txt  
+see LICENSING/media.LICENSE  
+
+Some files are under separate licenses. An individual license file called <file_name>.LICENSE will  
+be provided in the directories containing these files, specifying the filenames, licenses, and attribution.
+```

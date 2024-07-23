@@ -4,6 +4,12 @@
 # Boolean (true/false); default: false
 etc.library_mode (Library Mode) bool false
 
+[*Logging]
+
+# Log a warning when a module is enabled but missing dependencies.
+# Boolean (true/false); default: true
+etc.dependency_warning (Warn Missing Dependencies) bool true
+
 [Basic Resources]
 
 # Enable or disable the module entirely.

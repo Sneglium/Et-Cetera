@@ -75,7 +75,8 @@ minetest.register_lbm {
 	end,
 }
 
-local hardness_mult = minetest.settings: get('etc.') or 1
+local hardness_mult = minetest.settings: get('etc.mortar_and_pestle_hardness_mult') or 1
+local particles = minetest.settings: get_bool('etc.mortar_and_pestle_particles', true)
 
 etc.register_node('mortar', {
 	displayname = 'Mortar',
@@ -195,7 +196,7 @@ etc.register_node('mortar', {
 					etc.update_item_display(pos, inv: get_stack('item', 1), nil, 'random_flat')
 					
 					minetest.sound_play({name = recipe.plant and 'etc_mortar_plant' or 'etc_mortar'}, {pos = pos, max_hear_distance = 16}, true)
-					if default then
+					if default and particles then
 						for i = 1, 5 do
 							minetest.add_particle {
 								pos = pos,

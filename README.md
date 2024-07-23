@@ -16,6 +16,10 @@ A comprehensive reference to the APIs and utilities provided to mod and game dev
 
 (*Quick Note: Itemnames below use the `etc:` prefix, which is an alias. `etcetera:` is the registered prefix, but `etc:item_name` and `etcetera:item_name` are both defined for all items.*)
 
+## General Settings
+
+*Library Mode* (`etc.library_mode`, boolean): Disable all modules and only load the APIs and utilities depended on by other mods.
+
 ## Modules
 
 ---
@@ -51,6 +55,7 @@ This module is intended to be continually expanded and added to as necessary to 
 **List of Settings:**
 
  - *Load Module: Basic Resources* (`etc.load_module_basic_resources`, boolean): Enable or disable the module entirely.
+ - *Easy Flint Recipe* (`etc.basic_resources_easy_flint`, boolean): Enable crafting gravel into flint directly.
 
 ---
 ### Craft Grid Tools
@@ -163,7 +168,9 @@ If the `corrosion` module is enabled, wax can be used to seal metal blocks and p
  - *Load Module: Bees* (`etc.load_module_bees`, boolean): Enable or disable the module entirely.
  - *Honey Generation Rate* (`etc.bees_honey_rate`, floating-point): A multiplier for the average amount of honey generated every 10 seconds.
  - *Wax Generation Rate* (`etc.bees_wax_rate`, floating-point): A multiplier for the average amount of beeswax generated every 10 seconds.
- - *Apiary Memory Length* (`etc.bees_memory_length`, integer): How many visited flowers can the apiary remember.
+ - *Apiary: Memory Length* (`etc.bees_memory_length`, integer): How many visited flowers can the apiary remember.
+ - *Apiary: Search Radius* (`etc.bees_search_range`, integer): This radius defines a cube in which flowers will be looked for.
+ - *Apiary: Capacity* (`etc.bees_capacity`, integer): How many units for wax and honey (each) a single apiary box can hold. A double box holds twice as much.
 
 ---
 ### Gems
@@ -243,9 +250,10 @@ Additionally, if enabled, a Dust node will be added which can be obtained by cru
  - *Load Module: Mortar and Pestle* (`etc.load_module_mortar_and_pestle`, boolean): Enable or disable the module entirely.
  - *Use Technic Recipes* (`etc.mortar_and_pestle_technic_support`, boolean): Allow the mortar and pestle to accept technic grinder recipes.
  - *Hardness Multiplier* (`etc.mortar_and_pestle_hardness_mult`, floating-point): A multiplier for the average number of hits it will take to complete a recipe.
+ - *Enable Particles* (`etc.mortar_and_pestle_particles`, boolean): Enable or disable particles on hit with the pestle.
  - *Enable Dust* (`etc.load_module_dust`, boolean): Add a 'dust' node, which is made by crushing sand and can be used to create clay.
 
-_**Note:** the `etc.load_module_dust` setting pertains to a module called `dust`, which is not listed separately for brevity._
+_**Note:** the `etc.load_module_dust` setting pertains to a module called `dust`, which is not listed separately for the sake of brevity._
 
 ---
 ### Duststone
@@ -293,6 +301,7 @@ WARNING: This option may play weirdly with tools made via a compound parts syste
  - *Repair Factor* (`etc.anvil_repair_factor`, floating-point): A multiplier for the number of "uses" of a given tool that will be repaired with a single hammer blow.
  - *Wrought Iron Recipe* (`etc.anvil_use_wrought_iron`, boolean): Use a wrought iron block in the anvil recipe instead of a steel block if the Wrought Iron module is enabled.
  - *Forgiving Tool Breakage* (`etc.anvil_prevent_tool_break`, boolean): Digging tools will not be destroyed when they reach 0 durability, and will instead become useless until repaired.
+ - *Enable Particles* (`etc.anvil_particles`, boolean): Enable or disable particles on striking with the hammer.
 
 ---
 ### Chalk
@@ -454,6 +463,7 @@ The _watering can_ item wets soil faster, slightly boosts crop growth and preven
  - *Watering Can: Chance to Boost* (`etc.farming_tweaks_watering_can_boost_chances`, integer): The watering can has one in this many chances to boost the growth of a crop each step.
  - *Watering Can: Boost Limit* (`etc.farming_tweaks_watering_can_boost_max`, integer): The watering can will select this many crop nodes within its' radius to potentially boost each step.
  - *Watering Can: Exhaust Delay Limit* (`etc.farming_tweaks_watering_can_anti_exhaust_limit`, integer): The watering can will be capable of delaying the exhaustion of a compost node by at most this many cycles.
+ - *Enable Particles* (`etc.farming_tweaks_particles`, boolean): Enable or disable particles for growth boosting and the watering can.
 
 ---
 ### Wood Type Variants

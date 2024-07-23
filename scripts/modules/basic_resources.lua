@@ -149,12 +149,6 @@ if minetest.global_exists('default') then
 	}
 end
 
-minetest.register_craft {
-	type = 'shapeless',
-	recipe = {'default:gravel', 'default:gravel', 'default:gravel'},
-	output = 'default:flint 2'
-}
-
 etc.register_item('sandpaper_2', {
 	displayname = 'Sandpaper\n(Great, Medium Grit)',
 	inventory_image = 'etc_sandpaper_2.png'
@@ -184,5 +178,13 @@ if minetest.global_exists('default') then
 			{'default:paper', 'default:paper', 'default:paper'}
 		},
 		output = 'etc:sandpaper_3 3'
+	}
+end
+
+if minetest.settings: get_bool('etc.basic_resources_easy_flint', true) then
+	minetest.register_craft {
+		type = 'shapeless',
+		recipe = {'default:gravel', 'default:gravel', 'default:gravel'},
+		output = 'default:flint 2'
 	}
 end

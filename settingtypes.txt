@@ -1,8 +1,18 @@
+[General]
+
+# Disable all modules and only load the APIs and utilities depended on by other mods.
+# Boolean (true/false); default: false
+etc.library_mode (Library Mode) bool false
+
 [Basic Resources]
 
 # Enable or disable the module entirely.
 # Boolean (true/false); default: true
 etc.load_module_basic_resources (Load Module: Basic Resources) bool true
+
+# Enable crafting gravel into flint directly.
+# Boolean (true/false); default: true
+etc.basic_resources_easy_flint (Easy Flint Recipe) bool true
 
 [Craft Grid Tools]
 
@@ -67,7 +77,15 @@ etc.bees_wax_rate (Wax Generation Rate) float 1.0 0 10
 
 # How many visited flowers can the apiary remember.
 # Integer (0-10); default: 2
-etc.bees_memory_length (Apiary Memory Length) int 2 0 10
+etc.bees_memory_length (Apiary: Memory Length) int 2 0 10
+
+# This radius defines a cube in which flowers will be looked for.
+# Integer (0-100); default: 5
+etc.bees_search_range (Apiary: Search Radius) int 5 0 100
+
+# How many units for wax and honey (each) a single apiary box can hold. A double box holds twice as much.
+# Integer (0-100000); default: 1000
+etc.bees_capacity (Apiary: Capacity) int 1000 0 100000
 
 [Gems]
 
@@ -109,6 +127,10 @@ etc.mortar_and_pestle_technic_support (Use Technic Recipes) bool true
 # Floating-point (0.0-10.0); default: 1.0
 etc.mortar_and_pestle_hardness_mult (Hardness Multiplier) float 1.0 0 10
 
+# Enable or disable particles on hit with the pestle.
+# Boolean (true/false); default: true
+etc.mortar_and_pestle_particles (Enable Particles) bool true
+
 # Add a 'dust' node, which is made by crushing sand and can be used to create clay.
 # Boolean (true/false); default: true
 etc.load_module_dust (Enable Dust) bool true
@@ -147,6 +169,10 @@ etc.anvil_use_wrought_iron (Wrought Iron Recipe) bool true
 # Warning: special tools (e.g. upgradeable tools, tools made from multi-part systems) might behave weirdly upon breaking!
 # Boolean (true/false); default: true
 etc.anvil_prevent_tool_break (Forgiving Tool Breakage) bool true
+
+# Enable or disable particles on striking with the hammer.
+# Boolean (true/false); default: true
+etc.anvil_particles (Enable Particles) bool true
 
 [Chalk]
 
@@ -360,6 +386,10 @@ etc.farming_tweaks_watering_can_boost_max (Watering Can: Boost Limit) int 3 0 9
 # Set to 0 to disable exhaustion prevention.
 # Integer (0-1000); default: 4
 etc.farming_tweaks_watering_can_anti_exhaust_limit (Watering Can: Exhaust Delay Limit) int 4 0 1000
+
+# Enable or disable particles for growth boosting and the watering can.
+# Boolean (true/false); default: true
+etc.farming_tweaks_particles (Enable Particles) bool true
 
 [Wood Type Variants]
 

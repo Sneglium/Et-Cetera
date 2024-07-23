@@ -4,6 +4,7 @@ local repair_hammer = minetest.settings: get_bool('etc.anvil_circular_repair', f
 local repair_mult = minetest.settings: get('etc.anvil_repair_factor') or 4
 local wrought_iron = minetest.settings: get_bool('etc.anvil_use_wrought_iron', true)
 local no_break = minetest.settings: get_bool('etc.anvil_prevent_tool_break', true)
+local particles = minetest.settings: get_bool('etc.anvil_particles', true)
 
 etc.anvil_recipes = {}
 
@@ -212,7 +213,7 @@ etc.register_node('anvil', {
 					meta: set_int('progress', meta: get_int('progress') + 1)
 					etc.update_item_display(pos, stack, nil, 'random_flat')
 					
-					if default then
+					if default and particles then
 						for i = 1, 5 do
 							minetest.add_particle {
 								pos = pos,
@@ -263,17 +264,19 @@ etc.register_node('anvil', {
 						
 						minetest.sound_play({name = 'etc_anvil'}, {pos = pos, max_hear_distance = 16, gain = 1.2}, true)
 						
-						for i = 1, 5 do
-							minetest.add_particle {
-								pos = pos + vector.new(0, 0.35, 0),
-								velocity = vector.new((math.random()-0.5)*2, 3.5, (math.random()-0.5)*2),
-								acceleration = vector.new(0, -9.8, 0),
-								expirationtime = 2.5,
-								size = 1.5,
-								texture = 'etc_anvil_spark.png',
-								glow = 8,
-								blend = 'add',
-							}
+						if particles then
+							for i = 1, 5 do
+								minetest.add_particle {
+									pos = pos + vector.new(0, 0.35, 0),
+									velocity = vector.new((math.random()-0.5)*2, 3.5, (math.random()-0.5)*2),
+									acceleration = vector.new(0, -9.8, 0),
+									expirationtime = 2.5,
+									size = 1.5,
+									texture = 'etc_anvil_spark.png',
+									glow = 8,
+									blend = 'add',
+								}
+							end
 						end
 						
 						local repair = math.ceil((65535 / uses) * repair_mult)

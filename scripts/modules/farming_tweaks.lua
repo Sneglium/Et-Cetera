@@ -21,6 +21,7 @@ local module = {
 }
 
 local hoe_harvest = minetest.settings: get_bool('etc.farming_tweaks_hoe_harvest', true)
+local particles = minetest.settings: get_bool('etc.farming_tweaks_particles', true)
 
 local function plant_harvest (pos, plant, replace_plant, seed, guide, clicker)
 	if minetest.is_protected(pos, clicker: get_player_name()) then
@@ -118,17 +119,19 @@ local function boost_growth (pos)
 		end
 		minetest.swap_node(pos, node)
 		
-		for i = 1, 8 do
-			local vel = math.random()+0.5
-			minetest.add_particle {
-				pos = pos + vector.new(math.random()-0.5, 0, math.random()-0.5),
-				velocity = vector.new(0, vel, 0),
-				acceleration = vector.new(0, -1, 0),
-				expirationtime = vel,
-				size = vel*1.5,
-				glow = 8,
-				texture = 'etc_growth_particle.png'
-			}
+		if particles then
+			for i = 1, 8 do
+				local vel = math.random()+0.5
+				minetest.add_particle {
+					pos = pos + vector.new(math.random()-0.5, 0, math.random()-0.5),
+					velocity = vector.new(0, vel, 0),
+					acceleration = vector.new(0, -1, 0),
+					expirationtime = vel,
+					size = vel*1.5,
+					glow = 8,
+					texture = 'etc_growth_particle.png'
+				}
+			end
 		end
 		
 		return success
@@ -682,18 +685,20 @@ if minetest.settings: get_bool('etc.farming_tweaks_watering_can', true) then
 						watering_can_sound[player: get_player_name()] = {handle = handle, age = 0}
 					end
 					
-					for i = 1, 8 do
-						local vel = (player: get_look_dir() * 1.5) + vector.new(((math.random() - 0.5) * 1.5), 0, ((math.random() - 0.5) * 1.5))
-						minetest.add_particle {
-							pos = player: get_pos() + vector.new(0, 1.3, 0) + (player: get_look_dir() * 0.5),
-							velocity = vector.new(vel.x, 0, vel.z),
-							acceleration = vector.new(0, -9.8, 0),
-							expirationtime = math.random()*3,
-							size = math.random()*1.5,
-							texture = 'etc_water_particle.png',
-							collisiondetection = true,
-							bounce = {min = 0, max = 0.5, bias = 1}
-						}
+					if particles then
+						for i = 1, 8 do
+							local vel = (player: get_look_dir() * 1.5) + vector.new(((math.random() - 0.5) * 1.5), 0, ((math.random() - 0.5) * 1.5))
+							minetest.add_particle {
+								pos = player: get_pos() + vector.new(0, 1.3, 0) + (player: get_look_dir() * 0.5),
+								velocity = vector.new(vel.x, 0, vel.z),
+								acceleration = vector.new(0, -9.8, 0),
+								expirationtime = math.random()*3,
+								size = math.random()*1.5,
+								texture = 'etc_water_particle.png',
+								collisiondetection = true,
+								bounce = {min = 0, max = 0.5, bias = 1}
+							}
+						end
 					end
 				else
 					local sound = watering_can_sound[player: get_player_name()]

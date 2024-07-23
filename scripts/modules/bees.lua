@@ -5,6 +5,8 @@ local honey_rate = minetest.settings: get 'etc.bees_honey_rate' or 1
 local wax_rate = minetest.settings: get 'etc.bees_wax_rate' or 1
 
 local memory_length = minetest.settings: get 'etc.bees_memory_length' or 2
+local search_range = minetest.settings: get 'etc.bees_search_range' or 5
+local capacity = minetest.settings: get 'etc.bees_capacity' or 1000
 
 etc.register_node('bee', {
 	displayname = 'Honey Bee',
@@ -264,7 +266,7 @@ end
 
 local function get_apiary_infotext (pos)
 	local meta = minetest.get_meta(pos)
-	local limit = minetest.get_node(pos).name == 'etcetera:apiary_half' and '1000' or '2000'
+	local limit = capacity * (minetest.get_node(pos).name == 'etcetera:apiary_half' and 1 or 2)
 	
 	meta: set_string('infotext', table.concat {
 		'Honey: '..meta: get_int 'honey' or 0,
@@ -351,7 +353,7 @@ local function apiary_on_timer (pos, elapsed)
 	
 	if minetest.get_node_light(pos) >= 11 and minetest.get_timeofday() > 0.2 and minetest.get_timeofday() < 0.8 then
 		minetest.sound_play({name = 'etc_bees'}, {pos = pos})
-		local offset_vec = vector.new(5, 5, 5)
+		local offset_vec = vector.new(search_range, search_range, search_range)
 		local flower_positions = minetest.find_nodes_in_area_under_air(pos + offset_vec, pos - offset_vec, 'group:flower')
 		
 		local selected_flower_pos
@@ -368,12 +370,12 @@ local function apiary_on_timer (pos, elapsed)
 		
 		if selected_flower_pos then
 			local new_honey = node == 'etcetera:apiary_full' and math.random(12, 24) or math.random(6, 12)
-			meta: set_int('honey', math.min((meta: get_int 'honey' or 0) + math.ceil(new_honey * honey_rate), node == 'etcetera:apiary_half' and 1000 or 2000))
+			meta: set_int('honey', math.min((meta: get_int 'honey' or 0) + math.ceil(new_honey * honey_rate), capacity * (minetest.get_node(pos).name == 'etcetera:apiary_half' and 1 or 2)))
 		end
 	end
 	
 	local new_wax = node == 'etcetera:apiary_full' and math.random(12, 24) or math.random(6, 12)
-	meta: set_int('wax', math.min((meta: get_int 'wax' or 0) + math.ceil(new_wax * wax_rate), node == 'etcetera:apiary_half' and 1000 or 2000))
+	meta: set_int('wax', math.min((meta: get_int 'wax' or 0) + math.ceil(new_wax * wax_rate), capacity * (minetest.get_node(pos).name == 'etcetera:apiary_half' and 1 or 2)))
 	
 	get_apiary_infotext(pos)
 	

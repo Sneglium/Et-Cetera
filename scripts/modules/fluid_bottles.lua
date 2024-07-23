@@ -78,6 +78,12 @@ if minetest.settings: get_bool('etc.fluid_bottles_lava_bottle', true) then
 				
 				if minetest.get_node(ent: get_pos()).name and minetest.registered_nodes[minetest.get_node(ent: get_pos()).name].walkable then
 					local pos = minetest.find_node_near(ent: get_pos(), 1, 'air')
+					
+					if not self._owner or minetest.is_protected(pos, self._owner) then
+						ent: remove()
+						return
+					end
+					
 					if pos then
 						minetest.set_node(pos, {name = 'fire:basic_flame'})
 					end
@@ -96,7 +102,10 @@ if minetest.settings: get_bool('etc.fluid_bottles_lava_bottle', true) then
 			local obj = minetest.add_entity(pos_offset, 'etcetera:lava_bottle')
 			obj: add_velocity(user: get_velocity() + user: get_look_dir() * 20)
 			obj: set_acceleration(user: get_look_dir() * -2 + vector.new(0, -15, 0))
-
+			
+			local luaent = obj: get_luaentity()
+			luaent._owner = user: get_player_name()
+			
 			itemstack: take_item(1)
 			return itemstack
 		end

@@ -23,6 +23,10 @@ local module = {
 local hoe_harvest = minetest.settings: get_bool('etc.farming_tweaks_hoe_harvest', true)
 
 local function plant_harvest (pos, plant, replace_plant, seed, guide, clicker)
+	if minetest.is_protected(pos, clicker: get_player_name()) then
+		return
+	end
+	
 	local drops = minetest.get_node_drops(plant)
 	local had_seed = false
 	
@@ -302,6 +306,11 @@ if minetest.settings: get_bool('etc.farming_tweaks_compost', true) then
 			wield_image = 'etc_trowel.png^[transformFX',
 			on_use = function (itemstack, user, pointed_thing)
 				local pos = pointed_thing.under
+				
+				if minetest.is_protected(pos, user: get_player_name()) then
+					return itemstack
+				end
+				
 				local node = minetest.get_node(pos)
 				
 				local inv = user: get_inventory()
@@ -469,6 +478,10 @@ if minetest.settings: get_bool('etc.farming_tweaks_compost', true) then
 		end,
 		
 		on_rightclick = function (pos, node, clicker, itemstack)
+			if minetest.is_protected(pos, clicker: get_player_name()) then
+				return itemstack
+			end
+			
 			local compost = module.compost_values[itemstack: get_name()]
 			
 			local meta = minetest.get_meta(pos)
@@ -487,6 +500,10 @@ if minetest.settings: get_bool('etc.farming_tweaks_compost', true) then
 		end,
 		
 		on_punch = function (pos, node, puncher, pointed_thing)
+			if minetest.is_protected(pos, puncher: get_player_name()) then
+				return false
+			end
+			
 			local itemdef = puncher: get_wielded_item(): get_definition()
 			
 			if itemdef.groups and itemdef.groups.shovel then
@@ -613,6 +630,11 @@ if minetest.settings: get_bool('etc.farming_tweaks_watering_can', true) then
 				local water = meta: get_int 'water' - 1
 				if water >= 0 then
 					local water_pos = pointed and pointed.under or player: get_pos()
+					
+					if minetest.is_protected(water_pos, player: get_player_name()) then
+						return
+					end
+					
 					local add_vec = vector.new(1, 0, 1)
 					local crops = minetest.find_nodes_in_area(water_pos + add_vec, water_pos - add_vec, 'group:crop')
 					

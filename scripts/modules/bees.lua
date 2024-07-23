@@ -204,6 +204,11 @@ etc.register_item('beeswax', {
 	inventory_image = 'etc_beeswax.png',
 	on_use = etc.modules.corrosion and function (itemstack, user, pointed_thing)
 		local pos = pointed_thing.under
+		
+		if minetest.is_protected(pos, user: get_player_name()) then
+			return itemstack
+		end
+		
 		local node = minetest.get_node(pos)
 		
 		if etc.modules.corrosion.corrosion_nodes[node.name] then
@@ -241,6 +246,10 @@ minetest.register_craft {
 }
 
 local function apiary_on_rightclick (pos, node, clicker, itemstack, pointed_thing)
+	if minetest.is_protected(pos, clicker: get_player_name()) then
+		return itemstack
+	end
+	
 	if itemstack: get_name() == node.name then
 		local new_node = table.copy(node)
 		new_node.name = 'etcetera:apiary_full'
@@ -269,6 +278,11 @@ minetest.override_item('vessels:glass_bottle', {
 	on_use = function (itemstack, user, pointed_thing)
 		if pointed_thing.type == 'node' then
 			local pos = pointed_thing.under
+			
+			if minetest.is_protected(pos, user: get_player_name()) then
+				return itemstack
+			end
+			
 			local node = minetest.get_node(pos)
 			
 			if node.name == 'etcetera:apiary_half' or node.name == 'etcetera:apiary_full' then
@@ -299,6 +313,11 @@ minetest.override_item('etcetera:ct_knife', {
 	on_use = function (itemstack, user, pointed_thing)
 		if pointed_thing.type == 'node' then
 			local pos = pointed_thing.under
+			
+			if minetest.is_protected(pos, user: get_player_name()) then
+				return itemstack
+			end
+			
 			local node = minetest.get_node(pos)
 			
 			if node.name == 'etcetera:apiary_half' or node.name == 'etcetera:apiary_full' then

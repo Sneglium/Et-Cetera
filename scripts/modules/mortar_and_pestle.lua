@@ -116,6 +116,10 @@ etc.register_node('mortar', {
 	end,
 	
 	on_dig = function (pos, node, digger)
+		if minetest.is_protected(pos, digger: get_player_name()) then
+			return false
+		end
+		
 		etc.remove_item_display(pos)
 		local meta = minetest.get_meta(pos)
 		local inv = meta: get_inventory()
@@ -131,6 +135,10 @@ etc.register_node('mortar', {
 	end, 
 	 -- the wielded itemstack shenanigans at the end of this function are necessary to avoid any items being deleted or duped
 	on_rightclick = function (pos, node, clicker, itemstack, pointed_thing)
+		if minetest.is_protected(pos, clicker: get_player_name()) then
+			return itemstack
+		end
+		
 		local meta = minetest.get_meta(pos)
 		local inv = meta: get_inventory()
 		
@@ -159,6 +167,10 @@ etc.register_node('mortar', {
 	end,
 	
 	on_punch = function (pos, node, puncher, pointed_thing)
+		if minetest.is_protected(pos, puncher: get_player_name()) then
+			return false
+		end
+		
 		local meta = minetest.get_meta(pos)
 		local inv = meta: get_inventory()
 		

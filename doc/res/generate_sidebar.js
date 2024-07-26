@@ -5,6 +5,9 @@ const index = [
 	['Validation Utils', 'pages/err_utils.html'],
 	['Item/Stack Utils', 'pages/item_utils.html'],
 	['Player Utilities', 'pages/player_utils.html'],
+	['Math Utilities', 'pages/math_utils.html'],
+	['Text Utilities', 'pages/text_utils.html'],
+	['Node Utilities', 'pages/node_utils.html'],
 ];
 
 function sidebar (current_file, lookup_prefix) {

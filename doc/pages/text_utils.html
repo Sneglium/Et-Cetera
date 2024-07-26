@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<head>
+<link rel="stylesheet" href="../res/main.css">
+<meta charset="UTF-8">
+</head>
+
+<body>
+<script src="../res/generate_sidebar.js"></script>
+<script>
+sidebar('pages/text_utils.html', '../')
+</script>
+
+<div id='mainDoc'>
+<h1> Text Manipulation Utilities </h1>
+<hr>
+<p>
+	The functions in this category are useful for the manipulation of text pre-translation. Note that translating the output of these functions may not work as expected; you will need to supply the output of the function in the <code>.tr</code> file as the key, rather than the input.
+</p>
+
+<p>
+	<h3>etc.wrap_text</h3>
+	<b>Usage:</b> <code>etc.wrap_text(text, limit[, hard])</code>
+	<br>
+	&emsp;A 'smarter' text wrapping function that takes into account the characters in the text and behaves slightly differently depending on the characters around the split point. By default, it will not break words apart. Set <code>hard</code> to true in order to allow breaking words.
+</p>
+<p>
+	<h4>List of Character Rules</h4>
+	<ul>
+		<li><code> </code> (space): The text is allowed to split here, in which case the space will be removed and replaced by a newline.</li>
+		<li><code>-</code>: The text will split after the character. If the next character is space it will be removed.</li>
+		<li><code>.</code>: The text will split after the character. If the next character is space it will be removed.</li>
+		<li><code>!</code>: The text will split after the character. If the next character is space it will be removed.</li>
+		<li><code>?</code>: The text will split after the character. If the next character is space it will be removed.</li>
+		<li><code>,</code>: The text will split after the character. If the next character is space it will be removed.</li>
+		<li><code>(</code>: The text will split before the character.</li>
+	</ul>
+</p>
+
+<p>
+	<h3>etc.format_as_title</h3>
+	<b>Usage:</b> <code>etc.format_as_title(text[, capitalize_all])</code>
+	<br>
+	&emsp;Capitalizes the first letter of each word in a string of text. By default, certain words will not be capitalized unless they appear at the start of the text. setting <code>capitalize_all</code> to true disables this behaviour.
+</p>
+<p>
+	<h4>List of Words Not Capitalized by Default:</h4>
+	<ul>
+		<li><code>a</code></li>
+		<li><code>an</code></li>
+		<li><code>and</code></li>
+		<li><code>as</code></li>
+		<li><code>at</code></li>
+		<li><code>but</code></li>
+		<li><code>by</code></li>
+		<li><code>for</code></li>
+		<li><code>from</code></li>
+		<li><code>if</code></li>
+		<li><code>in</code></li>
+		<li><code>nor</code></li>
+		<li><code>of</code></li>
+		<li><code>on</code></li>
+		<li><code>or</code></li>
+		<li><code>the</code></li>
+		<li><code>up</code></li>
+	</ul>
+</p>
+</body>

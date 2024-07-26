@@ -516,11 +516,11 @@ All of these can be configured.
 ```
 Et Cetera (etcetera) (c) 2024 Hagatha (Sneglium)  
 
-License of code & data files (*.lua, *.conf, *.txt, *.tr, *.md, *.html): Apache-2.0  
+License of code & data files (*.lua, *.conf, *.txt, *.html, *.css, *.js): Apache-2.0  
 https://www.apache.org/licenses/LICENSE-2.0.txt  
 see LICENSING/code.LICENSE  
 
-License of media and other files (*.obj, *.ogg, *.png): Attribution-ShareAlike 4.0 International  
+License of media and other files (*.obj, *.ogg, *.png, *.tr, *.md): Attribution-ShareAlike 4.0 International  
 https://creativecommons.org/licenses/by-sa/4.0/legalcode.txt  
 see LICENSING/media.LICENSE  
 

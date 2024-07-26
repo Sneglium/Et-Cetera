@@ -1,7 +1,8 @@
 
 etc.register_item('slimeball', {
 	displayname = 'Slime Ball',
-	inventory_image = 'etc_slimeball.png'
+	inventory_image = 'etc_slimeball.png',
+	groups = {slime = 1, glue = 1, sticky = 1}
 })
 
 minetest.register_craft {

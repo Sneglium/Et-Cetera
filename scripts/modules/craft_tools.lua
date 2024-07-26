@@ -29,6 +29,12 @@ etc.register_tool('ct_knife', {
 	inventory_image = 'etc_knife.png'
 })
 
+etc.register_tool('ct_saw', {
+	displayname = 'Framing Saw',
+	description = 'Will not be consumed in recipes until durability runs out.',
+	inventory_image = 'etc_saw.png'
+})
+
 local uses = minetest.settings: get 'etc.craft_tools_num_uses' or 150
 
 local ct_tools = {
@@ -96,5 +102,14 @@ if minetest.global_exists('default') then
 			{'', 'default:stick', ''}
 		},
 		output = 'etc:ct_knife',
+	}
+	
+	minetest.register_craft {
+		recipe = {
+			{'', 'etc:ct_hammer', 'default:steel_ingot'},
+			{'default:stick', 'default:steel_ingot', 'etc:ct_file'},
+			{'', 'default:stick', ''}
+		},
+		output = 'etc:ct_saw',
 	}
 end

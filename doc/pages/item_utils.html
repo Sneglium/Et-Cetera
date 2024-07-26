@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<head>
+<link rel="stylesheet" href="../res/main.css">
+<meta charset="UTF-8">
+</head>
+
+<body>
+<script src="../res/generate_sidebar.js"></script>
+<script>
+sidebar('pages/item_utils.html', '../')
+</script>
+
+<div id='mainDoc'>
+<h1> Item &amp; Itemstack Utilities </h1>
+<hr>
+<p>
+	The functions in this category are helpful for manipulating itemstacks/strings and item or tool definitions.
+</p>
+
+<p>
+	<h3>etc.split_oversized_stack</h3>
+	<b>Usage:</b> <code>etc.split_oversized_stack(stack)</code>
+	<br>
+	&emsp;Takes a single ItemStack and returns an array of ItemStacks that resulted from dividing it up based on its' <code>stack_max</code> definition. If the stack was already smaller than or equal in size to <code>stack_max</code>, the array will only contain the original ItemStack.
+</p>
+
+<p>
+	<h3>etc.give_or_drop</h3>
+	<b>Usage:</b> <code>etc.give_or_drop(player, pos, itemstack)</code>
+	<br>
+	&emsp;Attempts to insert the ItemStack into the the <code>player</code>'s <code>main</code> inventory list. If the player doesn't have room for the item, it will instead be dropped at <code>pos</code> in the world. Note that this function calls <code>etc.split_oversized_stack</code> before attempting to give the item(s) to the player, so they may receive some but not all of the items if the stack was larger than allowed.
+</p>
+
+<p>
+	<h3>etc.sum_uses</h3>
+	<b>Usage:</b> <code>etc.sum_uses(...)</code>
+	<br>
+	&emsp;Returns the sum of all the <code>uses</code> across all the digging groups in the <code>tool_capabilities</code> of the specified items. Items must be in the form of an itemstring.
+</p>
+
+<p>
+	<h3>etc.average_uses</h3>
+	<b>Usage:</b> <code>etc.average_uses(...)</code>
+	<br>
+	&emsp;Similar to <code>sum_uses</code> but divides the result by the total number of digging groups found. If a tool has no capabilities, it will count as one group but add no uses, meaning the end result will be divided by one more than usual. 
+</p>
+</body>

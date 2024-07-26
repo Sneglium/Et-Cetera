@@ -1,7 +1,8 @@
 
 etc.register_item('pine_tar', {
 	displayname = 'Pine Tar',
-	inventory_image = 'etc_pine_tar.png'
+	inventory_image = 'etc_pine_tar.png',
+	groups = {glue = 1, tar = 1}
 })
 
 if minetest.global_exists('default') then
@@ -14,7 +15,8 @@ end
 
 etc.register_item('charcoal', {
 	displayname = 'Charcoal',
-	inventory_image = 'etc_charcoal.png'
+	inventory_image = 'etc_charcoal.png',
+	groups = {coal = 1, charcoal = 1, flammable = 3}
 })
 
 if minetest.global_exists('default') then
@@ -39,7 +41,8 @@ minetest.register_craft({
 
 etc.register_item('pine_pitch', {
 	displayname = 'Pine Pitch',
-	inventory_image = 'etc_pine_pitch.png'
+	inventory_image = 'etc_pine_pitch.png',
+	groups = {glue = 1, tar = 1}
 })
 
 minetest.register_craft {
@@ -50,7 +53,8 @@ minetest.register_craft {
 
 etc.register_item('acid', {
 	displayname = 'Acidic Extract',
-	inventory_image = 'etc_acid.png'
+	inventory_image = 'etc_acid.png',
+	groups = {acid = 1}
 })
 
 if minetest.global_exists('default') then
@@ -63,7 +67,8 @@ end
 
 etc.register_item('algin', {
 	displayname = 'Algin',
-	inventory_image = 'etc_algin.png'
+	inventory_image = 'etc_algin.png',
+	groups = {glue = 1, gelatin = 1, jelly = 1, sticky = 1}
 })
 
 if minetest.global_exists('default') then
@@ -76,12 +81,14 @@ end
 
 etc.register_item('string', {
 	displayname = 'Rough Twine',
-	inventory_image = 'etc_string.png'
+	inventory_image = 'etc_string.png',
+	groups= {string = 1, rope = 1}
 })
 
 etc.register_item('canvas', {
 	displayname = 'Heavy Canvas',
-	inventory_image = 'etc_canvas.png'
+	inventory_image = 'etc_canvas.png',
+	groups = {cloth = 1, canvas = 1, fabric = 1}
 })
 
 minetest.register_craft {
@@ -93,7 +100,8 @@ minetest.register_craft {
 
 etc.register_item('canvas_tarred', {
 	displayname = 'Oilcloth',
-	inventory_image = 'etc_oilcloth.png'
+	inventory_image = 'etc_oilcloth.png',
+	groups = {cloth = 1, canvas = 1, fabric = 1}
 })
 
 minetest.register_craft {

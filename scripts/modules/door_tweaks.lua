@@ -33,6 +33,8 @@ if minetest.settings: get_bool('etc.door_tweaks_double_doors', true) then
 	function doors.door_toggle (pos, node, clicker)
 		local first_toggle = old_door_toggle(pos, node, clicker)
 		
+		if (not pos) or (not node) or (not clicker) then return false end
+		
 		if first_toggle and door_dir_map[node.param2] then
 			local meta = minetest.get_meta(pos)
 			local newpos
@@ -70,6 +72,8 @@ if minetest.settings: get_bool('etc.door_tweaks_connected_trapdoors', true) then
 	local old_trapdoor_toggle = doors.trapdoor_toggle
 	function doors.trapdoor_toggle (pos, node, clicker)
 		local first_toggle = old_trapdoor_toggle(pos, node, clicker)
+		
+		if (not pos) or (not node) or (not clicker) then return false end
 		
 		if first_toggle ~= false then
 			local pos_add = pos + vector.new(trapdoor_radius, 0, trapdoor_radius)

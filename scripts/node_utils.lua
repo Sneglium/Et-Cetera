@@ -57,20 +57,20 @@ end
 -- flips a single box along an axis
 -- <axis> is either 'x', 'y', or 'z'
 function etc.flip_nodebox (box, axis)
-	local box = table.copy(box)
+	local box2 = table.copy(box)
 	
 	if axis == 'x' then
-		box[1] = -box[4]
-		box[4] = -box[1]
+		box2[1] = -box[4]
+		box2[4] = -box[1]
 	elseif axis == 'y' then
-		box[2] = -box[5]
-		box[5] = -box[2]
+		box2[2] = -box[5]
+		box2[5] = -box[2]
 	else
-		box[3] = -box[6]
-		box[6] = -box[3]
+		box2[3] = -box[6]
+		box2[6] = -box[3]
 	end
 	
-	return box
+	return box2
 end
 
 -- Same as above but can handle either a single box or a list of boxes

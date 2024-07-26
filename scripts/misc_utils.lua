@@ -31,11 +31,11 @@ function etc.check_depends (...)
 		local key = depend: sub(2,-1)
 		
 		if first_char == '$' then
-			if not rawget(_G, key) then return false, key end
+			if not rawget(_G, key) then return false, depend end
 		elseif first_char == '@' then
-			if not minetest.registered_items[key] or minetest.registered_aliases[key] then return false, key end
+			if not minetest.registered_items[key] or minetest.registered_aliases[key] then return false, depend end
 		elseif first_char == '&' then
-			if not etc.modules[key] then return false, key end
+			if not etc.modules[key] then return false, depend end
 		else
 			if not minetest.get_modpath(depend) then return false, depend end
 		end
@@ -155,7 +155,7 @@ function etc.is_integer (...)
 	
 	for i = 1, select('#', ...) do
 		local n = select(i, ...)
-		if type(n) ~= 'number' or math.abs(n) ~= n then return false end
+		if type(n) ~= 'number' or math.floor(n) ~= n then return false end
 	end
 	
 	return true
@@ -216,7 +216,7 @@ end
 -- Does NOT check if they are continuous, so not properly a mathematical array
 function etc.is_array (table)
 	for key, _ in pairs(table) do
-		if type(key) ~= 'number' then return false end
+		if type(key) ~= 'number' or math.floor(key) ~= key then return false end
 	end
 	
 	return true
@@ -374,12 +374,12 @@ function etc.average_uses (...)
 		def = minetest.registered_items[toolname].tool_capabilities and minetest.registered_items[toolname].tool_capabilities.groupcaps
 		
 		if not def then
-			return 1
-		end
-		
-		for __, group in pairs(def) do
 			num_groups = num_groups + 1
-			total_uses = total_uses + group.uses and group.uses * group.maxlevel  or 0
+		else
+			for __, group in pairs(def) do
+				num_groups = num_groups + 1
+				total_uses = total_uses + group.uses and group.uses * group.maxlevel or 0
+			end
 		end
 	end
 	
@@ -428,4 +428,10 @@ function etc.get_player_pointed_thing (player, objects, liquids)
 	local ray = Raycast(pos1, pos2, objects, liquids); ray: next()
 	
 	return ray: next()
+end
+
+function etc.set_player_look_dir (player, dir)
+	dir = dir: normalize()
+	player: set_look_horizontal(math.atan2(-dir.x, dir.z))
+	player: set_look_vertical(math.asin(-dir.y))
 end

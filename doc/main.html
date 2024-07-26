@@ -7,7 +7,7 @@
 <body>
 <script src="res/generate_sidebar.js"></script>
 <script>
-sidebar('main.html', 'pages/')
+sidebar('main.html', '')
 </script>
 
 <div id='mainDoc'>
@@ -16,6 +16,9 @@ sidebar('main.html', 'pages/')
 <p>
 	This file is the index for the official Et Cetera API documentation. This does not include mini-APIs provided by modules; every util mentioned here is always enabled, as opposed to module APIs which can be disabled or have unsatisfied dependencies.
 	<br>
+	Additionally, features that are not considered stable and in a finished state (as well as those that are meant only for internal use) are intentionally left out.
+</p>
+<p>
 	<b>Useful Links</b>
 	<ul>
 		<li><b>Forum Page: [NYI]<b></li>
@@ -28,7 +31,7 @@ sidebar('main.html', 'pages/')
 
 <script>
 	const newpara = document.createElement('div');
-	newpara.innerHTML = 'The sidebar to the left can be used to navigate between documentation files.';
+	newpara.innerHTML = 'The sidebar to the left can be used to navigate between documentation categories.';
 	document.getElementById('mainDoc').appendChild(newpara);
 </script>
 

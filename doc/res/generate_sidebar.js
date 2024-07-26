@@ -8,6 +8,7 @@ const index = [
 	['Math Utilities', 'pages/math_utils.html'],
 	['Text Utilities', 'pages/text_utils.html'],
 	['Node Utilities', 'pages/node_utils.html'],
+	['Display Entities', 'pages/display_ents.html'],
 ];
 
 function sidebar (current_file, lookup_prefix) {

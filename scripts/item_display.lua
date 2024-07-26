@@ -67,7 +67,8 @@ function etc.update_item_display (pos, item, scale, rotation)
 			entity: set_properties(properties)
 			
 			if rotation == 'random_flat' then
-				entity: set_rotation({x=math.pi/2, y=math.random()*math.pi*2, z=0})
+				local rot = entity: get_rotation()
+				entity: set_rotation({x=rot.x, y=math.random()*math.pi*2, z=rot.z})
 			elseif rotation ~= nil then
 				entity: set_rotation(rotation)
 			end

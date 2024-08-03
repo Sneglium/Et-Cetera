@@ -11,11 +11,6 @@ function etc.ID (...) return ... end
 -- Reverses its' inputs
 function etc.INV (a, b) return b, a end
 
--- Replaces functions that aren't allowed to run after modloading is finished
-function etc.DEAD (oldname)
-	etc.log.fatal('Function or method "' .. oldname .. '" must be used during mod loading!')
-end
-
 -- MODULE & MOD MANAGEMENT
 
 -- Tests for various kinds of dependency condition and returns true if all are satisfied.

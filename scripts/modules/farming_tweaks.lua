@@ -727,6 +727,7 @@ if minetest.settings: get_bool('etc.farming_tweaks_watering_can', true) then
 		inventory_image = 'etc_watering_can.png',
 		liquids_pointable = true,
 		on_use = etc.ID,
+		groups = {no_repair = 1},
 		wear_color = {
 		blend = 'linear',
 			color_stops = {

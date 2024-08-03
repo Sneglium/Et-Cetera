@@ -88,7 +88,8 @@ local function make_chalk (colorname, color, displayname, item_overlay)
 		description = 'Used to draw symbols on hard nodes.' .. (free_switching and ' Redrawing a symbol of the same color will not use durability.' or ''),
 		stats = '<LMB> to draw a symbol',
 		inventory_image = 'etc_chalk.png^['..color..(item_overlay and '^'..item_overlay or ''),
-		on_use = chalk_on_use(colorname, color)
+		on_use = chalk_on_use(colorname, color),
+		groups = {no_repair = 1}
 	})
 	
 	for i = 1, #symbolmap do

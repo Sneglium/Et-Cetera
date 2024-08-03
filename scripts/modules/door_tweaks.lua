@@ -81,9 +81,11 @@ if minetest.settings: get_bool('etc.door_tweaks_connected_trapdoors', true) then
 			
 			local trapdoors = minetest.find_nodes_in_area(pos_add, pos_sub, node.name, true)
 			
-			for _, v in pairs(trapdoors[node.name]) do
-				if v ~= pos then
-					old_trapdoor_toggle(v, minetest.get_node(v), clicker)
+			if trapdoors[node.name] then
+				for _, v in pairs(trapdoors[node.name]) do
+					if v ~= pos then
+						old_trapdoor_toggle(v, minetest.get_node(v), clicker)
+					end
 				end
 			end
 		end

@@ -45,4 +45,11 @@ sidebar('pages/node_utils.html', '../')
 	&emsp;Behaves identically to <code>etc.flip_nodebox</code> except that <code>boxes</code> may either be a single Box as described above, or an array of boxes.
 </p>
 
+<p>
+	<h3>etc.copy_or_calculate_rotation</h3>
+	<b>Usage:</b> <code>etc.copy_or_calculate_rotation(itemstack, placer, pointed_thing)</code>
+	<br>
+	&emsp;A replacement for <code>minetest.rotate_node</code> that replicates the rotation of the node being pointed at by the player if their names match, unless the player is holding sneak. Intended to be used directly as the <code>on_place</code> callback of node definition.
+</p>
+
 </body>

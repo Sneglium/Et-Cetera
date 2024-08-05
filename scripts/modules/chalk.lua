@@ -83,7 +83,7 @@ local colormap = {
 local function make_chalk (colorname, color, displayname, item_overlay)
 	local color_name = colorname: sub(1,1): upper() .. colorname: sub(2,-1)
 	
-	etc.register_tool('chalk_' .. colorname, {
+	etc: register_tool('chalk_' .. colorname, {
 		displayname = displayname or color_name .. ' Chalk',
 		description = 'Used to draw symbols on hard nodes.' .. (free_switching and ' Redrawing a symbol of the same color will not use durability.' or ''),
 		stats = '<LMB> to draw a symbol',
@@ -93,7 +93,7 @@ local function make_chalk (colorname, color, displayname, item_overlay)
 	})
 	
 	for i = 1, #symbolmap do
-		etc.register_node('chalk_symbol_'..colorname..'_'..i, {
+		etc: register_node('chalk_symbol_'..colorname..'_'..i, {
 			tiles = {symbolmap[i]..'^['..color},
 			use_texture_alpha = 'blend',
 			drawtype = 'signlike',

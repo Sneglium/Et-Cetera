@@ -1,5 +1,5 @@
 
-etc.register_item('slimeball', {
+etc: register_item('slimeball', {
 	displayname = 'Slime Ball',
 	inventory_image = 'etc_slimeball.png',
 	groups = {slime = 1, glue = 1, sticky = 1}
@@ -11,7 +11,7 @@ minetest.register_craft {
 	output = 'etc:slimeball 2'
 }
 
-etc.register_node('slime_block', {
+etc: register_node('slime_block', {
 	displayname = 'Slime Block',
 	tiles = {{name = 'etc_slime_block.png', backface_culling = true}},
 	drawtype = 'mesh',

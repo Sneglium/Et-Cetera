@@ -1,64 +1,39 @@
 
-local function get_translator (modname)
-	local tl = minetest.get_translator(modname)
-	return function (text, color, ...)
-		return tl(text, ...)
-	end
-end
-
-local function get_statblock (stats, translate)
-	if type(stats) == 'table' then
-		local statline = ''
-		
-		for _, v in ipairs(stats) do
-			statline = statline .. minetest.colorize(etc.textcolors.statblock, '\n\t\u{2022} ') .. translate(tostring(v), 'statblock')
-		end
-		
-		return statline
+etc.register_mod_component('inherit_item', function (self, parent, id, new_def)
+	local parent_modname = parent: split ':' [1]
+	local parent_mod = etc.registered_mods[parent_modname]
+	if parent_mod and parent_mod.item_prototypes and parent_mod.item_prototypes[parent: split ':' [2]] then
+		local final_def = etc.merge_recursive(parent_mod.item_prototypes[parent: split ':' [2]], new_def)
+		minetest.register_item(self.name .. ':' .. id, final_def)
 	else
-		return minetest.colorize(etc.textcolors.statblock, '\n\t\u{2022} ') .. translate(tostring(stats), 'statblock')
+		local item = minetest.registered_items[parent]
+		etc.log.assert(item, 'Missing or invalid parent item for inherit')
+		
+		local final_def = etc.merge_recursive(item, new_def)
+		minetest.register_item(self.name .. ':' .. id, final_def)
 	end
-end
-
-function etc.create_wrappers (modname, ...)
-	local aliases = {...}
 	
-	local translate = etc.gettext[modname] or get_translator(modname) or etc.ID
-	
-	return function (id, def)
-		def.description = minetest.get_background_escape_sequence('#22242d')..(def.displayname and translate(def.displayname) or '').. (def.description and '\n'..translate(def.description, 'description') or '') .. (def.stats and get_statblock(def.stats, translate) or '')
-		
-		minetest.register_node(modname..':'.. id, def)
-		
-		for k, v in pairs(aliases) do
-			minetest.register_alias(v ..':'.. id, modname..':'.. id)
-		end
-		
-		minetest.register_alias(id, modname..':'.. id)
-	end,
-
-	function (id, def)
-		def.description = minetest.get_background_escape_sequence('#22242d')..(def.displayname and translate(def.displayname) or '').. (def.description and '\n'..translate(def.description, 'description') or '') .. (def.stats and get_statblock(def.stats, translate) or '')
-		
-		minetest.register_craftitem(modname..':'.. id, def)
-		
-		for k, v in pairs(aliases) do
-			minetest.register_alias(v ..':'.. id, modname..':'.. id)
-		end
-		
-		minetest.register_alias(id, modname..':'.. id)
-	end,
-	
-	function (id, def)
-		def.description = minetest.get_background_escape_sequence('#22242d')..(def.displayname and translate(def.displayname) or '').. (def.description and '\n'..translate(def.description, 'description') or '') .. (def.stats and get_statblock(def.stats, translate) or '')
-		
-		minetest.register_tool(modname..':'.. id, def)
-		
-		for k, v in pairs(aliases) do
-			minetest.register_alias(v ..':'.. id, modname..':'.. id)
-		end
-		
-		minetest.register_alias(id, modname..':'.. id)
+	for k, v in pairs(self.aliases) do
+		minetest.register_alias(v ..':'.. id, self.name..':'.. id)
 	end
-end
+	
+	minetest.register_alias(id, self.name..':'.. id)
+end)
 
+etc.register_mod_component('register_item_prototype', function (self, id, base_def)
+	self.item_prototypes = self.item_prototypes or {}
+	
+	etc.log.assert(base_def.type, 'Prototype base definition must contain a \'type\' field == "node" or "tool" or "craftitem" or "none"')
+	if base_def.type == 'craftitem' then base_def.type = 'craft' end
+	
+	self.item_prototypes[id] = base_def
+end)
+
+function etc.smart_override_item (item, redef)
+	local itemdef = table.copy(minetest.registered_items[item])
+	etc.log.assert(item, 'Missing or invalid parent item for override')
+	
+	itemdef.name = nil
+	itemdef.type = nil
+	minetest.override_item(item, etc.merge_recursive(itemdef, redef))
+end

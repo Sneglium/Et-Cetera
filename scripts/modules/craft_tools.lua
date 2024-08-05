@@ -1,35 +1,35 @@
 
-etc.register_tool('ct_file', {
+etc: register_tool('ct_file', {
 	displayname = 'Metal File',
 	description = 'Will not be consumed in recipes until durability runs out.',
 	inventory_image = 'etc_file.png',
 })
 
-etc.register_tool('ct_cutters', {
+etc: register_tool('ct_cutters', {
 	displayname = 'Metal Snips',
 	description = 'Will not be consumed in recipes until durability runs out.',
 	inventory_image = 'etc_cutters.png',
 })
 
-etc.register_tool('ct_drill', {
+etc: register_tool('ct_drill', {
 	displayname = 'Hand Drill',
 	description = 'Will not be consumed in recipes until durability runs out.',
 	inventory_image = 'etc_drill.png',
 })
 
-etc.register_tool('ct_hammer', {
+etc: register_tool('ct_hammer', {
 	displayname = 'Sheeting Hammer',
 	description = 'Will not be consumed in recipes until durability runs out.',
 	inventory_image = 'etc_hammer.png',
 })
 
-etc.register_tool('ct_knife', {
+etc: register_tool('ct_knife', {
 	displayname = 'Carving Knife',
 	description = 'Will not be consumed in recipes until durability runs out.',
 	inventory_image = 'etc_knife.png'
 })
 
-etc.register_tool('ct_saw', {
+etc: register_tool('ct_saw', {
 	displayname = 'Framing Saw',
 	description = 'Will not be consumed in recipes until durability runs out.',
 	inventory_image = 'etc_saw.png'

@@ -6,7 +6,7 @@ etc.bottle_fluids = {
 	['default:river_water_source'] = 'etc:bottle_water'
 }
 
-etc.register_node('bottle_water', {
+etc: register_node('bottle_water', {
 	displayname = 'Glass Bottle (Water)',
 	inventory_image = table.concat {
 		(retexture and 'etc_bottle_water.png' or 'etc_bottle_water_old.png'),
@@ -111,7 +111,7 @@ if minetest.settings: get_bool('etc.fluid_bottles_lava_bottle', true) then
 		end
 	end
 	
-	etc.register_node('bottle_lava', lava_bottle_def)
+	etc: register_node('bottle_lava', lava_bottle_def)
 end
 
 local old_on_use = minetest.registered_items['vessels:glass_bottle'].on_use

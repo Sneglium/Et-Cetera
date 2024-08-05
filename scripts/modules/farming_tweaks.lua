@@ -106,16 +106,15 @@ function module.register_plant (name_prefix, stages, seed, guide_node, compost_v
 	minetest.override_item(seed, {groups = groups})
 end
 
-local function boost_growth (pos)
+function module.boost_growth (pos)
 	local node = minetest.get_node(pos)
 	local plant = module.plants[node.name]
 	if type(plant) == 'string' then
 		node.name = plant
 		local plant_def = minetest.registered_nodes[plant]
-		local success = false
+		
 		if plant_def.place_param2 ~= nil and node.param2 ~= plant_def.place_param2 then
 			node.param2 = plant_def.place_param2
-			success = true
 		end
 		minetest.swap_node(pos, node)
 		
@@ -134,8 +133,9 @@ local function boost_growth (pos)
 			end
 		end
 		
-		return success
+		return true
 	end
+	return false
 end
 
 
@@ -214,7 +214,7 @@ if minetest.settings: get_bool('etc.farming_tweaks_compost', true) then
 	local function compost_on_timer (pos)
 		local name = minetest.get_node(pos).name
 		
-		local success = boost_growth(pos + vector.new(0, 1, 0))
+		local success = module.boost_growth(pos + vector.new(0, 1, 0))
 		
 		if success and should_exhaust() then
 			local meta = minetest.get_meta(pos)
@@ -231,7 +231,7 @@ if minetest.settings: get_bool('etc.farming_tweaks_compost', true) then
 		set_next_tick(pos, name == 'etcetera:compost_tilled' and 1.5 or 1)
 	end
 	
-	etc.register_node('compost', {
+	etc: register_node('compost', {
 		displayname = 'Compost',
 		description = 'Boosts growth of plants growing in it. '.. (compost_exhaust_chance ~=0 and 'Will eventually convert to regular soil.' or ''),
 		tiles = {'etc_compost.png'},
@@ -244,7 +244,7 @@ if minetest.settings: get_bool('etc.farming_tweaks_compost', true) then
 		}
 	})
 	
-	etc.register_node('compost_tilled', {
+	etc: register_node('compost_tilled', {
 		tiles = {'etc_compost.png^(farming_soil.png^[multiply:#746423)', 'etc_compost.png'},
 		drop = 'etcetera:compost',
 		groups = {crumbly=3, not_in_creative_inventory = 1, soil = 3, grassland = 1, field = 1},
@@ -258,7 +258,7 @@ if minetest.settings: get_bool('etc.farming_tweaks_compost', true) then
 		on_timer = compost_on_timer
 	})
 
-	etc.register_node('compost_tilled_wet', {
+	etc: register_node('compost_tilled_wet', {
 		tiles = {'etc_compost.png^(farming_soil_wet.png^[multiply:#746423)', 'etc_compost.png^farming_soil_wet_side.png'},
 		drop = 'etcetera:compost',
 		groups = {crumbly=3, not_in_creative_inventory = 1, soil = 3, wet = 1, grassland = 1, field = 1},
@@ -301,7 +301,7 @@ if minetest.settings: get_bool('etc.farming_tweaks_compost', true) then
 			['farming:desert_sand_soil_wet'] = 'etcetera:compost_tilled_wet'
 		}
 		
-		etc.register_tool('trowel', {
+		etc: register_tool('trowel', {
 			displayname = 'Trowel',
 			description = 'Used to swap dirt or farmland for compost without breaking the crop above.',
 			stats = '<LMB> on soil or the plant above it to swap for compost',
@@ -403,7 +403,7 @@ if minetest.settings: get_bool('etc.farming_tweaks_compost', true) then
 	
 	local compost_process_rate = minetest.settings: get('etc.farming_tweaks_compost_process_rate') or 1
 	
-	etc.register_node('composter', {
+	etc: register_node('composter', {
 		displayname = 'Compost Bin',
 		description = 'Converts plant material into compost over time.',
 		stats = {
@@ -646,7 +646,7 @@ if minetest.settings: get_bool('etc.farming_tweaks_watering_can', true) then
 						if boosted == boost_max then break end
 						local should_boost = math.random(1, boost_chances)
 						if should_boost == 1 then
-							boost_growth(pos)
+							module.boost_growth(pos)
 							boosted = boosted + 1
 						end
 					end
@@ -720,7 +720,7 @@ if minetest.settings: get_bool('etc.farming_tweaks_watering_can', true) then
 		end
 	end)
 	
-	etc.register_tool('watering_can', {
+	etc: register_tool('watering_can', {
 		displayname = 'Watering Can',
 		description = 'Wets soil, which helps crops grow and prevents exhaustion of soil fertility.',
 		stats = '<LMB> to pour or refill',

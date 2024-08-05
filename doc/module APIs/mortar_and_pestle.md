@@ -2,7 +2,7 @@
 
 The mortar and pestle module provides the following functions:
 
-## register_mortar_recipe
+### register_mortar_recipe
 **Usage**: `etc.register_mortar_recipe(input, output, hits, use_plant_sound)`
 
 Adds a new recipe to be crafted with the mortar and pestle. Accepts the following parameters:

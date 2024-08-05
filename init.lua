@@ -1,69 +1,66 @@
 
-etc = {modpath = minetest.get_modpath 'etcetera', modules = {}}
+etcetera = {}
 
-local function load_script (fn)
-	dofile(table.concat {etc.modpath, '/scripts/', fn, '.lua'})
-end
+dofile(minetest.get_modpath('etcetera') .. '/scripts/mod_reg.lua')
+etcetera.register_mod('etcetera', 'etc')
+etc = etcetera
 
-local load_script_optional
-if minetest.settings: get_bool('etc.library_mode', false) then
-	function load_script_optional() end
-else
-	function load_script_optional (fn, ...)
-		if not minetest.settings: get_bool('etc.load_module_'..fn, true) then return end
-		
-		local success, missing = etc.check_depends(...)
-		if success then
-			local time = os.clock()
-			etc.modules[fn] = dofile(table.concat {etc.modpath, '/scripts/modules/', fn, '.lua'}) or true
-			etc[fn] = etc.modules[fn]
-			etc.log('Loaded module ', fn, ' in ', tostring((os.clock() - time) * 0.001): sub(1, 4), 'ms')
-		elseif minetest.settings: get_bool('etc.dependency_warning', true) then
-			etc.log.warn('Module ', fn, ' is enabled but has unsatisfied dependency: ', missing)
-		end
+etc: load_script 'misc_utils'
+etc: load_script 'math_utils'
+
+etc: load_script 'text_utils'
+
+etc.translate = minetest.get_translator 'etcetera'
+
+function etc.gettext (text, colormode, ...)
+	if (not colormode) or colormode == 'normal' or colormode == 'displayname' then
+		return etc.translate(text, ...)
+	else
+		-- NOTE: The hideous hack at the end of this line is mandatory!
+		return minetest.colorize(assert(etc.textcolors[colormode], 'Invalid color: ' .. colormode), etc.translate(etc.wrap_text(text, ETC_DESC_WRAP_LIMIT), ...): gsub('\n', '|n|')): gsub('|n|', '\n'): sub(1, -1)
 	end
 end
 
-load_script 'misc_utils'
-load_script 'math_utils'
+etc: load_script 'reg_utils'
+etc: load_script 'node_utils'
 
-load_script 'text_utils'
-load_script 'reg_utils'
-load_script 'node_utils'
+etc: load_script 'item_display'
+etc: load_script 'node_display'
+etc: load_script 'beam_display'
 
-load_script 'item_display'
-load_script 'node_display'
-load_script 'beam_display'
+etc.settings_key = 'etc'
 
-etc.register_node, etc.register_item, etc.register_tool = etc.create_wrappers('etcetera', 'etc')
+if minetest.settings: get_bool('etc.library_mode', false) then
+	function etc: load_module () end
+end
 
 -- Resources
-load_script_optional('basic_resources')
-load_script_optional('craft_tools')
-load_script_optional('wrought_iron', 'default')
-load_script_optional('slime', '&basic_resources')
-load_script_optional('treated_wood', '&basic_resources')
-load_script_optional('corrosion', 'default')
-load_script_optional('bees', 'default')
-load_script_optional('gems')
+etc: load_module('basic_resources')
+etc: load_module('craft_tools')
+etc: load_module('wrought_iron', 'default')
+etc: load_module('slime', '&basic_resources')
+etc: load_module('treated_wood', '&basic_resources')
+etc: load_module('corrosion', 'default')
+etc: load_module('bees', 'default')
+etc: load_module('gems')
 
 -- Crafting stations and such
-load_script_optional('labelling_bench')
-load_script_optional('coloring_bench')
-load_script_optional('mortar_and_pestle', '&basic_resources')
-load_script_optional('dust', '&mortar_and_pestle', 'bucket')
-load_script_optional('duststone', '&dust')
-load_script_optional('anvil', '&craft_tools')
+etc: load_module('labelling_bench')
+etc: load_module('coloring_bench')
+etc: load_module('mortar_and_pestle', '&basic_resources')
+etc: load_module('dust', '&mortar_and_pestle', 'bucket')
+etc: load_module('duststone', '&dust')
+etc: load_module('anvil', '&craft_tools')
 
 -- Misc. additions
-load_script_optional('chalk', '&craft_tools')
+etc: load_module('chalk', '&craft_tools')
 
 -- Tweaks and additions for MTG/the engine
-load_script_optional('fluid_bottles', 'default', 'vessels')
-load_script_optional('paxels', 'default')
-load_script_optional('fall_tweaks', 'default')
-load_script_optional('sneak_tweaks')
-load_script_optional('more_loot', 'dungeon_loot')
-load_script_optional('farming_tweaks', 'farming', 'default')
-load_script_optional('wood_variants', 'default')
-load_script_optional('door_tweaks', 'doors')
+etc: load_module('fluid_bottles', 'default', 'vessels')
+etc: load_module('paxels', 'default')
+etc: load_module('fall_tweaks', 'default')
+etc: load_module('sneak_tweaks')
+etc: load_module('more_loot', 'dungeon_loot')
+etc: load_module('farming_tweaks', 'farming', 'default')
+etc: load_module('wood_variants', 'default')
+etc: load_module('door_tweaks', 'doors')

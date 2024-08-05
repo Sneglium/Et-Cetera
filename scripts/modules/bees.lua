@@ -8,7 +8,7 @@ local memory_length = minetest.settings: get 'etc.bees_memory_length' or 2
 local search_range = minetest.settings: get 'etc.bees_search_range' or 5
 local capacity = minetest.settings: get 'etc.bees_capacity' or 1000
 
-etc.register_node('bee', {
+etc: register_node('bee', {
 	displayname = 'Honey Bee',
 	stats = fireflies and 'Use a bug net with <LMB> to collect',
 	drawtype = 'plantlike',
@@ -54,7 +54,7 @@ etc.register_node('bee', {
 	end
 })
 
-etc.register_node('hidden_bee', {
+etc: register_node('hidden_bee', {
 	drawtype = 'airlike',
 	inventory_image = 'empty.png',
 	wield_image =  'empty.png',
@@ -133,7 +133,7 @@ end)
 
 local retexture = minetest.settings: get_bool('etc.load_module_fluid_bottles', true) and minetest.settings: get_bool('etc.fluid_bottles_retexture', true)
 
-etc.register_node('bottle_honey', {
+etc: register_node('bottle_honey', {
 	displayname = 'Glass Bottle (Honey)',
 	inventory_image = table.concat {
 		(retexture and 'etc_bottle_honey.png' or 'etc_bottle_honey_old.png'),
@@ -159,7 +159,7 @@ etc.register_node('bottle_honey', {
 	on_use = minetest.item_eat(6, minetest.get_modpath 'vessels' and 'vessels:glass_bottle')
 })
 
-etc.register_node('honey_block', {
+etc: register_node('honey_block', {
 	displayname = 'Honey Block',
 	tiles = {{name = 'etc_honey_block.png', backface_culling = true}},
 	drawtype = 'mesh',
@@ -200,7 +200,7 @@ minetest.register_craft {
 	}
 }
 
-etc.register_item('beeswax', {
+etc: register_item('beeswax', {
 	displayname = 'Beeswax Nugget',
 	stats = etc.modules.corrosion and '<LMB> on a metal block to seal it against corrosion',
 	inventory_image = 'etc_beeswax.png',
@@ -224,7 +224,7 @@ etc.register_item('beeswax', {
 	end
 })
 
-etc.register_node('beeswax_block', {
+etc: register_node('beeswax_block', {
 	displayname = 'Beeswax Block',
 	tiles = {{name = 'etc_beeswax_block.png', backface_culling = true}},
 	groups = {snappy = 3, crumbly = 3, oddly_breakable_by_hand = 3},
@@ -395,7 +395,7 @@ local function apiary_on_construct (pos)
 	minetest.get_node_timer(pos): start(1)
 end
 
-etc.register_node('apiary_half', {
+etc: register_node('apiary_half', {
 	displayname = 'Apiary Box',
 	description = 'A single apiary box. Can be stacked to make taller apiaries.',
 	stats = {
@@ -430,7 +430,7 @@ etc.register_node('apiary_half', {
 	on_timer = apiary_on_timer
 })
 
-etc.register_node('apiary_full', {
+etc: register_node('apiary_full', {
 	tiles = {
 		'etc_apiary_top.png',
 		'etc_apiary_top.png',

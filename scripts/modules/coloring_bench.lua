@@ -19,7 +19,7 @@ local bench_form = function(pos, name, desc)
 	]]
 end
 
-etc.register_node('table_coloring', {
+etc: register_node('table_coloring', {
 	displayname = 'Dyeing Table',
 	description = 'Used to change the colors of items.',
 	tiles = {'etc_coloring_bench_top.png', 'etc_labelling_bench_bottom.png', 'etc_labelling_bench_side.png'},

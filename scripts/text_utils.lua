@@ -1,23 +1,10 @@
 
-etc.translate = minetest.get_translator 'etcetera'
-
 etc.textcolors = {
 	description = '#7f819a',
 	statblock   = '#f4315b'
 }
 
 ETC_DESC_WRAP_LIMIT = 40
-
-etc.gettext = {
-	etcetera = function(text, colormode, ...)
-		if (not colormode) or colormode == 'normal' then
-			return etc.translate(text, ...)
-		else
-			-- NOTE: The hideous hack at the end of this line is mandatory! It fixes an unaddressed issue I opened on GitHub 3 YEARS AGO.
-			return minetest.colorize(assert(etc.textcolors[colormode], 'Invalid color: ' .. colormode), etc.translate(etc.wrap_text(text, ETC_DESC_WRAP_LIMIT), ...): gsub('\n', '|n|')): gsub('|n|', '\n'): sub(1, -1)
-		end
-	end
-}
 
 etc.breaking_characters = {
  [' '] = 'on',

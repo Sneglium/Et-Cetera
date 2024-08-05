@@ -1,5 +1,5 @@
 
-etc.register_node('duststone', {
+etc: register_node('duststone', {
 	displayname = 'Duststone',
 	tiles = {'etc_duststone.png'},
 	groups = {cracky = 3},
@@ -15,7 +15,7 @@ minetest.register_craft {
 	}
 }
 
-etc.register_node('duststone_bricks', {
+etc: register_node('duststone_bricks', {
 	displayname = 'Duststone Bricks',
 	tiles = {'etc_duststone_bricks.png'},
 	groups = {cracky = 3},
@@ -31,7 +31,7 @@ minetest.register_craft {
 	}
 }
 
-etc.register_node('duststone_block', {
+etc: register_node('duststone_block', {
 	displayname = 'Duststone Tile',
 	tiles = {'etc_duststone_block.png'},
 	groups = {cracky = 3},
@@ -47,7 +47,7 @@ minetest.register_craft {
 	}
 }
 
-etc.register_node('duststone_block_chiselled', {
+etc: register_node('duststone_block_chiselled', {
 	displayname = 'Ornate Duststone Tile',
 	tiles = {'etc_duststone_block_chiselled.png'},
 	groups = {cracky = 3},
@@ -63,7 +63,7 @@ minetest.register_craft {
 	}
 }
 
-etc.register_node('duststone_tiles', {
+etc: register_node('duststone_tiles', {
 	displayname = 'Duststone Quartertiles',
 	tiles = {'etc_duststone_tiles.png'},
 	groups = {cracky = 3},
@@ -79,7 +79,7 @@ minetest.register_craft {
 	}
 }
 
-etc.register_node('duststone_column', {
+etc: register_node('duststone_column', {
 	displayname = 'Duststone Column',
 	tiles = {'etc_duststone_column.png'},
 	groups = {cracky = 3},
@@ -103,12 +103,12 @@ if stairs then
 		'etcetera:duststone',
 		{cracky=3},
 		{'etc_duststone.png'},
-		etc.gettext.etcetera('Duststone Stairs'),
-		etc.gettext.etcetera('Duststone Slab'),
+		etc.gettext('Duststone Stairs'),
+		etc.gettext('Duststone Slab'),
 		default.node_sound_stone_defaults(),
 		false,
-		etc.gettext.etcetera('Duststone Stairs (Inner Corner)'),
-		etc.gettext.etcetera('Duststone Stairs (Outer Corner)')
+		etc.gettext('Duststone Stairs (Inner Corner)'),
+		etc.gettext('Duststone Stairs (Outer Corner)')
 	)
 	
 	stairs.register_stair_and_slab(
@@ -116,12 +116,12 @@ if stairs then
 		'etcetera:duststone_bricks',
 		{cracky=3},
 		{'etc_duststone_bricks.png'},
-		etc.gettext.etcetera('Duststone Brick Stairs'),
-		etc.gettext.etcetera('Duststone Brick Slab'),
+		etc.gettext('Duststone Brick Stairs'),
+		etc.gettext('Duststone Brick Slab'),
 		default.node_sound_stone_defaults(),
 		false,
-		etc.gettext.etcetera('Duststone Brick Stairs (Inner Corner)'),
-		etc.gettext.etcetera('Duststone Brick Stairs (Outer Corner)')
+		etc.gettext('Duststone Brick Stairs (Inner Corner)'),
+		etc.gettext('Duststone Brick Stairs (Outer Corner)')
 	)
 	
 	stairs.register_stair_and_slab(
@@ -129,12 +129,12 @@ if stairs then
 		'etcetera:duststone_tiles',
 		{cracky=3},
 		{'etc_duststone_tiles.png'},
-		etc.gettext.etcetera('Duststone Quartertile Stairs'),
-		etc.gettext.etcetera('Duststone Quartertile Slab'),
+		etc.gettext('Duststone Quartertile Stairs'),
+		etc.gettext('Duststone Quartertile Slab'),
 		default.node_sound_stone_defaults(),
 		false,
-		etc.gettext.etcetera('Duststone Quartertile Stairs (Inner Corner)'),
-		etc.gettext.etcetera('Duststone Quartertile Stairs (Outer Corner)')
+		etc.gettext('Duststone Quartertile Stairs (Inner Corner)'),
+		etc.gettext('Duststone Quartertile Stairs (Outer Corner)')
 	)
 	
 end

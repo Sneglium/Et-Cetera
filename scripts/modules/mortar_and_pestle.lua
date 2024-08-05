@@ -44,7 +44,7 @@ function etc.register_mortar_recipe (input, output, hits, use_plant_sound)
 	end
 end
 
-etc.register_item('pestle', {
+etc: register_item('pestle', {
 	displayname = 'Pestle',
 	stats = 'Use on a mortar with <LMB>',
 	inventory_image = 'etc_pestle.png',
@@ -78,7 +78,7 @@ minetest.register_lbm {
 local hardness_mult = minetest.settings: get('etc.mortar_and_pestle_hardness_mult') or 1
 local particles = minetest.settings: get_bool('etc.mortar_and_pestle_particles', true)
 
-etc.register_node('mortar', {
+etc: register_node('mortar', {
 	displayname = 'Mortar',
 	stats = 'Add and remove items with <RMB>',
 	tiles = {'etc_mortar_top.png', 'etc_mortar_bottom.png', 'etc_mortar_side.png'},

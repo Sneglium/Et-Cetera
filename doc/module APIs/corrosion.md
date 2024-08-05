@@ -2,7 +2,7 @@
 
 The corrosion module provides the following functions:
 
-## add_metal_block
+### add_metal_block
 **Usage**: `etc.corrosion.add_metal_block(item, texname)`
 
 Adds a metal block to the list of nodes for the corrosion ABM and creates 4 variants corroded at different levels. Accepts the following parameters:

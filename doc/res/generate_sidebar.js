@@ -2,6 +2,7 @@
 const index = [
 	['Index', 'main.html'],
 	['Misc. Utilities', 'pages/misc_utils.html'],
+	['Auto-Boilerplate', 'pages/reg_utils.html'],
 	['Validation Utils', 'pages/err_utils.html'],
 	['Item/Stack Utils', 'pages/item_utils.html'],
 	['Player Utilities', 'pages/player_utils.html'],

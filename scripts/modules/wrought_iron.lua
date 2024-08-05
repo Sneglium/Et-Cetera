@@ -1,5 +1,5 @@
 
-etc.register_item('wrought_iron_ingot', {
+etc: register_item('wrought_iron_ingot', {
 	displayname = 'Wrought Iron Ingot',
 	inventory_image = 'etc_wrought_iron_ingot.png'
 })
@@ -25,7 +25,7 @@ else
 	}
 end
 
-etc.register_node('wrought_iron_block', {
+etc: register_node('wrought_iron_block', {
 	displayname = 'Wrought Iron Block',
 	tiles = {'etc_wrought_iron_block.png'},
 	groups = {cracky=2},

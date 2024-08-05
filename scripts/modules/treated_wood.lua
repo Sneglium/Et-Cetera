@@ -1,5 +1,5 @@
 
-etc.register_node('tarred_wood', {
+etc: register_node('tarred_wood', {
 	displayname = 'Treated Wood Planks',
 	paramtype2 = 'facedir',
 	place_param2 = 0,
@@ -9,7 +9,7 @@ etc.register_node('tarred_wood', {
 	sounds = minetest.global_exists('default') and default.node_sound_wood_defaults() or nil
 })
 
-etc.register_node('pitched_wood', {
+etc: register_node('pitched_wood', {
 	displayname = 'Pitch-Sealed Wood Planks',
 	paramtype2 = 'facedir',
 	place_param2 = 0,

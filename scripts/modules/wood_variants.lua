@@ -8,12 +8,12 @@ if treated then
 			'etcetera:tarred_wood',
 			{cracky=3},
 			{'etc_tarred_wood.png'},
-			etc.gettext.etcetera 'Treated Wood Stairs',
-			etc.gettext.etcetera 'Treated Wood Slab',
+			etc.gettext 'Treated Wood Stairs',
+			etc.gettext 'Treated Wood Slab',
 			default.node_sound_stone_defaults(),
 			false,
-			etc.gettext.etcetera 'Treated Wood Stairs (Inner Corner)',
-			etc.gettext.etcetera 'Treated Wood Stairs (Outer Corner)'
+			etc.gettext 'Treated Wood Stairs (Inner Corner)',
+			etc.gettext 'Treated Wood Stairs (Outer Corner)'
 		)
 		
 		stairs.register_stair_and_slab(
@@ -21,17 +21,17 @@ if treated then
 			'etcetera:pitched_wood',
 			{cracky=3},
 			{'etc_pitched_wood.png'},
-			etc.gettext.etcetera 'Pitch-Sealed Wood Stairs',
-			etc.gettext.etcetera 'Pitch-Sealed Wood Slab',
+			etc.gettext 'Pitch-Sealed Wood Stairs',
+			etc.gettext 'Pitch-Sealed Wood Slab',
 			default.node_sound_stone_defaults(),
 			false,
-			etc.gettext.etcetera 'Pitch-Sealed Wood Stairs (Inner Corner)',
-			etc.gettext.etcetera 'Pitch-Sealed Wood Stairs (Outer Corner)'
+			etc.gettext 'Pitch-Sealed Wood Stairs (Inner Corner)',
+			etc.gettext 'Pitch-Sealed Wood Stairs (Outer Corner)'
 		)
 	end
 	
 	default.register_fence('etcetera:fence_treated_wood', {
-		description = etc.gettext.etcetera 'Treated Wood Fence',
+		description = etc.gettext 'Treated Wood Fence',
 		texture = 'etc_fence_tarred.png',
 		inventory_image = 'default_fence_overlay.png^etc_tarred_wood.png^' ..
 					'default_fence_overlay.png^[makealpha:255,126,126',
@@ -43,7 +43,7 @@ if treated then
 	})
 	
 	default.register_fence_rail('etcetera:fence_rail_treated_wood', {
-		description = etc.gettext.etcetera 'Treated Wood Fence Rail',
+		description = etc.gettext 'Treated Wood Fence Rail',
 		texture = 'etc_fence_rail_tarred.png',
 		inventory_image = 'default_fence_rail_overlay.png^etc_tarred_wood.png^' ..
 					'default_fence_rail_overlay.png^[makealpha:255,126,126',
@@ -55,7 +55,7 @@ if treated then
 	})
 	
 	default.register_fence('etcetera:fence_pitched_wood', {
-		description = etc.gettext.etcetera 'Pitch-Sealed Wood Fence',
+		description = etc.gettext 'Pitch-Sealed Wood Fence',
 		texture = 'etc_fence_pitched.png',
 		inventory_image = 'default_fence_overlay.png^etc_pitched_wood.png^' ..
 					'default_fence_overlay.png^[makealpha:255,126,126',
@@ -67,7 +67,7 @@ if treated then
 	})
 	
 	default.register_fence_rail('etcetera:fence_rail_pitched_wood', {
-		description = etc.gettext.etcetera 'Pitch-Sealed Wood Fence Rail',
+		description = etc.gettext 'Pitch-Sealed Wood Fence Rail',
 		texture = 'etc_fence_rail_pitched.png',
 		inventory_image = 'default_fence_rail_overlay.png^etc_pitched_wood.png^' ..
 					'default_fence_rail_overlay.png^[makealpha:255,126,126',
@@ -79,27 +79,27 @@ if treated then
 	})
 	
 	default.register_mesepost('etcetera:mese_post_light_tarred', {
-		description = etc.gettext.etcetera 'Treated Wood Mese Post Light',
+		description = etc.gettext 'Treated Wood Mese Post Light',
 		texture = 'etc_fence_tarred.png',
 		material = 'etcetera:tarred_wood',
 	})
 
 	default.register_mesepost('etcetera:mese_post_light_pitched', {
-		description = etc.gettext.etcetera 'Pitch-Sealed Wood Mese Post Light',
+		description = etc.gettext 'Pitch-Sealed Wood Mese Post Light',
 		texture = 'etc_fence_pitched.png',
 		material = 'etcetera:pitched_wood',
 	})
 	
 	if doors then
 		doors.register_fencegate('etcetera:fence_gate_treated_wood', {
-			description = etc.gettext.etcetera 'Treated Wood Fence Gate',
+			description = etc.gettext 'Treated Wood Fence Gate',
 			texture = 'etc_tarred_wood.png',
 			material = 'etcetera:tarred_wood',
 			groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 2}
 		})
 		
 		doors.register_fencegate('etcetera:fence_gate_pitched_wood', {
-			description = etc.gettext.etcetera 'Pitch-Sealed Wood Fence Gate',
+			description = etc.gettext 'Pitch-Sealed Wood Fence Gate',
 			texture = 'etc_pitched_wood.png',
 			material = 'etcetera:pitched_wood',
 			groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 2}
@@ -127,7 +127,7 @@ local function make_bookshelf (name, reg_modname, displayname)
 		return drops
 	end
 	
-	etc.register_node(nodename, def)
+	etc: register_node(nodename, def)
 	
 	minetest.register_craft {
 		output = nodename,
@@ -159,7 +159,7 @@ local function make_vessel_shelf (name, reg_modname, displayname)
 		return drops
 	end
 	
-	etc.register_node(nodename, def)
+	etc: register_node(nodename, def)
 	
 	minetest.register_craft {
 		output = nodename,
@@ -183,7 +183,7 @@ if minetest.settings: get_bool('etc.wood_variants_shelves', true) then
 	end
 	
 	minetest.override_item('default:bookshelf', {
-		description = etc.gettext.etcetera 'Applewood Bookshelf'
+		description = etc.gettext 'Applewood Bookshelf'
 	})
 	
 	if minetest.get_modpath 'vessels' then
@@ -198,13 +198,13 @@ if minetest.settings: get_bool('etc.wood_variants_shelves', true) then
 		end
 		
 		minetest.override_item('vessels:shelf', {
-			description = etc.gettext.etcetera 'Applewood Vessels Shelf'
+			description = etc.gettext 'Applewood Vessels Shelf'
 		})
 	end
 end
 
 local function make_ladder (name, reg_modname, displayname)
-	etc.register_node('ladder_'..name, {
+	etc: register_node('ladder_'..name, {
 		displayname = displayname ..' Ladder',
 		drawtype = 'signlike',
 		tiles = {'etc_ladder_'..name..'.png'},
@@ -245,13 +245,13 @@ if minetest.settings: get_bool('etc.wood_variants_ladders', true) then
 	end
 	
 	minetest.override_item('default:ladder_wood', {
-		description = etc.gettext.etcetera 'Applewood Ladder'
+		description = etc.gettext 'Applewood Ladder'
 	})
 end
 
 local function make_doors (name, reg_modname, displayname)
 	doors.register('etcetera:door_'..name, {
-		description = etc.gettext.etcetera(displayname .. ' Door'),
+		description = etc.gettext(displayname .. ' Door'),
 		tiles = {{ name = 'etc_door_'..name..'.png', backface_culling = true }},
 		inventory_image = 'etc_door_'..name..'_inv.png',
 		groups = {node = 1, choppy = 2, oddly_breakable_by_hand = 2, flammable = 2},
@@ -265,7 +265,7 @@ local function make_doors (name, reg_modname, displayname)
 	})
 	
 	doors.register_trapdoor('etcetera:trapdoor_'..name, {
-		description = etc.gettext.etcetera(displayname .. ' Trapdoor'),
+		description = etc.gettext(displayname .. ' Trapdoor'),
 		inventory_image = 'etc_trapdoor_'..name..'.png',
 		wield_image = 'etc_trapdoor_'..name..'.png',
 		tile_front = 'etc_trapdoor_'..name..'.png',
@@ -297,10 +297,10 @@ if minetest.settings: get_bool('etc.wood_variants_doors', true) and minetest.get
 	end
 	
 	minetest.override_item('doors:door_wood', {
-		description = etc.gettext.etcetera 'Applewood Door'
+		description = etc.gettext 'Applewood Door'
 	})
 	
 	minetest.override_item('doors:trapdoor', {
-		description = etc.gettext.etcetera 'Applewood Trapdoor'
+		description = etc.gettext 'Applewood Trapdoor'
 	})
 end

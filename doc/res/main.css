@@ -112,5 +112,16 @@ code, .code {
 	border: 1px solid #88888820;
 }
 
+.colorsquare {
+	display: inline-block;
+	background-color: var(--color-square);
+	min-width: 12px;
+	min-height: 12px;
+	transform: translate(0, 3px);
+	border-color: black white white black;
+	border-width: 1px;
+	border-style: solid;
+}
+
 pre {-moz-tab-size: 2;}
 pre {tab-size: 2;}

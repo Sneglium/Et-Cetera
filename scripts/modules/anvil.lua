@@ -53,7 +53,7 @@ function etc.register_anvil_recipe (input, output, hits)
 	end
 end
 
-etc.register_tool('blacksmith_hammer', {
+etc: register_tool('blacksmith_hammer', {
 	displayname = 'Blacksmith\'s Hammer',
 	stats = 'Use on an anvil with <LMB>',
 	inventory_image = 'etc_blacksmith_hammer.png',
@@ -95,7 +95,7 @@ minetest.register_lbm {
 	end
 }
 
-etc.register_node('anvil', {
+etc: register_node('anvil', {
 	displayname = 'Anvil',
 	stats = 'Add and remove items with <RMB>',
 	tiles = {'etc_anvil_top.png', 'etc_anvil_bottom.png', 'etc_anvil_side.png'},

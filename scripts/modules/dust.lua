@@ -1,5 +1,5 @@
 
-etc.register_node('dust', {
+etc: register_node('dust', {
 	displayname = 'Dust',
 	tiles = {'etc_dust.png'},
 	groups = {crumbly = 3, falling_node = 1},

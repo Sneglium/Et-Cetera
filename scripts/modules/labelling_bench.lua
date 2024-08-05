@@ -18,7 +18,7 @@ local bench_form = function(pos, name, desc)
 	]]
 end
 
-etc.register_node('table_labelling', {
+etc: register_node('table_labelling', {
 	displayname = 'Labelling Bench',
 	description = 'Used to change the name and add or change the description of items.',
 	tiles = {'etc_labelling_bench_top.png', 'etc_labelling_bench_bottom.png', 'etc_labelling_bench_side.png'},

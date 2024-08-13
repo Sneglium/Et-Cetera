@@ -153,7 +153,7 @@ if minetest.get_modpath 'fireflies' then
 		inventory_image = retexture and 'etc_fireflies_bottle.png' or 'fireflies_bottle.png',
 		wield_image = retexture and 'etc_fireflies_bottle.png' or 'fireflies_bottle.png',
 		tiles = {{
-			name = retexture and 'fireflies_bottle_animated.png' or 'fireflies_bottle_animated.png',
+			name = retexture and 'etc_fireflies_bottle_animated.png' or 'fireflies_bottle_animated.png',
 			animation = {
 				type = 'vertical_frames',
 				aspect_w = 16,

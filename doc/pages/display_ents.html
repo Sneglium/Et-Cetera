@@ -80,7 +80,7 @@ sidebar('pages/display_ents.html', '../')
 <p>
 	<h2>BEAM DISPLAY ENTITIES</h2>
 	<br>
-	Beam display entities are rectangular prisms that connect two points in space. They have six tiles just like node displays, but the side and top textures of a beam display entity will be repeated along its' length, allowing for easy creation of linear 'beam', or 'pole' objects between points.
+	Beam display entities are rectangular prisms that connect two points in space. They have six tiles just like node displays, but the side, bottom, and top textures of a beam display entity will be repeated along its' length, allowing for easy creation of linear 'beam', or 'pole' objects between points.
 	<br>
 	The following functions can be used to create and manipulate beam displays:
 </p>
@@ -89,7 +89,7 @@ sidebar('pages/display_ents.html', '../')
 	<h3>etc.add_beam_display</h3>
 	<b>Usage:</b> <code>etc.add_beam_display(pos1, pos2, tiles, tile_size, width[, identifier])</code>
 	<br>
-	&emsp;Creates a new beam display at the halfway point between <code>pos1</code> and <code>pos2</code>, with a length equal to the distance between them and a rotation such that one end of the entity sits at each point. <code>tiles</code> is the same as with a node display: a list of six textures, or one string that will be applied to all faces. However, these tiles must be square; <code>tile_size</code> must indicate the length of a side of a tile, e.g. <code>16</code> for 16px textures. If <code>tile_size</code> is 0, the textures of the entity will not tile along its' length and will instead stretch. <code>width</code> is the scale of the other two dimensions of the entity's visual, where 1 is equivalent to the size of a full node.<br>
+	&emsp;Creates a new beam display at the halfway point between <code>pos1</code> and <code>pos2</code>, with a length equal to the distance between them and a rotation such that one end of the entity sits at each point. <code>tiles</code> is the same as with a node display: a list of six textures, or one string that will be applied to all faces. However, these tiles must be square; <code>tile_size</code> must indicate the length of a side of a tile, e.g. <code>16</code> for 16px textures. If <code>tile_size</code> is 0, the textures of the entity will not tile along its' length and will instead stretch. If using six textures, the first two textures are the top and bottom and will tile vertically, the middle two are the sides and will tile horizontally, and the last two are the textures of the ends of the beam. <code>width</code> is the scale of the other two dimensions of the entity's visual, where 1 is equivalent to the size of a full node.<br>
 	<code>identifier</code> is an optional arbitrary value that can be used to select particular beams in case they intersect unfavorably.
 </p>
 

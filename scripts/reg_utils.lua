@@ -4,12 +4,26 @@ etc.register_mod_component('inherit_item', function (self, parent, id, new_def)
 	local parent_mod = etc.registered_mods[parent_modname]
 	if parent_mod and parent_mod.item_prototypes and parent_mod.item_prototypes[parent: split ':' [2]] then
 		local final_def = etc.merge_recursive(parent_mod.item_prototypes[parent: split ':' [2]], new_def)
+		
+		if etcetera.rawitem_transformers then
+			for _, op in pairs(etcetera.rawitem_transformers) do
+				op(self, self.name..':'.. id, final_def)
+			end
+		end
+		
 		minetest.register_item(self.name .. ':' .. id, final_def)
 	else
 		local item = minetest.registered_items[parent]
 		etc.log.assert(item, 'Missing or invalid parent item for inherit')
 		
 		local final_def = etc.merge_recursive(item, new_def)
+		
+		if etcetera.rawitem_transformers then
+			for _, op in pairs(etcetera.rawitem_transformers) do
+				op(self, self.name..':'.. id, final_def)
+			end
+		end
+		
 		minetest.register_item(self.name .. ':' .. id, final_def)
 	end
 	

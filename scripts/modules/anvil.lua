@@ -90,6 +90,7 @@ minetest.register_lbm {
 		local meta = minetest.get_meta(pos)
 		local inv = meta: get_inventory()
 		if not inv: is_empty('item') then
+			etc.remove_item_display(pos)
 			etc.add_item_display(vector.add(pos, vector.new(0, 0.35, 0)), inv: get_stack('item', 1), 1.5, 'random_flat')
 		end
 	end

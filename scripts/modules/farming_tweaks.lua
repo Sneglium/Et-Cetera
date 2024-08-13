@@ -145,6 +145,7 @@ module.register_plant('farming:cotton_', 8, 'farming:seed_cotton', nil, 10)
 if farming.mod == 'redo' then
 	module.register_plant('farming:artichoke_', 5, 'farming:artichoke', nil, 20)
 	module.register_plant('farming:asparagus_', 5, 'farming:asparagus', nil, 10)
+	module.register_plant('farming:barley_', 8, 'farming:seed_barley', 15)
 	module.register_plant('farming:beanpole_', 5, 'farming:beans', 'farming:beanpole', 5)
 	module.register_plant('farming:beetroot_', 5, 'farming:beetroot', nil, 10)
 	module.register_plant('farming:blackberry_', 4, 'farming:blackberry', nil, 8)
@@ -619,7 +620,7 @@ if minetest.settings: get_bool('etc.farming_tweaks_watering_can', true) then
 						
 						local meta = itemstack: get_meta()
 						
-						local water = meta: get_int 'water' + 3
+						local water = meta: get_int 'water' + 4
 						meta: set_int('water', math.min(capacity, water))
 						itemstack: set_wear(math.max(0, 65536 - (65536/capacity) * water))
 						

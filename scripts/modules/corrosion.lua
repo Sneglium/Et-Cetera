@@ -48,7 +48,7 @@ local function make_corrosion_group (modname, nodename, texname)
 		}
 		def.groups.not_in_creative_inventory = i == 4 and 0 or 1
 		def.groups.etc_corrodable = i == 4 and 0 or 1
-		minetest.register_node('etcetera:'..nodename..'_corroded_'..i, def)
+		minetest.register_node(':etcetera:'..nodename..'_corroded_'..i, def)
 		
 		corrosion.corrosion_nodes['etcetera:'..nodename..'_corroded_'..i] = 'etcetera:'..nodename..'_corroded_'..(i+1)
 	end
@@ -103,7 +103,7 @@ function corrosion.add_metal_block (item, texname_override)
 	make_corrosion_group(itemstring_split[1], itemstring_split[2], texname_override)
 end
 
-local speed_mult = minetest.settings: get 'etc.corrosion_speed_mult' or 8
+local speed_mult = minetest.settings: get 'etc.corrosion_speed_mult' or 1
 
 minetest.register_abm {
 	label = 'Metal Corrosion',
@@ -119,7 +119,6 @@ minetest.register_abm {
 	catch_up = true,
 	action = function(pos, node)
 		if minetest.get_meta(pos): get_string('sealed') == 'true' then return end
-		print(node.name, corrosion.corrosion_nodes[node.name])
 		minetest.swap_node(pos, {name = corrosion.corrosion_nodes[node.name], param2 = node.param2})
 	end
 }

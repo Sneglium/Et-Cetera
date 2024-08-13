@@ -136,4 +136,32 @@ sidebar('pages/reg_utils.html', '../')
 	&emsp;The same as <code>minetest.override_item</code>, but deep-merges values in the new definition with those of the same name in the old definition if both are tables. For example, <code>minetest.override_item('default:dirt', {groups = {falling_node = 1}})</code> will remove all the previously defined groups in the item definition, whereas <code>etc.smart_override_item('default:dirt', {groups = {falling_node = 1}})</code> will add the <code>falling_node</code> group while keeping the rest intact.
 </p>
 
+<p>
+	<h3>register_rawitem_transformer</h3>
+	<b>Usage:</b> <code>etc.register_rawitem_transformer(func)</code>
+	<br>
+	&emsp;Applies a function <code>func(mod, itemname, itemdef)</code> to every item registered with <code>mod: register_node</code>, <code>mod: register_item</code>, and <code>mod: register_tool</code>. This is used, for example, to handle the <code>displayname</code>, <code>description</code>, and <code>stats</code> special fields of items registered with these functions. The transformer will apply to <i>every</i> item registered with these functions by <i>every</i> registered Etc mod after the transformer is defined.
+</p>
+
+<p>
+	<h3>register_node_transformer</h3>
+	<b>Usage:</b> <code>etc.register_node_transformer(func)</code>
+	<br>
+	&emsp;The same as <code>etc.register_rawitem_transformer</code>, but applies only to <code>mod: register_node</code>.
+</p>
+
+<p>
+	<h3>register_item_transformer</h3>
+	<b>Usage:</b> <code>etc.register_item_transformer(func)</code>
+	<br>
+	&emsp;The same as <code>etc.register_rawitem_transformer</code>, but applies only to <code>mod: register_item</code>.
+</p>
+
+<p>
+	<h3>register_tool_transformer</h3>
+	<b>Usage:</b> <code>etc.register_tool_transformer(func)</code>
+	<br>
+	&emsp;The same as <code>etc.register_rawitem_transformer</code>, but applies only to <code>mod: register_tool</code>.
+</p>
+
 </body>

@@ -87,8 +87,42 @@ end
 
 etcetera.register_mod_component('background_color', '#22242d')
 
+function etcetera.register_rawitem_transformer (op)
+	etcetera.rawitem_transformers = etcetera.rawitem_transformers or {}
+	
+	table.insert(etcetera.rawitem_transformers, op)
+end
+
+function etcetera.register_node_transformer (op)
+	etcetera.node_transformers = etcetera.node_transformers or {}
+	
+	table.insert(etcetera.node_transformers, op)
+end
+
+function etcetera.register_item_transformer (op)
+	etcetera.item_transformers = etcetera.item_transformers or {}
+	
+	table.insert(etcetera.item_transformers, op)
+end
+
+function etcetera.register_tool_transformer (op)
+	etcetera.tool_transformers = etcetera.tool_transformers or {}
+	
+	table.insert(etcetera.tool_transformers, op)
+end
+
 etcetera.register_mod_component('register_node', function (self, id, def)
-	def.description = minetest.get_background_escape_sequence(self.background_color or '')..(def.displayname and self.gettext(def.displayname, 'displayname') or '').. (def.description and '\n'..self.gettext(def.description, 'description') or '') .. (def.stats and get_statblock(def.stats, self.gettext) or '')
+	if etcetera.rawitem_transformers then
+		for _, op in pairs(etcetera.rawitem_transformers) do
+			op(self, self.name..':'.. id, def)
+		end
+	end
+	
+	if etcetera.node_transformers then
+		for _, op in pairs(etcetera.node_transformers) do
+			op(self, self.name..':'.. id, def)
+		end
+	end
 	
 	minetest.register_node(self.name..':'.. id, def)
 	
@@ -100,7 +134,17 @@ etcetera.register_mod_component('register_node', function (self, id, def)
 end)
 
 etcetera.register_mod_component('register_item', function (self, id, def)
-	def.description = minetest.get_background_escape_sequence(self.background_color or '')..(def.displayname and self.gettext(def.displayname, 'displayname') or '').. (def.description and '\n'..self.gettext(def.description, 'description') or '') .. (def.stats and get_statblock(def.stats, self.gettext) or '')
+	if etcetera.rawitem_transformers then
+		for _, op in pairs(etcetera.rawitem_transformers) do
+			op(self, self.name..':'.. id, def)
+		end
+	end
+	
+	if etcetera.item_transformers then
+		for _, op in pairs(etcetera.item_transformers) do
+			op(self, self.name..':'.. id, def)
+		end
+	end
 	
 	minetest.register_craftitem(self.name..':'.. id, def)
 	
@@ -112,7 +156,17 @@ etcetera.register_mod_component('register_item', function (self, id, def)
 end)
 
 etcetera.register_mod_component('register_tool', function (self, id, def)
-	def.description = minetest.get_background_escape_sequence(self.background_color or '')..(def.displayname and self.gettext(def.displayname, 'displayname') or '').. (def.description and '\n'..self.gettext(def.description, 'description') or '') .. (def.stats and get_statblock(def.stats, self.gettext) or '')
+	if etcetera.rawitem_transformers then
+		for _, op in pairs(etcetera.rawitem_transformers) do
+			op(self, self.name..':'.. id, def)
+		end
+	end
+	
+	if etcetera.tool_transformers then
+		for _, op in pairs(etcetera.tool_transformers) do
+			op(self, self.name..':'.. id, def)
+		end
+	end
 	
 	minetest.register_tool(self.name..':'.. id, def)
 	
@@ -121,4 +175,8 @@ etcetera.register_mod_component('register_tool', function (self, id, def)
 	end
 	
 	minetest.register_alias(id, self.name..':'.. id)
+end)
+
+etcetera.register_rawitem_transformer(function(self, id, def)
+	def.description = minetest.get_background_escape_sequence(self.background_color or '')..(def.displayname and self.gettext(def.displayname, 'displayname') or '').. (def.description and def.description ~= '' and '\n'..self.gettext(def.description, 'description') or '') .. (def.stats and get_statblock(def.stats, self.gettext) or '')
 end)

@@ -10,7 +10,7 @@ if treated then
 			{'etc_tarred_wood.png'},
 			etc.gettext 'Treated Wood Stairs',
 			etc.gettext 'Treated Wood Slab',
-			default.node_sound_stone_defaults(),
+			default.node_sound_wood_defaults(),
 			false,
 			etc.gettext 'Treated Wood Stairs (Inner Corner)',
 			etc.gettext 'Treated Wood Stairs (Outer Corner)'
@@ -23,7 +23,7 @@ if treated then
 			{'etc_pitched_wood.png'},
 			etc.gettext 'Pitch-Sealed Wood Stairs',
 			etc.gettext 'Pitch-Sealed Wood Slab',
-			default.node_sound_stone_defaults(),
+			default.node_sound_wood_defaults(),
 			false,
 			etc.gettext 'Pitch-Sealed Wood Stairs (Inner Corner)',
 			etc.gettext 'Pitch-Sealed Wood Stairs (Outer Corner)'

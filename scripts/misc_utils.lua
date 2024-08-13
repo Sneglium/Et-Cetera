@@ -345,7 +345,9 @@ function etc.give_or_drop (player, pos, give_item)
 	local itemstacks = etc.split_oversized_stack(give_item)
 	
 	for _, item in pairs(itemstacks) do
-		if inv: room_for_item('main', item) then
+		if inv: get_stack('main', player:get_wield_index()): is_empty() then
+			inv: set_stack('main', player:get_wield_index(), item)
+		elseif inv: room_for_item('main', item) then
 			inv: add_item('main', item)
 		else
 			minetest.add_item(pos, item)

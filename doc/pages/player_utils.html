@@ -18,6 +18,11 @@ sidebar('pages/player_utils.html', '../')
 </p>
 
 <p>
+	<h2>MISC. FUNCTIONS</h2>
+	Helpers that add functionality which isn't in the Lua API but should be.
+</p>
+
+<p>
 	<h3>etc.get_player_range</h3>
 	<b>Usage:</b> <code>etc.get_player_range(player)</code>
 	<br>
@@ -36,6 +41,34 @@ sidebar('pages/player_utils.html', '../')
 	<b>Usage:</b> <code>etc.set_player_look_dir(player, dir)</code>
 	<br>
 	&emsp;Rotate's the <code>player</code>'s camera to look in the direction specified by <code>dir</code>. The direction should be a vector denoting a point on the surface of a sphere, much like the one returned by <code>player: get_look_dir</code>. It does not need to be a unit vector; this function will normalize its' input.
+</p>
+
+<p>
+	<h2>SITTING</h2>
+	This system allows mod developers to easily make players 'sit' at a position, which will render them unable to move until:
+	 <ul>
+		<li>The mod cancels the sitting state,</li>
+		<li>The player presses the sneak key,</li>
+		<li>The player disconnects or the server shuts down, or</li>
+		<li>The player dies.</li>
+	 </ul>
+	When a player leaves the sitting state, they will return to the position they were at before they sat.
+	<br>
+	'Sitting' players will also be given the sit animation if <code>player_api</code> is installed.
+</p>
+
+<p>
+	<h3>etc.set_sitting</h3>
+	<b>Usage:</b> <code>etc.set_sitting(player[, pos])</code>
+	<br>
+	&emsp;If <code>pos</code> is a vector, the player will sit down exactly at <code>pos</code>. If <code>pos</code> is <code>nil</code> or <code>false</code>, the sitting state will be cancelled and the player will return to their original position.
+</p>
+
+<p>
+	<h3>etc.get_sitting</h3>
+	<b>Usage:</b> <code>etc.get_sitting(player)</code>
+	<br>
+	&emsp;Returns true if the player is currently sitting.
 </p>
 
 </body>

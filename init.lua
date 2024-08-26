@@ -28,6 +28,8 @@ etc: load_script 'item_display'
 etc: load_script 'node_display'
 etc: load_script 'beam_display'
 
+etc: load_script 'sitting'
+
 etc.settings_key = 'etc'
 
 if minetest.settings: get_bool('etc.library_mode', false) then

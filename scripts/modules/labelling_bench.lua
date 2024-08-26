@@ -103,12 +103,12 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	end
 end)
 
-if minetest.get_modpath 'default' and minetest.get_modpath 'farming' then
+if minetest.get_modpath 'default' and etc.modules.basic_resources then
 	if minetest.get_modpath 'chunkydeco' and minetest.settings: get_bool('etc.labelling_bench_use_chunkydeco', true) then
 		minetest.register_craft {
 			output = 'etc:table_labelling',
 			recipe = {
-				{'default:paper', 'default:stick', 'farming:string'},
+				{'default:paper', 'default:stick', 'etc:string'},
 				{'', 'group:workbench', ''}
 			}
 		}
@@ -116,7 +116,7 @@ if minetest.get_modpath 'default' and minetest.get_modpath 'farming' then
 		minetest.register_craft {
 			output = 'etc:table_labelling',
 			recipe = {
-				{'default:paper', 'default:stick', 'farming:string'},
+				{'default:paper', 'default:stick', 'etc:string'},
 				{'default:stick', 'group:wood', 'default:stick'},
 				{'group:wood', '', 'group:wood'}
 			}

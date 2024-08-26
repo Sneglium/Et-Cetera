@@ -208,7 +208,7 @@ The *Gems* module (technical: `gems`) includes various gemstones, intended for u
 
 **Depends on:**
 
- - `default` **AND** `farming` (`minetest_game` Mods; optional - both or neither)
+ - `default` (`minetest_game` Mod; optional)
 
 The *Labelling Bench* submodule (technical: `labelling_bench`) provides a way for players to change the display-names and long descriptions of items. Includes only one item: the Labelling Bench node, which has a GUI for doing just that.
 

@@ -37,11 +37,11 @@ function etc.register_anvil_recipe (input, output, hits)
 	
 	if minetest.global_exists('unified_inventory') then
 		unified_inventory.register_craft({
-		type = 'etcetera:anvil',
-		output = output,
-		items = {input},
-		width = 1
-	})
+			type = 'etcetera:anvil',
+			output = output,
+			items = {input},
+			width = 1
+		})
 	end
 	
 	if minetest.global_exists('i3') then

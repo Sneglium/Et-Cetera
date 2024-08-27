@@ -512,6 +512,23 @@ All of these can be configured.
  - *Collateral Trapdoors* (`etc.door_tweaks_connected_trapdoors`, boolean): Trapdoors will open/close in a flat radius.
  - *Collateral Trapdoors: Radius* (`etc.door_tweaks_connected_trapdoors_spread`, integer): The radius in which trapdoors will open collaterally. This is a square region, not a circle.
 
+---
+### More Recipe Types
+
+**Depends on:**
+
+ - `dungeon_loot` (`minetest_game` Mod; optional)
+ - `unified_inventory` **OR** `i3` (Standalone mods; one or neither but not both - optional)
+
+The *More Recipe Types* module (technical: `more_recipes`) adds custom recipe types in I3 or Unified Inventory for use as furnace fuel and generation as an ore, and if dungeon loot is enabled it will also add a type for generation as dungeon loot.
+
+**List of Settings:**
+
+ - *Load Module: More Recipe Types* (`etc.load_module_more_recipes`, boolean): Enable or disable the module entirely.
+ - *Fuel Recipe Type* (`etc.more_recipes_fuel`, boolean): Add recipe type for fuel items.
+ - *Dungeon Loot Recipe Type* (`etc.more_recipes_loot`, boolean): Add recipe type for dungeon loot.
+ - *Ore Recipe Type* (`etc.more_recipes_ore`, boolean): Add recipe type for ore generation.
+
 ## Licensing
 ```
 Et Cetera (etcetera) (c) 2024 Hagatha (Sneglium)  

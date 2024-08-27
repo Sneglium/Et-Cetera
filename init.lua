@@ -30,6 +30,8 @@ etc: load_script 'beam_display'
 
 etc: load_script 'sitting'
 
+etc: load_script 'placeholder_items'
+
 etc.settings_key = 'etc'
 
 if minetest.settings: get_bool('etc.library_mode', false) then
@@ -66,3 +68,4 @@ etc: load_module('more_loot', 'dungeon_loot')
 etc: load_module('farming_tweaks', 'farming', 'default')
 etc: load_module('wood_variants', 'default')
 etc: load_module('door_tweaks', 'doors')
+etc: load_module('more_recipes')

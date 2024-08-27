@@ -13,7 +13,7 @@ if minetest.settings: get_bool('etc.wrought_iron_dumb_crafting', false) then
 	
 	minetest.register_craft {
 		type = 'shapeless',
-		output = 'etc:wrought_iron_ingot',
+		output = 'etc:wrought_iron_ingot 8',
 		recipe = {'default:coal_lump', 'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot'}
 	}
 else

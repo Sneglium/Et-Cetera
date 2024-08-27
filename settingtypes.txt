@@ -440,3 +440,21 @@ etc.door_tweaks_connected_trapdoors (Collateral Trapdoors) bool true
 # The radius in which trapdoors will open collaterally. This is a square region, not a circle.
 # Integer (0-10); default: 2
 etc.door_tweaks_connected_trapdoors_spread (Collateral Trapdoors: Radius) int 2 0 10
+
+[More Recipe Types]
+
+# Enable or disable the module entirely.
+# Boolean (true/false); default: true
+etc.load_module_more_recipes (Load Module: More Recipe Types) bool true
+
+# Add recipe type for fuel items.
+# Boolean (true/false); default: true
+etc.more_recipes_fuel (Fuel Recipe Type) bool true
+
+# Add recipe type for dungeon loot.
+# Boolean (true/false); default: true
+etc.more_recipes_loot (Dungeon Loot Recipe Type) bool true
+
+# Add recipe type for ore generation.
+# Boolean (true/false); default: true
+etc.more_recipes_ore (Ore Recipe Type) bool true

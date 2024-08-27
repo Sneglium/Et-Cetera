@@ -18,6 +18,11 @@ sidebar('pages/item_utils.html', '../')
 </p>
 
 <p>
+	<h2>MISC. FUNCTIONS</h2>
+	General utilities for handling items
+</p>
+
+<p>
 	<h3>etc.split_oversized_stack</h3>
 	<b>Usage:</b> <code>etc.split_oversized_stack(stack)</code>
 	<br>
@@ -44,4 +49,31 @@ sidebar('pages/item_utils.html', '../')
 	<br>
 	&emsp;Similar to <code>sum_uses</code> but divides the result by the total number of digging groups found. If a tool has no capabilities, it will count as one group but add no uses, meaning the end result will be divided by one more than usual. 
 </p>
+
+<p>
+	<h2>PLACEHOLDER ITEMS</h2>
+	These functions can be used to retrieve a stack that represents an action or a unit of something other than items, for example time, energy, etc.
+</p>
+
+<p>
+	<h3>etc.get_time_rep_stack</h3>
+	<b>Usage:</b> <code>etc.get_time_rep_stack(description, time_in_seconds)</code>
+	<br>
+	&emsp;Returns a stack of count <code>time_in_seconds</code> with the description metadata field <code>description</code> plus an additional line of text containing a timestamp in the format <code>HH:MM:SS</code>.
+</p>
+
+<p>
+	<h3>etc.get_chance_rep_stack</h3>
+	<b>Usage:</b> <code>etc.get_chance_rep_stack(percent[, addendum, conditions])</code>
+	<br>
+	&emsp;Returns a stack of count <code>percent*100</code> (so percent should be formatted from 0-1). The raw percentage will be on the second line of the description, with the <code>addendum</code> concatenated after the percent sign to give extra context if defined. <code>conditions</code> is an array of strings added to a bullet-pointed list below the description, indicating special requirements for the chance to be evaluated.
+</p>
+
+<p>
+	<h3>etc.get_power_rep_stack</h3>
+	<b>Usage:</b> <code>etc.get_power_rep_stack(description, unit, amount)</code>
+	<br>
+	&emsp;Returns a stack of count <code>amount</code> with the description <code>Energy (&lt;description&gt;)</code>, followed by another line showing the raw amount including decimals plus <code>unit</code> concatenated to the end.
+</p>
+
 </body>

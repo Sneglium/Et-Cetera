@@ -14,8 +14,6 @@ When an enabled module's dependencies are unsatisfied, it will disable itself an
 
 A comprehensive reference to the APIs and utilities provided to mod and game developers can be found in the `doc/` directory, starting with `doc/main.html`. This doc is meant to be viewed in the browser, and makes use of CSS and JavaScript. References for the mini-APIs provided by individual modules can be found under `doc/module APIs/`.  
 
-**Warning: the Etc API documentation is very much a work in progress! Don't expect it to be up to date until Etc is out of the pre-release stage!**  
-
 (*Quick Note: Itemnames below use the `etc:` prefix, which is an alias. `etcetera:` is the registered prefix, but `etc:item_name` and `etcetera:item_name` are both defined for all items.*)
 
 ## General Settings

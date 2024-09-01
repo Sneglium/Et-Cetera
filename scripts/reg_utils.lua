@@ -43,11 +43,11 @@ etc.register_mod_component('register_item_prototype', function (self, id, base_d
 	self.item_prototypes[id] = base_def
 end)
 
-function etc.smart_override_item (item, redef)
+function etc.smart_override_item (item, redef, delete)
 	local itemdef = table.copy(minetest.registered_items[item])
 	etc.log.assert(item, 'Missing or invalid parent item for override')
 	
 	itemdef.name = nil
 	itemdef.type = nil
-	minetest.override_item(item, etc.merge_recursive(itemdef, redef))
+	minetest.override_item(item, etc.merge_recursive(itemdef, redef), delete)
 end

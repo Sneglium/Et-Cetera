@@ -67,6 +67,5 @@ function etc.register_sound_group (name, def)
 end
 
 function etc.get_sound_group (name)
-	print(dump(etc.sound_groups[name]))
 	return etc.sound_groups[name]
 end

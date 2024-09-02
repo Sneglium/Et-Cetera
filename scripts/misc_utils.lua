@@ -91,6 +91,18 @@ function etc.merge_recursive (table_a, ...)
 	return new_table
 end
 
+function etc.merge_recursive2 (exclude, table_a, ...)
+	local new_table = table.copy(table_a)
+	
+	for _, curr_table in ipairs {...} do
+		for k, v in pairs(curr_table) do
+			new_table[k] = (not exclude[k]) and type(new_table[k]) == 'table' and type(v) == 'table' and etc.merge_recursive(new_table[k], v) or v
+		end
+	end
+	
+	return new_table
+end
+
 -- Finds the index of an entry in an array
 -- Also returns the object at the index for convenience
 function etc.array_find (array, data)

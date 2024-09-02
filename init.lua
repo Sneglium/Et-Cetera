@@ -32,6 +32,9 @@ etc: load_script 'sitting'
 
 etc: load_script 'placeholder_items'
 
+etc: load_script 'sound_manager'
+etc: load_script 'sound_library'
+
 etc.settings_key = 'etc'
 
 if minetest.settings: get_bool('etc.library_mode', false) then

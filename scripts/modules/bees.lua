@@ -174,13 +174,7 @@ etc: register_node('honey_block', {
 		fall_damage_add_percent = -100,
 		bouncy = 50
 	},
-	sounds = {
-		footstep = {name = 'etc_slime_dig', pitch = 1.5, gain = 0.5},
-		dig = {name = 'etc_slime_dig', pitch = 2},
-		dug = {name = 'etc_slime_dug', pitch = 2},
-		fall = {name = 'etc_slime_dug', pitch = 2},
-		place = {name = 'etc_slime_dug', pitch = 3}
-	}
+	sounds = etc.get_sound_group 'slime'
 })
 
 minetest.register_craft {

@@ -133,11 +133,11 @@ etc: register_node('mortar', {
 		etc.give_or_drop(digger, pos, ItemStack 'etcetera:mortar')
 		minetest.set_node(pos, {name='air'})
 		return true
-	end, 
-	 -- the wielded itemstack shenanigans at the end of this function are necessary to avoid any items being deleted or duped
-	on_rightclick = function (pos, node, clicker, itemstack, pointed_thing)
+	end,
+	
+	on_rightclick = function (pos, node, clicker)
 		if minetest.is_protected(pos, clicker: get_player_name()) then
-			return itemstack
+			return clicker: get_wielded_item()
 		end
 		
 		local meta = minetest.get_meta(pos)
@@ -153,6 +153,7 @@ etc: register_node('mortar', {
 			return clicker: get_wielded_item()
 		end
 		
+		local itemstack = clicker: get_wielded_item()
 		local recipe = etc.mortar_recipes[itemstack: get_name()]
 		if recipe then
 			inv: set_stack('item', 1, itemstack)
@@ -160,11 +161,8 @@ etc: register_node('mortar', {
 			meta: set_int('progress_needed', math.floor(itemtime*math.ceil(itemstack: get_count()*0.75)*hardness_mult))
 			meta: set_string('infotext', itemstack: get_short_description())
 			etc.add_item_display(vector.add(pos, vector.new(0, -0.25, 0)), itemstack, 1, 'random_flat')
-			itemstack: clear()
-			clicker: set_wielded_item(itemstack)
+			minetest.after(0, function() clicker: set_wielded_item(ItemStack()) end)
 		end
-		
-		return clicker: get_wielded_item()
 	end,
 	
 	on_punch = function (pos, node, puncher, pointed_thing)

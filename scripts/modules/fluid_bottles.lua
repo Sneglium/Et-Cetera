@@ -60,7 +60,7 @@ if minetest.settings: get_bool('etc.fluid_bottles_lava_bottle', true) then
 		sounds = default.node_sound_glass_defaults()
 	}
 	
-	if minetest.settings: get_bool('fluid_bottles_lava_bottle_throwable', true)  and minetest.get_modpath 'fire' then
+	if minetest.settings: get_bool('etc.fluid_bottles_lava_bottle_throwable', true)  and minetest.get_modpath 'fire' then
 		minetest.register_entity('etcetera:lava_bottle', {
 			initial_properties = {
 				physical = false,

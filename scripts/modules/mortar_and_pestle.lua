@@ -188,7 +188,7 @@ etc: register_node('mortar', {
 					meta: set_string('infotext', table.concat {
 						stack: get_short_description(),
 						': ~',
-						tostring(100 / meta: get_int 'progress_needed' * meta: get_int'progress'): sub(1,2): gsub('%.', ''),
+						tostring(100 / meta: get_int 'progress_needed' * meta: get_int'progress'): sub(1,3): gsub('%..*', ''),
 						'% crushed'
 					})
 					etc.update_item_display(pos, inv: get_stack('item', 1), nil, 'random_flat')
@@ -207,7 +207,7 @@ etc: register_node('mortar', {
 						end
 					end
 					
-					if meta: get_int('progress') > meta: get_int('progress_needed') then
+					if meta: get_int('progress') >= meta: get_int('progress_needed') then
 						local output = ItemStack(recipe.output)
 						output: set_count(output: get_count() * stack: get_count())
 						inv: set_stack('item', 1, output)

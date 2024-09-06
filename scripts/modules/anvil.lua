@@ -328,8 +328,9 @@ if no_break then
 			else
 				if not minetest.is_creative_enabled(digger: get_player_name()) then
 					wielded: set_wear(math.min(65535, wielded: get_wear() + dig.wear))
-					if wielded: get_wear() >= 65534 and item_def.sound and item_def.sound.breaks then
-						minetest.sound_play(item_def.sound.breaks, {pos = pos, gain = 0.5}, true)
+					if wielded: get_wear() >= 65534 then
+						wielded: set_wear(65534)
+						minetest.sound_play(item_def.sound and item_def.sound.breaks, {pos = pos, gain = 0.5}, true)
 						local meta = wielded: get_meta()
 						meta: set_tool_capabilities {}
 						meta: set_string('etc:tool_broken', 'true')

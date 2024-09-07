@@ -2,7 +2,7 @@
 etc: register_node('duststone', {
 	displayname = 'Duststone',
 	tiles = {'etc_duststone.png'},
-	groups = {cracky = 3},
+	groups = {cracky = 3, stone = 1, sandstone = 1},
 	sounds = default.node_sound_stone_defaults()
 })
 
@@ -18,7 +18,7 @@ minetest.register_craft {
 etc: register_node('duststone_bricks', {
 	displayname = 'Duststone Bricks',
 	tiles = {'etc_duststone_bricks.png'},
-	groups = {cracky = 3},
+	groups = {cracky = 3, stone = 1, sandstone = 1},
 	sounds = default.node_sound_stone_defaults()
 })
 
@@ -34,7 +34,7 @@ minetest.register_craft {
 etc: register_node('duststone_block', {
 	displayname = 'Duststone Tile',
 	tiles = {'etc_duststone_block.png'},
-	groups = {cracky = 3},
+	groups = {cracky = 3, stone = 1, sandstone = 1},
 	sounds = default.node_sound_stone_defaults()
 })
 
@@ -50,7 +50,7 @@ minetest.register_craft {
 etc: register_node('duststone_block_chiselled', {
 	displayname = 'Ornate Duststone Tile',
 	tiles = {'etc_duststone_block_chiselled.png'},
-	groups = {cracky = 3},
+	groups = {cracky = 3, stone = 1, sandstone = 1},
 	sounds = default.node_sound_stone_defaults()
 })
 
@@ -66,7 +66,7 @@ minetest.register_craft {
 etc: register_node('duststone_tiles', {
 	displayname = 'Duststone Quartertiles',
 	tiles = {'etc_duststone_tiles.png'},
-	groups = {cracky = 3},
+	groups = {cracky = 3, stone = 1, sandstone = 1},
 	sounds = default.node_sound_stone_defaults()
 })
 
@@ -82,7 +82,7 @@ minetest.register_craft {
 etc: register_node('duststone_column', {
 	displayname = 'Duststone Column',
 	tiles = {'etc_duststone_column.png'},
-	groups = {cracky = 3},
+	groups = {cracky = 3, stone = 1, sandstone = 1},
 	sounds = default.node_sound_stone_defaults(),
 	paramtype2 = 'facedir',
 	on_place = minetest.rotate_node

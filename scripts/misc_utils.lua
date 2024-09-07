@@ -377,7 +377,7 @@ function etc.sum_uses (...)
 		local toolname = ItemStack(toolname): get_name()
 		local def = etc.log.assert(minetest.registered_items[toolname].tool_capabilities.groupcaps, 'No item named '..toolname)
 		for __, group in pairs(def) do
-			total_uses = total_uses + group.uses and group.uses * group.maxlevel or 0
+			total_uses = total_uses + group.uses or 0
 		end
 	end
 	
@@ -401,7 +401,7 @@ function etc.average_uses (...)
 		else
 			for __, group in pairs(def) do
 				num_groups = num_groups + 1
-				total_uses = total_uses + group.uses and group.uses * group.maxlevel or 0
+				total_uses = total_uses + group.uses or 0
 			end
 		end
 	end

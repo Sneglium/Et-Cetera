@@ -125,11 +125,11 @@ minetest.after(0, function()
 		for _, ore in pairs(minetest.registered_ores) do
 			local conds = {}
 			
-			if ore.y_min > -31000 then
+			if ore.y_min and ore.y_min > -31000 then
 				table.insert(conds, 'Y Level >= '..ore.y_min)
 			end
 			
-			if ore.y_max < 31000 then
+			if ore.y_max and ore.y_max < 31000 then
 				table.insert(conds, 'Y Level <= '..ore.y_max)
 			end
 			

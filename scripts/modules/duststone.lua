@@ -136,5 +136,22 @@ if stairs then
 		etc.gettext('Duststone Quartertile Stairs (Inner Corner)'),
 		etc.gettext('Duststone Quartertile Stairs (Outer Corner)')
 	)
+end
+
+if walls then
+	walls.register(
+		'etcetera:duststone_wall',
+		etc.gettext 'Duststone Wall',
+		{'etc_duststone.png'},
+		'etcetera:duststone',
+		default and default.node_sound_stone_defaults()
+	)
 	
+	walls.register(
+		'etcetera:duststone_bricks_wall',
+		etc.gettext 'Duststone Brick Wall',
+		{'etc_duststone_bricks.png'},
+		'etcetera:duststone_bricks',
+		default and default.node_sound_stone_defaults()
+	)
 end

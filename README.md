@@ -289,11 +289,15 @@ The *Duststone* module (technical: `duststone`) includes various decorative `cra
  - `wrought_iron` (Etc module; optional)
  - `unified_inventory` **OR** `i3` (Standalone mods; one or neither but not both - optional)
  - `default` (`minetest_game` Mod; optional)
+ - `moreores` (Standalone mod; optional)
 
-The *Anvil* module (technical: `anvil`) adds a node-item pair which allow for the balanced repairing of nearly any tool. The Anvil can also be used by other mods as a crafting station similar to the Mortar and Pestle.
+The *Anvil* module (technical: `anvil`) adds a node-item pair which allow for the balanced repairing of nearly any tool. The Anvil can also be used by other mods as a crafting station similar to the Mortar and Pestle.  
+
+If the More Ores mod is enabled, another hammer called the Legendary Blacksmith's Hammer will be added, which is made from mithril and intended for repairing mithril items as they have ridiculous durability (but will work fine for everything the regular hammer will repair regardless). This feature can be disabled independently.
 
 When this module and the corresponding setting are enabled, digging tools (but not hoes or swords) will not disappear upon breaking. Instead they will become useless until repaired.  
-WARNING: This option may play weirdly with tools made via a compound parts system or similar. Once rendered useless, they will permanently be in that state or at least lose their buffs.
+WARNING: This option may play weirdly with tools made via a compound parts system or similar. Once rendered useless, they will permanently be in that state or at least lose their buffs.  
+This feature is also incompatible with toolranks; for tools registered with toolranks, the tool will simply be destroyed upon breaking as usual.
 
 **List of Settings:**
 
@@ -304,6 +308,9 @@ WARNING: This option may play weirdly with tools made via a compound parts syste
  - *Wrought Iron Recipe* (`etc.anvil_use_wrought_iron`, boolean): Use a wrought iron block in the anvil recipe instead of a steel block if the Wrought Iron module is enabled.
  - *Forgiving Tool Breakage* (`etc.anvil_prevent_tool_break`, boolean): Digging tools will not be destroyed when they reach 0 durability, and will instead become useless until repaired.
  - *Enable Particles* (`etc.anvil_particles`, boolean): Enable or disable particles on striking with the hammer.
+ - *Enable Mithril Hammer* (`etc.anvil_mithril_hammer`, boolean): Enable or disable the mithril hammer.
+ - *Mithril Hammer Durability* (`etc.anvil_mithril_hammer_num_uses`, boolean): How many times the Legendary Blacksmith's Hammer can be used before it breaks.
+ - *Mithril Hammer Repair Factor* (`etc.anvil_mithril_repair_factor`, boolean): How many "uses" of a tool will be repaired with each hammer blow from the mithril hammer, if enabled.
 
 ---
 ### Chalk

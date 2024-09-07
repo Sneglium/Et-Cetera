@@ -6,6 +6,10 @@ local wrought_iron = minetest.settings: get_bool('etc.anvil_use_wrought_iron', t
 local no_break = minetest.settings: get_bool('etc.anvil_prevent_tool_break', true)
 local particles = minetest.settings: get_bool('etc.anvil_particles', true)
 
+local mithril_hammer = minetest.settings: get_bool('etc.anvil_mithril_hammer', true)
+local hammer_dura_mith = minetest.settings: get('etc.anvil_mithril_hammer_num_uses') or 3000
+local repair_mult_mith = minetest.settings: get('etc.anvil_mithril_repair_factor') or 50
+
 etc.anvil_recipes = {}
 
 if minetest.global_exists('unified_inventory') then
@@ -71,9 +75,30 @@ if minetest.global_exists('default') then
 	}
 end
 
+if minetest.global_exists('moreores') and mithril_hammer then
+	etc: register_tool('blacksmith_hammer_mithril', {
+		displayname = 'Legendary Blacksmith\'s Hammer',
+		description = 'Far more durable and efficient.',
+		stats = 'Use on an anvil with <LMB>',
+		inventory_image = 'etc_blacksmith_hammer_mithril.png',
+		tool_capabilities = {groupcaps={cracky={}}}
+	})
+
+	if minetest.global_exists('default') then
+		minetest.register_craft {
+			recipe = {
+				{'etc:ct_file', 'moreores:mithril_ingot', 'etc:ct_drill'},
+				{'etcetera:sandpaper_3', 'default:stick', 'moreores:mithril_ingot'},
+				{'default:stick', '', 'etc:ct_hammer'}
+			},
+			output = 'etc:blacksmith_hammer_mithril'
+		}
+	end
+end
+
 local function valid_tool (stack)
 	local name = stack: get_name()
-	if name == 'etcetera:blacksmith_hammer' then
+	if name == 'etcetera:blacksmith_hammer' or name == 'etcetera:blacksmith_hammer_mithril' then
 		return repair_hammer
 	elseif minetest.registered_tools[name] then
 		local def = stack: get_definition()
@@ -94,6 +119,11 @@ minetest.register_lbm {
 			etc.add_item_display(vector.add(pos, vector.new(0, 0.35, 0)), inv: get_stack('item', 1), 1.5, 'random_flat')
 		end
 	end
+}
+
+local hammers = {
+	['etcetera:blacksmith_hammer'] = {hammer_dura, repair_mult},
+	['etcetera:blacksmith_hammer_mithril'] = {hammer_dura_mith, repair_mult_mith}
 }
 
 etc: register_node('anvil', {
@@ -198,12 +228,14 @@ etc: register_node('anvil', {
 		local inv = meta: get_inventory()
 		local heldstack = puncher: get_wielded_item()
 		
-		if heldstack: get_name() == 'etcetera:blacksmith_hammer' then
+		local stackname = heldstack: get_name()
+		
+		if hammers[stackname] then
 			if not inv: is_empty('item') then
 				local stack = inv: get_stack('item', 1)
 				local recipe = etc.anvil_recipes[stack: get_name()]
 				if recipe then
-					local held_wear = heldstack: get_wear() + math.floor(65535/(hammer_dura * 2))
+					local held_wear = heldstack: get_wear() + math.floor(65535/(hammers[stackname][1] * 2))
 					if held_wear >= 65535 then
 						minetest.sound_play('default_tool_breaks', {to_player = puncher: get_player_name(), gain = 1}, true)
 						heldstack: clear()
@@ -255,7 +287,7 @@ etc: register_node('anvil', {
 							meta: set_string('inventory_image', minetest.registered_items[stack: get_name()].inventory_image)
 						end
 						
-						local held_wear = heldstack: get_wear() + math.floor(65535/hammer_dura)
+						local held_wear = heldstack: get_wear() + math.floor(65535/hammers[stackname][1])
 						if held_wear >= 65535 then
 							minetest.sound_play('default_tool_breaks', {to_player = puncher: get_player_name(), gain = 1}, true)
 							heldstack: clear()
@@ -281,7 +313,7 @@ etc: register_node('anvil', {
 							end
 						end
 						
-						local repair = math.ceil((65535 / uses) * repair_mult)
+						local repair = math.ceil((65535 / uses) * hammers[stackname][2])
 						stack: set_wear(math.max(0, wear - repair))
 						inv: set_stack('item', 1, stack)
 					end

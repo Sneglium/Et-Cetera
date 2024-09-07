@@ -137,6 +137,9 @@ Duststone Quartertile Stairs (Outer Corner)=
 Blacksmith's Hammer=
 Use on an anvil with <LMB>=
 
+Legendary Blacksmith's Hammer=
+Far more durable and efficient.=
+
 Anvil=
 Add and remove items with <RMB>=
 
@@ -150,6 +153,7 @@ Blue Chalk=
 Violet Chalk=
 White Chalk=
 
+Used to draw symbols on hard nodes.=
 Used to draw symbols on hard nodes. Redrawing@na symbol of the same color will not use@ndurability.=
 <LMB> to draw a symbol=
 

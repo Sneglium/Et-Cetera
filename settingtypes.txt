@@ -180,6 +180,21 @@ etc.anvil_prevent_tool_break (Forgiving Tool Breakage) bool true
 # Boolean (true/false); default: true
 etc.anvil_particles (Enable Particles) bool true
 
+[*Mithril Hammer]
+
+# Enable or disable the mithril hammer.
+# Boolean (true/false); default: true
+etc.anvil_mithril_hammer (Enable Mithril Hammer) bool true
+
+# How many times the Legendary Blacksmith's Hammer can be used before it breaks.
+# Integer (0-10000); default: 3000
+etc.anvil_mithril_hammer_num_uses (Mithril Hammer Durability) int 3000 0 10000
+
+# How many "uses" of a tool will be repaired with each hammer blow from
+# the mithril hammer, if enabled.
+# Floating-point (0.0-1000.0); default: 50.0
+etc.anvil_mithril_repair_factor (Mithril Hammer Repair Factor) float 50.0 0 1000
+
 [Chalk]
 
 # Enable or disable the module entirely.

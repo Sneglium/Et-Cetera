@@ -71,9 +71,9 @@ sidebar('pages/item_utils.html', '../')
 
 <p>
 	<h3>etc.get_power_rep_stack</h3>
-	<b>Usage:</b> <code>etc.get_power_rep_stack(description, unit, amount)</code>
+	<b>Usage:</b> <code>etc.get_power_rep_stack(description, unit, amount[, inventory_image])</code>
 	<br>
-	&emsp;Returns a stack of count <code>amount</code> with the description <code>Energy (&lt;description&gt;)</code>, followed by another line showing the raw amount including decimals plus <code>unit</code> concatenated to the end.
+	&emsp;Returns a stack of count <code>amount</code> with the description <code>Energy (&lt;description&gt;)</code>, followed by another line showing the raw amount including decimals plus <code>unit</code> concatenated to the end. <code>inventory_image</code> is a string that will override the image used for the representation item. Leaving it out will result in the default 'lightning bolt' image.
 </p>
 
 </body>

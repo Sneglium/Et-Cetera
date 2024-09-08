@@ -155,3 +155,13 @@ if walls then
 		default and default.node_sound_stone_defaults()
 	)
 end
+
+etc.register_mortar_recipe('etcetera:duststone', 'etcetera:dust', 1)
+etc.register_mortar_recipe('etcetera:duststone_bricks', 'etcetera:dust', 1)
+etc.register_mortar_recipe('etcetera:duststone_block', 'etcetera:dust', 1)
+etc.register_mortar_recipe('etcetera:duststone_block_chiselled', 'etcetera:dust', 1)
+etc.register_mortar_recipe('etcetera:duststone_tiles', 'etcetera:dust', 1)
+etc.register_mortar_recipe('etcetera:duststone_column', 'etcetera:dust', 1)
+
+etc.register_mortar_recipe('etcetera:duststone_wall', 'etcetera:dust', 1)
+etc.register_mortar_recipe('etcetera:duststone_bricks_wall', 'etcetera:dust', 1)

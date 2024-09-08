@@ -279,6 +279,11 @@ etc: register_node('anvil', {
 					local uses = etc.average_uses(stack: get_name())
 					local wear = stack: get_wear()
 					
+					local armor_uses = minetest.get_item_group(stack:get_name(), 'armor_use')
+					if armor_uses ~= 0 then
+						uses = 65535/armor_uses
+					end
+					
 					if wear >= 1 then
 						if stack: get_meta(): get_string 'etc:tool_broken' ~= '' then
 							local meta = stack: get_meta()

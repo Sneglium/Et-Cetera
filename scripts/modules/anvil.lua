@@ -306,7 +306,11 @@ etc: register_node('anvil', {
 									acceleration = vector.new(0, -9.8, 0),
 									expirationtime = 2.5,
 									size = 1.5,
-									texture = 'etc_anvil_spark.png',
+									texture = (
+										stackname == 'etcetera:blacksmith_hammer_mithril'
+										and 'etc_anvil_spark_blue.png'
+										or 'etc_anvil_spark.png'
+									),
 									glow = 8,
 									blend = 'add',
 								}

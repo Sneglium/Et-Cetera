@@ -172,7 +172,6 @@ etc.anvil_use_wrought_iron (Wrought Iron Recipe) bool true
 
 # When enabled, tools will not be destroyed when they reach 0 durability, and will instead become useless until repaired.
 # Will only affect tools used to dig nodes.
-# Warning: special tools (e.g. upgradeable tools, tools made from multi-part systems) might behave weirdly upon breaking!
 # Boolean (true/false); default: true
 etc.anvil_prevent_tool_break (Forgiving Tool Breakage) bool true
 

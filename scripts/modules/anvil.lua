@@ -287,9 +287,20 @@ etc: register_node('anvil', {
 					if wear >= 1 then
 						if stack: get_meta(): get_string 'etc:tool_broken' ~= '' then
 							local meta = stack: get_meta()
-							meta: set_tool_capabilities()
+							
+							local oldcaps = meta: get_string 'etc:tool_broken_caps'
+							if oldcaps ~= '' then
+								meta: set_tool_capabilities(minetest.deserialize(oldcaps))
+							else
+								meta: set_tool_capabilities()
+							end
+							
 							meta: set_string('etc:tool_broken', '')
-							meta: set_string('inventory_image', minetest.registered_items[stack: get_name()].inventory_image)
+							
+							local image = meta: get_string('etc:tool_broken_image')
+							if image == '' then image = nil end
+							
+							meta: set_string('inventory_image', image)
 						end
 						
 						local held_wear = heldstack: get_wear() + math.floor(65535/hammers[stackname][1])
@@ -373,9 +384,18 @@ if no_break then
 						wielded: set_wear(65534)
 						minetest.sound_play(item_def.sound and item_def.sound.breaks, {pos = pos, gain = 0.5}, true)
 						local meta = wielded: get_meta()
-						meta: set_tool_capabilities {}
+						
 						meta: set_string('etc:tool_broken', 'true')
-						meta: set_string('inventory_image', item_def.inventory_image..'^[mask:etc_broken_tool.png')
+						
+						meta: set_string('etc:tool_broken_caps', minetest.serialize(wielded: get_tool_capabilities()))
+						meta: set_tool_capabilities {}
+						
+						meta: set_string('etc:tool_broken_image', meta: get_string('inventory_image'))
+						
+						local image = meta: get_string('inventory_image')
+						if image == '' then image = item_def.inventory_image end
+						
+						meta: set_string('inventory_image', image .. '^[mask:etc_broken_tool.png')
 						digger: set_wielded_item(wielded)
 						return true
 					end

@@ -296,8 +296,7 @@ The *Anvil* module (technical: `anvil`) adds a node-item pair which allow for th
 If the More Ores mod is enabled, another hammer called the Legendary Blacksmith's Hammer will be added, which is made from mithril and intended for repairing mithril items as they have ridiculous durability (but will work fine for everything the regular hammer will repair regardless). This feature can be disabled independently.
 
 When this module and the corresponding setting are enabled, digging tools (but not hoes or swords) will not disappear upon breaking. Instead they will become useless until repaired.  
-WARNING: This option may play weirdly with tools made via a compound parts system or similar. Once rendered useless, they will permanently be in that state or at least lose their buffs.  
-This feature is also incompatible with toolranks; for tools registered with toolranks, the tool will simply be destroyed upon breaking as usual.
+This feature is incompatible with toolranks; for tools registered with toolranks, the tool will simply be destroyed upon breaking as usual.
 
 **List of Settings:**
 

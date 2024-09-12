@@ -102,7 +102,8 @@ local function valid_tool (stack)
 		return repair_hammer
 	elseif minetest.registered_tools[name] then
 		local def = stack: get_definition()
-		return not (def.wear_represents or (def.groups and def.groups.no_repair) or (def.groups and def.groups.powertool))
+		return (def.wear_represents == 'mechanical_wear') 
+					 or not (def.wear_represents or (def.groups and def.groups.no_repair) or (def.groups and def.groups.powertool))
 	end
 	return false
 end

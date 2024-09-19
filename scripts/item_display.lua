@@ -20,7 +20,7 @@ minetest.register_entity('etcetera:item_display', {
 function etc.add_item_display (pos, item, scale, rotation)
 	etc.log.assert(etc.is_vector(pos), 'Item display entity position must be a vector')
 	etc.log.assert(etc.is_itemstack(item), 'Item display entity item must be an ItemStack')
-	etc.log.assert(not scale or etc.is_number(scale), 'Item display entity scale must be a number')
+	etc.log.assert(not scale or etc.is_number(scale) or type(scale) == 'table', 'Item display entity scale must be a number')
 	etc.log.assert(not rotation or etc.is_vector(rotation) or rotation == 'random_flat', 'Display entity rotation must be a vector or the string \'random_flat\'')
 	
 	local entity = minetest.add_entity(pos, 'etcetera:item_display')
@@ -29,7 +29,7 @@ function etc.add_item_display (pos, item, scale, rotation)
 	properties.wield_item = ItemStack(item): get_name()
 	
 	if scale then
-		properties.visual_size = {x = scale*0.2, y = scale*0.2, z = scale*0.2}
+		properties.visual_size = type(scale) == 'table' and scale or {x = scale*0.2, y = scale*0.2, z = scale*0.2}
 	end
 	
 	entity: set_properties(properties)
@@ -61,7 +61,7 @@ function etc.update_item_display (pos, item, scale, rotation)
 			properties.wield_item = ItemStack(item): get_name()
 			
 			if scale then
-				properties.visual_size = {x = scale*0.2, y = scale*0.2, z = scale*0.2}
+				properties.visual_size = type(scale) == 'table' and scale or {x = scale*0.2, y = scale*0.2, z = scale*0.2}
 			end
 			
 			entity: set_properties(properties)
